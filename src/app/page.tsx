@@ -1,7 +1,12 @@
+export const dynamic = "force-dynamic"
+export const revalidate = 0
+
+
 import { Button } from "@/components/Button"
 import { ProjectCard } from "@/components/ProjectCard"
 import { SectionWrapper } from "@/components/SectionWrapper"
 import { client } from "@/sanity/lib/client"
+
 
 type Project = {
   _id: string
