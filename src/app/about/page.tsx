@@ -2,7 +2,7 @@ import { Section } from "@/components/Section"
 
 export const metadata = {
   title: "About | Pratishek Bansal",
-  description: "Senior UX Design Lead with 10+ years of experience in Design Systems, AI-first strategy, and Enterprise SaaS.",
+  description: "Senior UX Design Lead with 10+ years of experience in Design Systems and AI strategy.",
 }
 
 export default function AboutPage() {
@@ -22,7 +22,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div>
+    <main>
       <Section
         eyebrow="Experience & Strategy"
         title="Driving Product Strategy Through Design Leadership"
@@ -37,7 +37,7 @@ export default function AboutPage() {
           </p>
 
           <p>
-            Previously at <strong>Jio</strong>, I drove design system maturity across one of India’s largest digital ecosystems, contributing to a <strong>17.8% increase</strong> in customer acquisition through optimized patterns.
+            Previously at <strong>Jio</strong>, I drove design system maturity across India’s largest digital ecosystem, contributing to a <strong>17.8% increase</strong> in customer acquisition through optimized patterns.
           </p>
 
           <p>
@@ -64,7 +64,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Optional Contact CTA */}
       <section className="pb-24">
         <div className="mx-auto max-w-5xl px-5">
           <div className="rounded-3xl bg-zinc-950 p-8 md:p-12 text-center">
@@ -78,6 +77,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   )
 }
