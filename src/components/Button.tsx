@@ -4,26 +4,33 @@ import { cn } from "@/lib/cn"
 
 type ButtonVariant = "primary" | "secondary"
 
-type SharedProps = {
+// Base props that every version of this button needs
+interface BaseProps {
   variant?: ButtonVariant
   className?: string
   children?: React.ReactNode
 }
 
-type ButtonAsButton = SharedProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    href?: never
-  }
+// Props specifically for when the button is a link (<a> or <Link>)
+interface LinkProps extends BaseProps {
+  href: string
+  target?: string
+  rel?: string
+}
 
-type ButtonAsLink = SharedProps &
-  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
-    href: string
-  }
+// Props specifically for when the button is a standard <button>
+interface HTMLButtonProps extends BaseProps {
+  href?: never
+  type?: "button" | "submit" | "reset"
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+}
 
-export type ButtonProps = ButtonAsButton | ButtonAsLink
+export type ButtonProps = LinkProps | HTMLButtonProps
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", ...props }, ref) => {
+  (props, ref) => {
+    const { className, variant = "primary", children } = props
+
     const styles = cn(
       "inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
       variant === "primary" && "bg-brand-primary text-white hover:bg-zinc-800",
@@ -32,19 +39,17 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className,
     )
 
-    if ("href" in props) {
-      const { href, children, target, rel, ...rest } = props
-      const isExternal =
-        href.startsWith("http") || href.startsWith("mailto:")
+    // CASE 1: It's a Link
+    if ("href" in props && props.href) {
+      const isExternal = props.href.startsWith("http") || props.href.startsWith("mailto:")
 
       if (isExternal) {
         return (
           <a
             className={styles}
-            href={href}
-            target={target}
-            rel={target === "_blank" ? rel ?? "noreferrer" : rel}
-            {...rest}
+            href={props.href}
+            target={props.target}
+            rel={props.target === "_blank" ? props.rel ?? "noreferrer" : props.rel}
           >
             {children}
           </a>
@@ -52,23 +57,25 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       }
 
       return (
-        <Link className={styles} href={href} {...rest}>
-          {props.children}
+        <Link className={styles} href={props.href}>
+          {children}
         </Link>
       )
     }
 
-    const { type = "button", ...buttonProps } = props
+    // CASE 2: It's a regular Button
+    const { type = "button", onClick } = props as HTMLButtonProps
     return (
       <button
         ref={ref}
         type={type}
         className={styles}
-        {...buttonProps}
-      />
+        onClick={onClick}
+      >
+        {children}
+      </button>
     )
   },
 )
 
 Button.displayName = "Button"
-
