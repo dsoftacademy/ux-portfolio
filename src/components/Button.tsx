@@ -28,13 +28,24 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const { className, variant = "primary", children } = props
 
+    // CHECK: Are we passing custom colors in the className?
+    const hasCustomBg = className?.includes("bg-")
+    const hasCustomText = className?.includes("text-")
+    const hasCustomBorder = className?.includes("border-")
+
     const styles = cn(
       "inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-      // Primary Defaults
-      variant === "primary" && "bg-brand-primary text-white hover:bg-zinc-800",
-      // Secondary Defaults - Modified to be more override-friendly
-      variant === "secondary" && "border border-zinc-200 bg-white text-brand-primary hover:bg-zinc-50",
-      // Custom overrides passed from parent components
+      
+      // Primary Defaults (Only if no custom bg/text is passed)
+      variant === "primary" && !hasCustomBg && "bg-brand-primary hover:bg-zinc-800",
+      variant === "primary" && !hasCustomText && "text-white",
+      
+      // Secondary Defaults (Only if no custom bg/text/border is passed)
+      variant === "secondary" && !hasCustomBorder && "border border-zinc-200",
+      variant === "secondary" && !hasCustomBg && "bg-white hover:bg-zinc-50",
+      variant === "secondary" && !hasCustomText && "text-brand-primary",
+      
+      // Custom overrides (Always applied last)
       className,
     )
 
@@ -47,7 +58,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={styles}
             href={props.href}
             target={props.target}
-            // Fix: Ensure security best practices for external links
             rel={props.target === "_blank" ? (props.rel || "noopener noreferrer") : props.rel}
           >
             {children}

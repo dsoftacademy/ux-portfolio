@@ -67,10 +67,11 @@ export default function AboutPage() {
 
       <section className="pb-24">
         <div className="mx-auto max-w-5xl px-5">
-          <div className="rounded-[2.5rem] bg-zinc-950 p-10 md:p-16 text-center text-white">
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-zinc-950 p-10 md:p-16 text-center text-white">
             <h3 className="text-3xl font-bold tracking-tight mb-8 md:text-4xl">
               Let&apos;s build something scalable.
             </h3>
+            {/* Primary Override: Uses our new logic to force White BG on Dark Section */}
             <Button 
               href="mailto:pratishek.designs@gmail.com" 
               className="bg-white text-zinc-950 hover:bg-zinc-200 px-10 py-4"

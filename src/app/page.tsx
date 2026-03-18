@@ -129,11 +129,14 @@ export default async function HomePage() {
               Let&apos;s build something scalable.
             </h2>
             <div className="relative z-10 flex flex-wrap justify-center gap-4">
-              {/* Primary: White fill, dark text */}
-              <Button href="mailto:pratishek.designs@gmail.com" className="bg-white text-zinc-950 hover:bg-zinc-200">
+              {/* Primary Override: Solid White bg, Dark text */}
+              <Button 
+                href="mailto:pratishek.designs@gmail.com" 
+                className="bg-white text-zinc-950 hover:bg-zinc-200"
+              >
                 Email Me
               </Button>
-              {/* Secondary: FIXED color override for dark background */}
+              {/* Secondary Override: Transparent bg, White border, White text */}
               <Button
                 href="https://www.linkedin.com/in/pratishekbansal"
                 variant="secondary"
