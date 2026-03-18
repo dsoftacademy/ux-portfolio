@@ -4,21 +4,18 @@ import { cn } from "@/lib/cn"
 
 type ButtonVariant = "primary" | "secondary"
 
-// Base props that every version of this button needs
 interface BaseProps {
   variant?: ButtonVariant
   className?: string
   children?: React.ReactNode
 }
 
-// Props specifically for when the button is a link (<a> or <Link>)
 interface LinkProps extends BaseProps {
   href: string
   target?: string
   rel?: string
 }
 
-// Props specifically for when the button is a standard <button>
 interface HTMLButtonProps extends BaseProps {
   href?: never
   type?: "button" | "submit" | "reset"
@@ -33,13 +30,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const styles = cn(
       "inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+      // Primary Defaults
       variant === "primary" && "bg-brand-primary text-white hover:bg-zinc-800",
-      variant === "secondary" &&
-        "border border-zinc-200 bg-white text-brand-primary hover:bg-zinc-50",
+      // Secondary Defaults - Modified to be more override-friendly
+      variant === "secondary" && "border border-zinc-200 bg-white text-brand-primary hover:bg-zinc-50",
+      // Custom overrides passed from parent components
       className,
     )
 
-    // CASE 1: It's a Link
     if ("href" in props && props.href) {
       const isExternal = props.href.startsWith("http") || props.href.startsWith("mailto:")
 
@@ -49,7 +47,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={styles}
             href={props.href}
             target={props.target}
-            rel={props.target === "_blank" ? props.rel ?? "noreferrer" : props.rel}
+            // Fix: Ensure security best practices for external links
+            rel={props.target === "_blank" ? (props.rel || "noopener noreferrer") : props.rel}
           >
             {children}
           </a>
@@ -63,7 +62,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       )
     }
 
-    // CASE 2: It's a regular Button
     const { type = "button", onClick } = props as HTMLButtonProps
     return (
       <button

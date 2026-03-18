@@ -39,9 +39,9 @@ export default async function HomePage() {
   const projects = await getProjects();
 
   return (
-    <main className="bg-[#F9FAFB] min-h-screen">
+    <main className="bg-[#F9FAFB] min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="py-20">
+      <section className="py-20 md:py-28">
         <SectionWrapper>
           <div className="grid gap-10 md:grid-cols-[1.3fr_0.7fr] md:items-center">
             <div>
@@ -88,7 +88,7 @@ export default async function HomePage() {
       </section>
 
       {/* DYNAMIC WORK SECTION */}
-      <section className="pb-16">
+      <section className="py-20 bg-white border-y border-zinc-100">
         <SectionWrapper>
           <div className="flex flex-col gap-2 border-b border-zinc-100 pb-8 md:flex-row md:items-end md:justify-between">
             <div>
@@ -100,7 +100,7 @@ export default async function HomePage() {
 
           <div className="mt-12">
             {projects && projects.length > 0 ? (
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project) => (
                   <ProjectCard
                     key={project._id}
@@ -113,29 +113,31 @@ export default async function HomePage() {
                 ))}
               </div>
             ) : (
-              <div className="rounded-3xl border-2 border-dashed border-zinc-200 p-12 text-center text-sm italic text-zinc-500">
-                No projects found in Sanity. Add documents to see them here.
+              <div className="rounded-3xl border-2 border-dashed border-zinc-200 p-20 text-center text-sm italic text-zinc-500">
+                No projects found in Sanity.
               </div>
             )}
           </div>
         </SectionWrapper>
       </section>
 
-      {/* Final CTA */}
-      <section className="pb-24">
+      {/* Final CTA Section */}
+      <section className="py-24">
         <SectionWrapper>
-          <div className="relative rounded-[2.5rem] bg-zinc-950 p-10 text-center text-white md:p-16">
-            <h2 className="mb-8 text-3xl font-bold tracking-tight md:text-5xl">
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-zinc-950 p-10 text-center text-white md:p-16">
+            <h2 className="relative z-10 mb-8 text-3xl font-bold tracking-tight md:text-5xl">
               Let&apos;s build something scalable.
             </h2>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="relative z-10 flex flex-wrap justify-center gap-4">
+              {/* Primary: White fill, dark text */}
               <Button href="mailto:pratishek.designs@gmail.com" className="bg-white text-zinc-950 hover:bg-zinc-200">
                 Email Me
               </Button>
+              {/* Secondary: FIXED color override for dark background */}
               <Button
                 href="https://www.linkedin.com/in/pratishekbansal"
                 variant="secondary"
-                className="border-zinc-700 text-white hover:bg-zinc-800"
+                className="bg-transparent border-zinc-700 text-white hover:bg-zinc-800"
                 target="_blank"
                 rel="noopener noreferrer"
               >

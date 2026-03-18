@@ -1,4 +1,5 @@
 import { Section } from "@/components/Section"
+import { Button } from "@/components/Button"
 
 export const metadata = {
   title: "About | Pratishek Bansal",
@@ -22,7 +23,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <main>
+    <main className="pt-16">
       <Section
         eyebrow="Experience & Strategy"
         title="Driving Product Strategy Through Design Leadership"
@@ -66,14 +67,16 @@ export default function AboutPage() {
 
       <section className="pb-24">
         <div className="mx-auto max-w-5xl px-5">
-          <div className="rounded-3xl bg-zinc-950 p-8 md:p-12 text-center">
-            <h3 className="text-2xl font-semibold text-white mb-4">Let&apos;s build something scalable.</h3>
-            <a 
+          <div className="rounded-[2.5rem] bg-zinc-950 p-10 md:p-16 text-center text-white">
+            <h3 className="text-3xl font-bold tracking-tight mb-8 md:text-4xl">
+              Let&apos;s build something scalable.
+            </h3>
+            <Button 
               href="mailto:pratishek.designs@gmail.com" 
-              className="inline-block bg-white text-zinc-950 px-8 py-3 rounded-full font-medium hover:bg-zinc-200 transition-colors"
+              className="bg-white text-zinc-950 hover:bg-zinc-200 px-10 py-4"
             >
               Get in touch
-            </a>
+            </Button>
           </div>
         </div>
       </section>
