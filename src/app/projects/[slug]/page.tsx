@@ -4,7 +4,7 @@ import { SectionWrapper } from "@/components/SectionWrapper"
 import { H1, H2 } from "@/components/Typography"
 import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import { type SanityImageSource } from "@sanity/image-url/lib/types/types"
 
 export const dynamic = "force-dynamic"
 export const revalidate = 0
@@ -14,7 +14,7 @@ type Project = {
   title: string;
   slug: { current: string };
   category?: string;
-  mainImage?: any;
+  mainImage?: SanityImageSource;
   overviewRole?: string;
   overviewTimeline?: string;
   overviewTools?: string;
