@@ -37,7 +37,7 @@ export default function AboutPage() {
           </p>
 
           <p>
-            Previously at <strong>Jio</strong>, I drove design system maturity across India’s largest digital ecosystem, contributing to a <strong>17.8% increase</strong> in customer acquisition through optimized patterns.
+            Previously at <strong>Jio</strong>, I drove design system maturity across India&apos;s largest digital ecosystem, contributing to a 17.8% increase in customer acquisition through optimized patterns.
           </p>
 
           <p>
@@ -67,7 +67,7 @@ export default function AboutPage() {
       <section className="pb-24">
         <div className="mx-auto max-w-5xl px-5">
           <div className="rounded-3xl bg-zinc-950 p-8 md:p-12 text-center">
-            <h3 className="text-2xl font-semibold text-white mb-4">Let's build something scalable.</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Let&apos;s build something scalable.</h3>
             <a 
               href="mailto:pratishek.designs@gmail.com" 
               className="inline-block bg-white text-zinc-950 px-8 py-3 rounded-full font-medium hover:bg-zinc-200 transition-colors"
