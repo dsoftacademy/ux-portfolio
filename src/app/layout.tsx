@@ -17,11 +17,11 @@ const headingFont = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Pratishek Bansal — UX/UI Design Lead",
-    template: "%s — Pratishek Bansal",
+    default: "Pratishek Bansal | UX/UI Design Lead",
+    template: "%s - Pratishek Bansal",
   },
   description:
-    "UX designer portfolio featuring selected work, process, and contact information.",
+    "Portfolio of Pratishek Bansal, a UX/UI Design Lead specializing in mobile products, research, and design systems.",
 }
 
 export default function RootLayout({
