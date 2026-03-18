@@ -3,8 +3,9 @@ import { ProjectCard } from "@/components/ProjectCard"
 import { SectionWrapper } from "@/components/SectionWrapper"
 import { client } from "@/sanity/lib/client"
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-// Define what data a Project contains
 interface Project {
   _id: string;
   title: string;
@@ -14,7 +15,7 @@ interface Project {
     };
   };
   slug: { current: string };
-  category?: string; // The '?' means this is optional
+  category?: string; 
   excerpt?: string;
 }
 
@@ -31,133 +32,112 @@ async function getProjects(): Promise<Project[]> {
       },
       "excerpt": content[0].children[0].text
     }`
-  )
+  );
 }
 
 export default async function HomePage() {
-  const projects = await getProjects()
+  const projects = await getProjects();
 
   return (
-    <div className="bg-[#F9FAFB]">
-      <section className="py-16">
-        <SectionWrapper className="grid gap-10 md:grid-cols-[1.25fr_0.75fr] md:items-end">
-          <div>
-            <p className="text-sm font-medium text-zinc-600">
-              Product UX • Research • Systems
-            </p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-zinc-950 md:text-5xl">
-            Hi, I&apos;m Pratishek, a UX/UI Design Lead crafting digital
-              experiences.
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-700">
-              I&apos;m Pratishek, a UX/UI Design Lead focused on mobile products and
-              design systems—partnering with product and engineering to turn
-              messy problems into simple, high-performing experiences.
-            </p>
+    <main className="bg-[#F9FAFB] min-h-screen">
+      {/* Hero Section */}
+      <section className="py-20">
+        <SectionWrapper>
+          <div className="grid gap-10 md:grid-cols-[1.3fr_0.7fr] md:items-center">
+            <div>
+              <p className="mb-4 text-sm font-bold uppercase tracking-widest text-zinc-400">
+                Senior UX Design Lead
+              </p>
+              <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-zinc-950 md:text-6xl">
+                Building scalable systems and AI-first products.
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-600">
+                Over 10 years of experience driving design strategy for enterprise SaaS, 
+                telecom, and startups. Currently leading UX at <span className="font-medium border-b-2 border-zinc-200 text-zinc-950">ICICI Lombard</span>.
+              </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Button href="/projects">View projects</Button>
-              <Button href="/contact" variant="secondary">
-                Get in touch
-              </Button>
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-6">
-            <p className="text-sm font-medium text-zinc-900">
-              Available for select freelance
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600">
-              Currently open to short engagements: UX audits, flows, IA, and
-              design systems. Based in Mumbai, India (remote-friendly).
-            </p>
-            <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
-              <div className="rounded-2xl bg-white p-4">
-                <p className="text-xs font-medium text-zinc-500">Strength</p>
-                <p className="mt-1 font-medium text-zinc-900">
-                  Information architecture
-                </p>
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <Button href="/projects">Explore Work</Button>
+                <Button href="/about" variant="secondary">
+                  My Story
+                </Button>
               </div>
-              <div className="rounded-2xl bg-white p-4">
-                <p className="text-xs font-medium text-zinc-500">Focus</p>
-                <p className="mt-1 font-medium text-zinc-900">
-                  End-to-end product UX
-                </p>
+            </div>
+
+            <div className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
+              <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">
+                Current Focus
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-zinc-600">
+                Directing UX strategy for India&apos;s leading insurance ecosystem. 
+                Specializing in <span className="font-medium text-zinc-950">70% handoff efficiency</span> through Design Systems.
+              </p>
+              <div className="mt-8 space-y-4">
+                <div className="rounded-2xl border border-zinc-100 bg-zinc-50 p-4">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Expertise</p>
+                  <p className="mt-1 text-sm font-semibold text-zinc-900">Systems Architecture</p>
+                </div>
+                <div className="rounded-2xl border border-zinc-100 bg-zinc-50 p-4">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Innovation</p>
+                  <p className="mt-1 text-sm font-semibold text-zinc-900">AI-Integrated UX (LLMs)</p>
+                </div>
               </div>
             </div>
           </div>
         </SectionWrapper>
       </section>
 
+      {/* DYNAMIC WORK SECTION */}
       <section className="pb-16">
         <SectionWrapper>
-          <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-col gap-2 border-b border-zinc-100 pb-8 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-medium text-zinc-600">
-                Featured projects
-              </p>
-              <h2 className="mt-2 font-heading text-2xl font-bold tracking-tight text-brand-primary md:text-3xl">
-                Work I&apos;m proud of
-              </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-600">
-                Three recent highlights. Replace these with real case studies as
-                you publish them.
-              </p>
+              <p className="text-sm font-bold uppercase tracking-widest text-zinc-400">Selected Work</p>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-zinc-950">Strategic Case Studies</h2>
             </div>
-
-            <Button href="/projects" variant="secondary" className="mt-4 md:mt-0">
-              See all projects
-            </Button>
+            <Button href="/projects" variant="secondary">View All Work</Button>
           </div>
 
-          {projects.length > 0 ? (
-            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {projects.map((project) => (
-                <ProjectCard
-                  key={project._id}
-                  title={project.title}
-                  category={project.category ?? "Case study"}
-                  description={
-                    project.excerpt ||
-                    "A UX/UI case study from my portfolio."
-                  }
-                  href={
-                    project.slug?.current
-                      ? `/projects/${project.slug.current}`
-                      : "/projects"
-                  }
-                  image={project.mainImage}
-                />
-              ))}
-            </div>
-          ) : (
-            <p className="mt-8 text-sm text-zinc-500">
-              Projects coming soon. Add a few `project` documents in Sanity to
-              see them here.
-            </p>
-          )}
+          <div className="mt-12">
+            {projects && projects.length > 0 ? (
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {projects.map((project) => (
+                  <ProjectCard
+                    key={project._id}
+                    title={project.title}
+                    category={project.category ?? "Case study"}
+                    description={project.excerpt || "Driving impact through research-led design strategy."}
+                    href={project.slug?.current ? `/projects/${project.slug.current}` : "/projects"}
+                    image={project.mainImage}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-3xl border-2 border-dashed border-zinc-200 p-12 text-center text-sm italic text-zinc-500">
+                No projects found in Sanity. Add documents to see them here.
+              </div>
+            )}
+          </div>
         </SectionWrapper>
       </section>
 
-      <section className="pb-20">
+      {/* Final CTA */}
+      <section className="pb-24">
         <SectionWrapper>
-          <div className="rounded-3xl border border-zinc-200 bg-white p-6 md:p-10">
-            <p className="text-sm font-medium text-zinc-600">Contact</p>
-            <h2 className="mt-2 font-heading text-2xl font-bold tracking-tight text-brand-primary md:text-3xl">
-              Let&apos;s build something together
+          <div className="relative rounded-[2.5rem] bg-zinc-950 p-10 text-center text-white md:p-16">
+            <h2 className="mb-8 text-3xl font-bold tracking-tight md:text-5xl">
+              Let&apos;s build something scalable.
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-600">
-              Currently available for UX/UI Design Lead roles and strategic
-              consulting.
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button href="mailto:pratishek.designs@gmail.com">Email Me</Button>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button href="mailto:pratishek.designs@gmail.com" className="bg-white text-zinc-950 hover:bg-zinc-200">
+                Email Me
+              </Button>
               <Button
-                href="https://www.linkedin.com/in/pratishek-bansal-designer/"
+                href="https://www.linkedin.com/in/pratishekbansal"
                 variant="secondary"
+                className="border-zinc-700 text-white hover:bg-zinc-800"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 LinkedIn
               </Button>
@@ -165,7 +145,6 @@ export default async function HomePage() {
           </div>
         </SectionWrapper>
       </section>
-    </div>
-  )
+    </main>
+  );
 }
-

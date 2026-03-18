@@ -29,7 +29,7 @@ export default function AboutPage() {
       >
         <div className="space-y-6 text-zinc-600 leading-relaxed">
           <p>
-            I am a <span className="text-zinc-950 font-medium">Senior UX Design Lead</span> with over a decade of experience crafting human-centered products for enterprise and consumer markets. My work sits at the intersection of **Design Systems Architecture**, **AI-first product strategy**, and **DesignOps**.
+            I am a <span className="text-zinc-950 font-medium">Senior UX Design Lead</span> with over a decade of experience crafting human-centered products for enterprise and consumer markets. My work sits at the intersection of <strong>Design Systems Architecture</strong>, <strong>AI-first product strategy</strong>, and <strong>DesignOps</strong>.
           </p>
           
           <p>
