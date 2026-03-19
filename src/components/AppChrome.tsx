@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Nav } from "@/components/Nav"
 
@@ -17,23 +16,23 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
     <>
       <Nav />
       <main>{children}</main>
-      <footer className="border-t border-zinc-200/70">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 py-8 text-sm text-zinc-600">
-          <p>© {new Date().getFullYear()} Pratishek Bansal</p>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/contact"
-              className="font-medium text-zinc-600 hover:text-zinc-900"
-            >
-              Contact
-            </Link>
-            <Link
-              href="/studio"
-              className="text-xs text-zinc-400 hover:text-zinc-700"
-            >
-              Admin
-            </Link>
-            <p className="text-zinc-500">Built with Next.js & Tailwind CSS</p>
+      <footer className="py-12 border-t border-[var(--border)]">
+        <div className="mx-auto w-full max-w-content px-5">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <span className="font-mono text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-[0.2em]">
+              © 2026 Pratishek Bansal
+            </span>
+            <div className="flex gap-10">
+              {["LinkedIn", "Dribbble", "Instagram"].map((social) => (
+                <a
+                  key={social}
+                  href="#"
+                  className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--accent)] transition-all duration-300"
+                >
+                  {social}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </footer>

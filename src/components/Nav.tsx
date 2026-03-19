@@ -1,60 +1,76 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { cn } from "@/lib/cn" // Using your existing utility
+import { cn } from "@/lib/cn"
+import { useTheme } from "./ThemeProvider"
+import ThemeToggle from "./ThemeToggle"
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
 ] as const
-
-function isActive(pathname: string, href: string) {
-  if (href === "/") return pathname === "/"
-  return pathname === href || pathname.startsWith(`${href}/`)
-}
 
 export function Nav() {
   const pathname = usePathname()
+  const { isDark } = useTheme()
+  const [isScrolled, setIsScrolled] = React.useState(false)
+
+  React.useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-200/50 bg-white/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
-        <Link
-          href="/"
-          className="group text-sm font-medium tracking-tight text-zinc-950 transition-colors"
-        >
-          Pratishek Bansal
-          <span className="ml-2 align-middle text-xs font-normal text-zinc-400 group-hover:text-zinc-600 transition-colors">
-            UX/UI Design Lead
+    <header 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
+        isScrolled 
+          ? "py-4 border-b border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur-md" 
+          : "py-8 bg-transparent border-transparent"
+      )}
+    >
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 md:px-12">
+        <Link href="/" className="group flex flex-col">
+          <span className="text-[15px] font-bold tracking-tight text-[var(--text)] transition-colors">
+            Pratishek Bansal
+          </span>
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors">
+            Product Designer
           </span>
         </Link>
 
-        <nav aria-label="Primary">
-          <ul className="flex items-center gap-1">
-            {links.map((l) => {
-              const active = isActive(pathname, l.href)
-              return (
+        <div className="flex items-center gap-8">
+          <nav aria-label="Primary" className="hidden md:block">
+            <ul className="flex items-center gap-8">
+              {links.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    aria-current={active ? "page" : undefined}
                     className={cn(
-                      "rounded-full px-3 py-1.5 text-sm font-medium transition-all duration-200",
-                      active
-                        ? "bg-zinc-900 text-white shadow-sm"
-                        : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900"
+                      "text-[12px] font-medium tracking-wide transition-colors relative",
+                      pathname === l.href 
+                        ? "text-[var(--text)]" 
+                        : "text-[var(--text-muted)] hover:text-[var(--text)]"
                     )}
                   >
                     {l.label}
+                    {pathname === l.href && (
+                      <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-[var(--accent)]" />
+                    )}
                   </Link>
                 </li>
-              )
-            })}
-          </ul>
-        </nav>
+              ))}
+            </ul>
+          </nav>
+          
+          <div className="pl-4 border-l border-[var(--border)]">
+            <ThemeToggle />
+          </div>
+        </div>
       </div>
     </header>
   )

@@ -1,6 +1,10 @@
+import { Hero } from "@/components/Hero"
 import { Button } from "@/components/Button"
 import { ProjectCard } from "@/components/ProjectCard"
 import { SectionWrapper } from "@/components/SectionWrapper"
+import { SkillMarquee } from "@/components/SkillMarquee"
+import { Impact } from "@/components/Impact" 
+import { Experience } from "@/components/Experience" 
 import { client } from "@/sanity/lib/client"
 
 export const dynamic = "force-dynamic";
@@ -9,11 +13,7 @@ export const revalidate = 0;
 interface Project {
   _id: string;
   title: string;
-  mainImage: {
-    asset: {
-      url: string;
-    };
-  };
+  mainImage: { asset: { url: string } };
   slug: { current: string };
   category?: string; 
   excerpt?: string;
@@ -22,14 +22,8 @@ interface Project {
 async function getProjects(): Promise<Project[]> {
   return await client.fetch(
     `*[_type == "project"] | order(_createdAt desc){
-      _id,
-      title,
-      "slug": slug,
-      category,
-      mainImage{
-        ...,
-        asset->
-      },
+      _id, title, "slug": slug, category,
+      mainImage{..., asset->},
       "excerpt": content[0].children[0].text
     }`
   );
@@ -39,66 +33,35 @@ export default async function HomePage() {
   const projects = await getProjects();
 
   return (
-    <main className="bg-[#F9FAFB] min-h-screen pt-16">
-      {/* Hero Section */}
-      <section className="py-20 md:py-28">
+    <main className="bg-[var(--bg)] text-[var(--text)] min-h-screen transition-colors duration-500 overflow-x-hidden">
+      
+      {/* 1. HERO SECTION */}
+      <Hero />
+
+      {/* 2. SKILL MARQUEE */}
+      <SkillMarquee />
+
+      {/* 3. IMPACT & SCALE SECTION */}
+      <Impact />
+
+      {/* 4. THE PROJECT VAULT */}
+      <section className="py-24 bg-[var(--bg)] border-t border-[var(--border)] relative z-10">
         <SectionWrapper>
-          <div className="grid gap-10 md:grid-cols-[1.3fr_0.7fr] md:items-center">
-            <div>
-              <p className="mb-4 text-sm font-bold uppercase tracking-widest text-zinc-400">
-                Senior UX Design Lead
+          <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-10 md:flex-row md:items-end md:justify-between">
+            <div className="space-y-2">
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--accent)]">
+                Selected Work
               </p>
-              <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-zinc-950 md:text-6xl">
-                Building scalable systems and AI-first products.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-600">
-                Over 10 years of experience driving design strategy for enterprise SaaS, 
-                telecom, and startups. Currently leading UX at <span className="font-medium border-b-2 border-zinc-200 text-zinc-950">ICICI Lombard</span>.
-              </p>
-
-              <div className="mt-10 flex flex-wrap items-center gap-4">
-                <Button href="/projects">Explore Work</Button>
-                <Button href="/about" variant="secondary">
-                  My Story
-                </Button>
-              </div>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--text)] font-sans">
+                Strategic Case Studies
+              </h2>
             </div>
-
-            <div className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
-              <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">
-                Current Focus
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-600">
-                Directing UX strategy for India&apos;s leading insurance ecosystem. 
-                Specializing in <span className="font-medium text-zinc-950">70% handoff efficiency</span> through Design Systems.
-              </p>
-              <div className="mt-8 space-y-4">
-                <div className="rounded-2xl border border-zinc-100 bg-zinc-50 p-4">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Expertise</p>
-                  <p className="mt-1 text-sm font-semibold text-zinc-900">Systems Architecture</p>
-                </div>
-                <div className="rounded-2xl border border-zinc-100 bg-zinc-50 p-4">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Innovation</p>
-                  <p className="mt-1 text-sm font-semibold text-zinc-900">AI-Integrated UX (LLMs)</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </SectionWrapper>
-      </section>
-
-      {/* DYNAMIC WORK SECTION */}
-      <section className="py-20 bg-white border-y border-zinc-100">
-        <SectionWrapper>
-          <div className="flex flex-col gap-2 border-b border-zinc-100 pb-8 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-widest text-zinc-400">Selected Work</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-zinc-950">Strategic Case Studies</h2>
-            </div>
-            <Button href="/projects" variant="secondary">View All Work</Button>
+            <Button href="/projects" variant="secondary">
+              View All Work
+            </Button>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-16">
             {projects && projects.length > 0 ? (
               <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project) => (
@@ -113,43 +76,66 @@ export default async function HomePage() {
                 ))}
               </div>
             ) : (
-              <div className="rounded-3xl border-2 border-dashed border-zinc-200 p-20 text-center text-sm italic text-zinc-500">
-                No projects found in Sanity.
+              <div className="rounded-3xl border-2 border-dashed border-[var(--border)] p-24 text-center">
+                <p className="text-sm font-mono italic text-[var(--text-muted)]">
+                  // No projects found in Sanity.
+                </p>
               </div>
             )}
           </div>
         </SectionWrapper>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="py-24">
+      {/* 5. CAREER TIMELINE */}
+      <Experience />
+
+      {/* 6. V5 "GET IN TOUCH" SECTION (Theme Aware) */}
+      <section className="py-32 md:py-56 text-center relative overflow-hidden">
+        {/* Background Glow - Uses opacity to work in both themes */}
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none opacity-20 blur-[120px]"
+          style={{ background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)' }}
+        />
+        
         <SectionWrapper>
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-zinc-950 p-10 text-center text-white md:p-16">
-            <h2 className="relative z-10 mb-8 text-3xl font-bold tracking-tight md:text-5xl">
-              Let&apos;s build something scalable.
+          <div className="relative z-10">
+            {/* Label */}
+            <span className="font-mono text-[11px] font-medium text-[var(--accent)] tracking-[0.3em] uppercase block mb-8">
+              Get in Touch
+            </span>
+
+            {/* Headline with v5 Gradient Scaling */}
+            <h2 className="font-sans text-4xl md:text-7xl font-extrabold tracking-tighter mb-8 text-[var(--text)] leading-[1.05]">
+              Let&apos;s build something<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#818CF8] via-[#A78BFA] to-[#6366F1]">
+                extraordinary.
+              </span>
             </h2>
-            <div className="relative z-10 flex flex-wrap justify-center gap-4">
-              {/* Primary Override: Solid White bg, Dark text */}
-              <Button 
-                href="mailto:pratishek.designs@gmail.com" 
-                className="bg-white text-zinc-950 hover:bg-zinc-200"
-              >
+
+            {/* Subtext - Uses var(--text-muted) for theme switching */}
+            <p className="text-[15px] md:text-lg text-[var(--text-muted)] max-w-[500px] mx-auto mb-12 leading-relaxed font-sans">
+              Looking for a Design Lead who can architect systems, drive AI innovation, and scale product teams?
+            </p>
+
+            {/* Standardized Design System Buttons (From Button.tsx) */}
+            <div className="flex flex-wrap justify-center gap-5">
+              <Button href="mailto:pratishek.designs@gmail.com" variant="primary">
                 Email Me
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
               </Button>
-              {/* Secondary Override: Transparent bg, White border, White text */}
-              <Button
-                href="https://www.linkedin.com/in/pratishekbansal"
-                variant="secondary"
-                className="bg-transparent border-zinc-700 text-white hover:bg-zinc-800"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              
+              <Button href="https://www.linkedin.com/in/pratishekbansal" variant="secondary">
                 LinkedIn
               </Button>
             </div>
           </div>
         </SectionWrapper>
       </section>
+
+      {/* Footer moved to AppChrome.tsx to prevent double-footers */}
     </main>
   );
 }

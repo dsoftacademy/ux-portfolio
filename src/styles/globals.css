@@ -2,16 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light;
+@layer base {
+  :root {
+    /* v5 Font System Mapping */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+
+    /* Dark theme variables (v5 Spec) - Default */
+    --bg: #0C0C10;
+    --surface: #16161C; /* Lighter than BG for card elevation */
+    --text: #F0F0F4;
+    --text-2: rgba(255, 255, 255, 0.55);
+    --text-muted: rgba(255, 255, 255, 0.42);
+    --accent: #6366F1;
+    --border: rgba(255, 255, 255, 0.08); /* Slightly more visible */
+    --selection: rgba(99, 102, 241, 0.3);
+  }
+
+  [data-theme='light'] {
+    /* Light theme overrides (v5 Spec) */
+    --bg: #F5F5F2;
+    --surface: #FFFFFF; /* Pure white on off-white background */
+    --text: #111827;
+    --text-2: rgba(17, 24, 39, 0.68);
+    --text-muted: rgba(17, 24, 39, 0.50);
+    --accent: #4F46E5;
+    --border: rgba(17, 24, 39, 0.08);
+    --selection: rgba(99, 102, 241, 0.15);
+  }
+
+  body {
+    @apply antialiased;
+    background-color: var(--bg);
+    color: var(--text);
+    /* FORCED FONT HANDSHAKE */
+    font-family: var(--font-sans);
+    transition: background-color 0.45s cubic-bezier(0.23, 1, 0.32, 1), 
+                color 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Force Headings to use the Design System Font */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    @apply tracking-tight;
+  }
 }
 
-body {
-  @apply bg-surface font-sans text-brand-primary antialiased;
-  text-rendering: optimizeLegibility;
-}
-
+/* Design System Helpers */
 ::selection {
-  @apply bg-brand-primary text-white;
+  background: var(--selection);
+  color: var(--text);
 }
 
+.ease-v5 {
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}

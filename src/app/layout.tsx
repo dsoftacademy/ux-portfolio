@@ -1,34 +1,28 @@
 import type { Metadata } from "next"
-import "@/styles/globals.css"
+import "./globals.css"
 import { AppChrome } from "@/components/AppChrome"
-import { Inter, Plus_Jakarta_Sans } from "next/font/google"
+import { ThemeProvider } from "@/components/ThemeProvider"
+import { Inter } from "next/font/google"
+import { GeistMono } from "geist/font/mono"
 
-const bodyFont = Inter({
+// Updated variable to --font-sans to match tailwind.config.js
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-})
-
-const headingFont = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-sans", 
   display: "swap",
 })
 
 export const metadata: Metadata = {
   title: {
-    default: "Pratishek Bansal | UX/UI Design Lead",
+    default: "Pratishek Bansal | Senior Design Lead",
     template: "%s - Pratishek Bansal",
   },
-  description: "Senior UX Design Lead with 10+ years of experience...",
+  description:
+    "Strategic Design Leader specializing in AI-First Products and Design Systems.",
   icons: {
-    icon: '/icon.png',
-    shortcut: '/icon.png',
-    apple: '/icon.png',
+    icon: "/icon.png",
   },
-};
-
-
+}
 
 export default function RootLayout({
   children,
@@ -36,11 +30,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${bodyFont.variable} ${headingFont.variable}`}>
-        <AppChrome>{children}</AppChrome>
+    <html
+      lang="en"
+      className={`${inter.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="antialiased">
+        <ThemeProvider>
+          <AppChrome>{children}</AppChrome>
+        </ThemeProvider>
       </body>
     </html>
   )
 }
-

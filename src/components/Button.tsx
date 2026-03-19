@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import Link from "next/link"
 import { cn } from "@/lib/cn"
@@ -28,57 +30,42 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const { className, variant = "primary", children } = props
 
-    // CHECK: Are we passing custom colors in the className?
-    const hasCustomBg = className?.includes("bg-")
-    const hasCustomText = className?.includes("text-")
-    const hasCustomBorder = className?.includes("border-")
-
     const styles = cn(
-      "inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+      // Base: v5 Lead-Level Parameters
+      "inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-[13px] font-bold uppercase tracking-[0.15em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] disabled:pointer-events-none disabled:opacity-50 font-sans cursor-pointer",
       
-      // Primary Defaults (Only if no custom bg/text is passed)
-      variant === "primary" && !hasCustomBg && "bg-brand-primary hover:bg-zinc-800",
-      variant === "primary" && !hasCustomText && "text-white",
+      // v5 Primary: Tokenized Brand Gradient (Same in all modes)
+      variant === "primary" && 
+        "bg-gradient-to-br from-[#6366F1] to-[#818CF8] text-white shadow-[0_6px_20px_rgba(99,102,241,0.25)] border-none hover:scale-105 active:scale-95",
       
-      // Secondary Defaults (Only if no custom bg/text/border is passed)
-      variant === "secondary" && !hasCustomBorder && "border border-zinc-200",
-      variant === "secondary" && !hasCustomBg && "bg-white hover:bg-zinc-50",
-      variant === "secondary" && !hasCustomText && "text-brand-primary",
+      // v5 Secondary: Token-Driven Accessibility (Flipping correctly in light/dark)
+      variant === "secondary" && 
+        "border border-[var(--border)] bg-transparent text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--text)]/[0.04] hover:border-[var(--text)]/[0.2] hover:scale-105 active:scale-95",
       
-      // Custom overrides (Always applied last)
-      className,
+      className
     )
 
     if ("href" in props && props.href) {
       const isExternal = props.href.startsWith("http") || props.href.startsWith("mailto:")
-
-      if (isExternal) {
-        return (
-          <a
-            className={styles}
-            href={props.href}
-            target={props.target}
-            rel={props.target === "_blank" ? (props.rel || "noopener noreferrer") : props.rel}
-          >
-            {children}
-          </a>
-        )
-      }
-
       return (
-        <Link className={styles} href={props.href}>
+        <Link 
+          className={styles} 
+          href={props.href}
+          target={isExternal ? (props.target || "_blank") : props.target}
+          rel={isExternal ? (props.rel || "noopener noreferrer") : props.rel}
+        >
           {children}
         </Link>
       )
     }
 
-    const { type = "button", onClick } = props as HTMLButtonProps
+    const buttonProps = props as HTMLButtonProps
     return (
       <button
         ref={ref}
-        type={type}
+        type={buttonProps.type || "button"}
         className={styles}
-        onClick={onClick}
+        onClick={buttonProps.onClick}
       >
         {children}
       </button>
