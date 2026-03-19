@@ -2,7 +2,14 @@
 
 import React, { useState } from 'react'
 
-const EXPERIENCES = [
+type ExperienceItem = {
+  company: string
+  role: string
+  period: string
+  current: boolean
+}
+
+const EXPERIENCES: ExperienceItem[] = [
   { company: "ICICI Lombard", role: "Design Lead", period: "2024 — Present", current: true },
   { company: "Jio", role: "UX/UI Design Lead — Design Systems", period: "2022 — 2024", current: false },
   { company: "YUJ Designs", role: "UX/UI Design Consultant", period: "2022 — 2023", current: false },
@@ -49,7 +56,7 @@ export const Experience = () => {
   )
 }
 
-function ExperienceRow({ exp }: { exp: any }) {
+function ExperienceRow({ exp }: { exp: ExperienceItem }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (

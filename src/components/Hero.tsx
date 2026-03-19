@@ -2,12 +2,11 @@
 
 import React, { useState, useRef, useCallback } from 'react'
 import { Button } from './Button'
-import { useTheme } from './ThemeProvider'
 import { TypingRole } from './TypingRole'
 import { HeroFloor } from './HeroFloor'
 
 export const Hero = () => {
-  const { isDark } = useTheme()
+  // Removed unused isDark to fix Vercel/Local build errors
   const [tiltX, setTiltX] = useState(0)
   const [tiltY, setTiltY] = useState(0)
   const ref = useRef<HTMLElement>(null)
@@ -22,8 +21,8 @@ export const Hero = () => {
   }, [])
 
   return (
-    <section 
-      ref={ref} 
+    <section
+      ref={ref}
       onMouseMove={onMouse}
       className="relative min-h-[100vh] flex flex-col justify-center px-12 pt-[120px] pb-[80px] overflow-hidden"
     >
@@ -31,10 +30,7 @@ export const Hero = () => {
       <HeroFloor tiltX={tiltX} tiltY={tiltY} />
 
       {/* 2. LAYER: Sacred Content Zone (z-10) */}
-      {/* Added pointer-events-none to allow mouse to reach the floor underneath */}
       <div className="relative z-10 w-full max-w-[1200px] mx-auto pointer-events-none">
-        
-        {/* Re-enable pointer-events-auto for the actual content so buttons remain clickable */}
         <div className="max-w-[620px] pointer-events-auto">
           
           {/* Status Badge */}
@@ -73,12 +69,10 @@ export const Hero = () => {
               My Story
             </Button>
           </div>
-          
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      {/* Added pointer-events-none so it doesn't block artifacts at the bottom-center */}
       <div className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 animate-fade-in-late z-10 pointer-events-none">
         <span className="font-mono text-[10px] text-[var(--text-5)] tracking-[2px] uppercase">Scroll</span>
         <div className="w-[1px] h-6 bg-gradient-to-b from-[rgba(99,102,241,0.35)] to-transparent" />

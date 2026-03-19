@@ -70,15 +70,16 @@ export default async function HomePage() {
                     title={project.title}
                     category={project.category ?? "Case study"}
                     description={project.excerpt || "Driving impact through research-led design strategy."}
-                    href={project.slug?.current ? `/projects/${project.slug.current}` : "/projects"}
                     image={project.mainImage}
+                    href={project.slug?.current ? `/projects/${project.slug.current}` : "/projects"}
                   />
                 ))}
               </div>
             ) : (
               <div className="rounded-3xl border-2 border-dashed border-[var(--border)] p-24 text-center">
                 <p className="text-sm font-mono italic text-[var(--text-muted)]">
-                  // No projects found in Sanity.
+                  {/* Fixed: Comments inside children must be in braces */}
+                  No projects found in Sanity.
                 </p>
               </div>
             )}
@@ -89,9 +90,8 @@ export default async function HomePage() {
       {/* 5. CAREER TIMELINE */}
       <Experience />
 
-      {/* 6. V5 "GET IN TOUCH" SECTION (Theme Aware) */}
+      {/* 6. V5 "GET IN TOUCH" SECTION */}
       <section className="py-32 md:py-56 text-center relative overflow-hidden">
-        {/* Background Glow - Uses opacity to work in both themes */}
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none opacity-20 blur-[120px]"
           style={{ background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)' }}
@@ -99,12 +99,10 @@ export default async function HomePage() {
         
         <SectionWrapper>
           <div className="relative z-10">
-            {/* Label */}
             <span className="font-mono text-[11px] font-medium text-[var(--accent)] tracking-[0.3em] uppercase block mb-8">
               Get in Touch
             </span>
 
-            {/* Headline with v5 Gradient Scaling */}
             <h2 className="font-sans text-4xl md:text-7xl font-extrabold tracking-tighter mb-8 text-[var(--text)] leading-[1.05]">
               Let&apos;s build something<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#818CF8] via-[#A78BFA] to-[#6366F1]">
@@ -112,12 +110,10 @@ export default async function HomePage() {
               </span>
             </h2>
 
-            {/* Subtext - Uses var(--text-muted) for theme switching */}
             <p className="text-[15px] md:text-lg text-[var(--text-muted)] max-w-[500px] mx-auto mb-12 leading-relaxed font-sans">
               Looking for a Design Lead who can architect systems, drive AI innovation, and scale product teams?
             </p>
 
-            {/* Standardized Design System Buttons (From Button.tsx) */}
             <div className="flex flex-wrap justify-center gap-5">
               <Button href="mailto:pratishek.designs@gmail.com" variant="primary">
                 Email Me
@@ -134,8 +130,6 @@ export default async function HomePage() {
           </div>
         </SectionWrapper>
       </section>
-
-      {/* Footer moved to AppChrome.tsx to prevent double-footers */}
     </main>
   );
 }

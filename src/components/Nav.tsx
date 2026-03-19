@@ -15,7 +15,7 @@ const links = [
 
 export function Nav() {
   const pathname = usePathname()
-  const { isDark } = useTheme()
+  useTheme()
   const [isScrolled, setIsScrolled] = React.useState(false)
 
   React.useEffect(() => {

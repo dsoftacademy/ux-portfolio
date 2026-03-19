@@ -3,26 +3,37 @@
 import React, { useState } from 'react'
 
 // --- V5 Design Primitives (Internal) ---
-const AToggle = ({ on, isDark }: any) => (
+type ThemeAwareProps = { isDark: boolean }
+
+type ToggleProps = ThemeAwareProps & { on: boolean }
+const AToggle = ({ on, isDark }: ToggleProps) => (
   <div className={`w-[56px] h-[30px] rounded-[15px] relative ${on ? 'bg-[linear-gradient(135deg,#6366F1,#818CF8)] shadow-[0_8px_28px_rgba(99,102,241,0.35),inset_0_1px_0_rgba(255,255,255,0.2)]' : (isDark ? 'bg-[#3F3F46]' : 'bg-[#D4D4D8]')}`}>
     <div className={`w-[24px] h-[24px] rounded-full bg-white absolute top-[3px] shadow-[0_2px_6px_rgba(0,0,0,0.2)] transition-all duration-300 ${on ? 'left-[29px]' : 'left-[3px]'}`} />
   </div>
 )
 
-const AButton = ({ label, primary, isDark }: any) => (
+type ButtonArtifactProps = ThemeAwareProps & {
+  label: string
+  primary: boolean
+}
+const AButton = ({ label, primary, isDark }: ButtonArtifactProps) => (
   <div className={`px-6 py-2.5 rounded-[10px] font-sans text-[13px] font-semibold whitespace-nowrap ${primary ? 'bg-[linear-gradient(135deg,#818CF8,#6366F1)] text-white shadow-[0_8px_28px_rgba(99,102,241,0.35),inset_0_1px_0_rgba(255,255,255,0.2)]' : (isDark ? 'bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.08)] text-[rgba(255,255,255,0.4)]' : 'bg-[rgba(255,255,255,0.92)] border border-[rgba(0,0,0,0.06)] text-[rgba(17,24,39,0.4)]')}`}>
     {label}
   </div>
 )
 
-const AColor = ({ color, label, isDark }: any) => (
+type ColorArtifactProps = ThemeAwareProps & {
+  color: string
+  label: string
+}
+const AColor = ({ color, label, isDark }: ColorArtifactProps) => (
   <div className="flex flex-col items-center gap-1.5">
     <div className="w-[44px] h-[44px] rounded-[12px]" style={{ background: color, boxShadow: `0 8px 24px ${color}44, 0 2px 6px rgba(0,0,0,0.08)` }} />
     <span className={`font-mono text-[9px] ${isDark ? 'text-[rgba(255,255,255,0.4)]' : 'text-[rgba(17,24,39,0.4)]'}`}>{label}</span>
   </div>
 )
 
-const AInput = ({ isDark }: any) => (
+const AInput = ({ isDark }: ThemeAwareProps) => (
   <div className={`w-[190px] h-[42px] rounded-[10px] flex items-center px-[14px] gap-[10px] relative overflow-hidden ${isDark ? 'bg-[rgba(255,255,255,0.06)] border border-[rgba(99,102,241,0.12)] shadow-[0_4px_16px_rgba(0,0,0,0.15)]' : 'bg-[rgba(255,255,255,0.92)] border border-[rgba(99,102,241,0.18)] shadow-[0_6px_20px_rgba(0,0,0,0.07)]'}`}>
     <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-1/2 h-[10px] rounded-full blur-[4px]" style={{ background: `radial-gradient(ellipse, ${isDark ? 'rgba(99,102,241,0.2)' : 'rgba(99,102,241,0.12)'} 0%, transparent 70%)` }} />
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={isDark ? "rgba(255,255,255,0.4)" : "rgba(17,24,39,0.4)"} strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
@@ -30,7 +41,7 @@ const AInput = ({ isDark }: any) => (
   </div>
 )
 
-const ASlider = ({ isDark }: any) => (
+const ASlider = ({ isDark }: ThemeAwareProps) => (
   <div className="w-[120px] flex flex-col gap-1.5">
     <div className={`relative h-[6px] rounded-[3px] ${isDark ? 'bg-[rgba(255,255,255,0.06)]' : 'bg-[rgba(0,0,0,0.06)]'}`}>
       <div className="absolute left-0 top-0 w-[65%] h-full rounded-[3px] bg-gradient-to-r from-[#6366F1] to-[#818CF8]" />
@@ -40,7 +51,7 @@ const ASlider = ({ isDark }: any) => (
   </div>
 )
 
-const ACheck = ({ isDark }: any) => (
+const ACheck = ({ isDark }: ThemeAwareProps) => (
   <div className="flex items-center gap-2">
     <div className="w-5 h-5 rounded-[6px] bg-gradient-to-br from-[#6366F1] to-[#818CF8] shadow-[0_3px_10px_rgba(99,102,241,0.3)] flex items-center justify-center">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
@@ -49,7 +60,7 @@ const ACheck = ({ isDark }: any) => (
   </div>
 )
 
-const ARadius = ({ isDark }: any) => (
+const ARadius = ({ isDark }: ThemeAwareProps) => (
   <div className="relative w-[52px] h-[52px]">
     <div className={`w-[52px] h-[52px] rounded-[14px] border-[1.5px] border-dashed ${isDark ? 'border-[rgba(99,102,241,0.12)]' : 'border-[rgba(99,102,241,0.18)]'}`} />
     <svg width="18" height="18" className="absolute -top-[1px] -left-[1px]">
@@ -59,7 +70,7 @@ const ARadius = ({ isDark }: any) => (
   </div>
 )
 
-const ASpacing = ({ isDark }: any) => (
+const ASpacing = ({ isDark }: ThemeAwareProps) => (
   <svg width="72" height="36" viewBox="0 0 72 36">
     <line x1="6" y1="6" x2="6" y2="30" stroke="#818CF8" strokeWidth="0.8" opacity="0.5" />
     <line x1="66" y1="6" x2="66" y2="30" stroke="#818CF8" strokeWidth="0.8" opacity="0.5" />
@@ -70,7 +81,15 @@ const ASpacing = ({ isDark }: any) => (
   </svg>
 )
 
-const FloorPiece = ({ children, left, top, rx = 12, ry = 0, isDark }: any) => {
+type FloorPieceProps = ThemeAwareProps & {
+  children: React.ReactNode
+  left: string
+  top: string
+  rx?: number
+  ry?: number
+}
+
+const FloorPiece = ({ children, left, top, rx = 12, ry = 0, isDark }: FloorPieceProps) => {
   const [isHovered, setIsHovered] = useState(false)
   
   const baseOp = isDark ? 0.27 : 0.32 
