@@ -6,9 +6,6 @@ import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
 import { type SanityImageSource } from "@sanity/image-url/lib/types/types"
 
-export const dynamic = "force-dynamic"
-export const revalidate = 0
-
 type Project = {
   _id: string;
   title: string;
@@ -39,6 +36,16 @@ async function getProjectBySlug(slug: string): Promise<Project | null> {
     }`,
     { slug }
   )
+}
+
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const slugs: { slug: string }[] = await client.fetch(
+    `*[_type == "project" && defined(slug.current)][]{
+      "slug": slug.current
+    }`,
+  )
+
+  return slugs
 }
 
 export default async function ProjectDetailPage({

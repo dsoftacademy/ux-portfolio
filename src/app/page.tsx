@@ -7,9 +7,6 @@ import { Impact } from "@/components/Impact"
 import { Experience } from "@/components/Experience" 
 import { client } from "@/sanity/lib/client"
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 interface Project {
   _id: string;
   title: string;
