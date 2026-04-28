@@ -16,6 +16,13 @@ const inter = Inter({
 })
 
 const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
+const themeInitScript = `try {
+  var savedTheme = localStorage.getItem('portfolio-theme');
+  var theme = savedTheme === 'light' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+} catch (e) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}`
 
 export const metadata: Metadata = {
   title: {
@@ -41,6 +48,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInitScript}
+        </Script>
         {umamiWebsiteId ? (
           <Script
             async

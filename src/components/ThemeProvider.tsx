@@ -19,7 +19,7 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setThemeState] = useState<Theme | null>(null);
+  const [theme, setThemeState] = useState<Theme>('dark');
 
   useEffect(() => {
     const saved = (localStorage.getItem('portfolio-theme') as Theme) || 'dark';
@@ -38,21 +38,16 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     setTheme(nextTheme);
   };
 
-  // We ensure isDark always derives from the current state
-  const currentTheme = theme ?? 'dark';
-
   const value = {
-    theme: currentTheme,
-    isDark: currentTheme === 'dark',
+    theme,
+    isDark: theme === 'dark',
     setTheme,
     toggleTheme,
   };
 
   return (
     <ThemeContext.Provider value={value}>
-      <div style={{ visibility: theme ? 'visible' : 'hidden' }}>
-        {children}
-      </div>
+      {children}
     </ThemeContext.Provider>
   );
 };

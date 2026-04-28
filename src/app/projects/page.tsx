@@ -7,7 +7,7 @@ import { type SanityImageSource } from "@sanity/image-url/lib/types/types"
 import Link from "next/link"
 
 export const metadata = {
-  title: "Projects | Pratishek Bansal",
+  title: "Projects",
   description: "A collection of design leadership and AI-first product case studies.",
 }
 
@@ -60,6 +60,13 @@ export default async function ProjectsPage() {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={urlFor(project.mainImage).width(800).height(500).url()}
+                      alt={project.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : project.slug?.current === "ilds-design-system" ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src="/images/ilds-cover.png"
                       alt={project.title}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
