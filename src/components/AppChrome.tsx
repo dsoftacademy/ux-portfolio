@@ -24,7 +24,7 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
             </span>
             <div className="flex gap-10">
               {[
-                { label: "LinkedIn", href: "https://www.linkedin.com/in/pratishekbansal" },
+                { label: "LinkedIn", href: "https://www.linkedin.com/in/pratishek-bansal-designer/?originalSubdomain=in" },
                 { label: "Email", href: "mailto:pratishek.designs@gmail.com" },
               ].map((social) => (
                 <a

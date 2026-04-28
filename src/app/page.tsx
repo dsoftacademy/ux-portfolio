@@ -120,7 +120,7 @@ export default async function HomePage() {
                 </svg>
               </Button>
               
-              <Button href="https://www.linkedin.com/in/pratishekbansal" variant="secondary">
+              <Button href="https://www.linkedin.com/in/pratishek-bansal-designer/?originalSubdomain=in" variant="secondary">
                 LinkedIn
               </Button>
             </div>

@@ -103,7 +103,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Social</p>
-                      <a href="https://www.linkedin.com/in/pratishekbansal" target="_blank" rel="noopener noreferrer" className="text-base font-medium text-[var(--text)] hover:text-[var(--accent)] transition-colors">
+                      <a href="https://www.linkedin.com/in/pratishek-bansal-designer/?originalSubdomain=in" target="_blank" rel="noopener noreferrer" className="text-base font-medium text-[var(--text)] hover:text-[var(--accent)] transition-colors">
                         LinkedIn
                       </a>
                     </div>
