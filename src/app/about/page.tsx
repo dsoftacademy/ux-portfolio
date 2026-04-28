@@ -4,7 +4,7 @@ import { SectionWrapper } from "@/components/SectionWrapper"
 
 export const metadata = {
   title: "About | Pratishek Bansal",
-  description: "Senior UX Design Lead with 10+ years of experience in Design Systems and AI strategy.",
+  description: "Principal Design Lead with 10+ years of experience in Design Systems and AI strategy.",
 }
 
 export default function AboutPage() {
@@ -38,11 +38,11 @@ export default function AboutPage() {
               </h1>
               <div className="mt-8 space-y-6 text-lg leading-relaxed text-[var(--text-muted)] font-sans">
                 <p>
-                  I am a <span className="text-[var(--text)] font-semibold">Senior UX Design Lead</span> with over a decade of experience crafting human-centered products. My work sits at the intersection of <strong>Design Systems Architecture</strong> and <strong>AI-first product strategy</strong>.
+                  I am a <span className="text-[var(--text)] font-semibold">Principal UX/UI Design Lead</span> with over a decade of experience crafting human-centered products. My work sits at the intersection of <strong>Design Systems Architecture</strong> and <strong>AI-first product strategy</strong>.
                 </p>
                 
                 <p>
-                  Currently, as a <strong>Design Lead at ICICI Lombard</strong>, I direct the UX strategy for enterprise platforms. I recently led the creation of the <strong>IL Design System</strong>, unifying 15+ product teams and reducing handoff time by <strong>70%</strong>—earning the <span className="text-[var(--accent)] italic font-medium">Top Performer 2025</span> award.
+                  Currently, as a <strong>Principal Design Lead at ICICI Lombard</strong>, I direct the UX strategy for enterprise platforms. I recently led the creation of the <strong>IL Design System</strong>, unifying 15+ product teams and reducing handoff time by <strong>70%</strong>—earning the <span className="text-[var(--accent)] italic font-medium">Top Performer 2025</span> award.
                 </p>
 
                 <p>
@@ -68,11 +68,11 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Current Role</p>
-                    <p className="text-base font-medium text-[var(--text)]">Design Lead @ ICICI Lombard</p>
+                    <p className="text-base font-medium text-[var(--text)]">Principal Design Lead @ ICICI Lombard</p>
                   </div>
                   <div className="pt-4">
                     <a
-                      href="/Pratishek-Bansal-Resume.txt"
+                      href="/Pratishek-Bansal-Resume.pdf"
                       download
                       className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#6366F1] to-[#818CF8] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:scale-105 active:scale-95"
                     >

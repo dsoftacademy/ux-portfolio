@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 
 const roles = [
-  "Senior UX Design Lead",
+  "Principal UX/UI Design Lead",
   "Design Systems Architect",
   "Enterprise Product Strategist",
   "AI Interaction Specialist",

@@ -19,12 +19,17 @@ export function Nav() {
   const pathname = usePathname()
   useTheme()
   const [isScrolled, setIsScrolled] = React.useState(false)
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  React.useEffect(() => {
+    setIsMenuOpen(false)
+  }, [pathname])
 
   return (
     <header 
@@ -45,7 +50,16 @@ export function Nav() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4 md:gap-8">
+          <button
+            type="button"
+            className="md:hidden inline-flex items-center justify-center rounded-md border border-[var(--border)] px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--text)]"
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            {isMenuOpen ? "Close" : "Menu"}
+          </button>
           <nav aria-label="Primary" className="hidden md:block">
             <ul className="flex items-center gap-8">
               {links.map((l) => (
@@ -74,6 +88,30 @@ export function Nav() {
           </div>
         </div>
       </div>
+      {isMenuOpen ? (
+        <nav
+          aria-label="Mobile primary"
+          className="md:hidden mx-6 mt-4 rounded-xl border border-[var(--border)] bg-[var(--bg)]/95 p-4 backdrop-blur-md"
+        >
+          <ul className="grid gap-3">
+            {links.map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className={cn(
+                    "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    pathname === l.href
+                      ? "bg-[var(--surface)] text-[var(--text)]"
+                      : "text-[var(--text-muted)] hover:bg-[var(--surface)] hover:text-[var(--text)]"
+                  )}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
     </header>
   )
 }

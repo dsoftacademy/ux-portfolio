@@ -58,8 +58,8 @@ export default function ContactPage() {
               Contact
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-[var(--text-muted)]">
-              Looking for a Design Lead to architect your next system or scale your product team? 
-              Send a note below and I’ll get back to you within 24 hours.
+              Looking for a Principal Design Lead to architect your next system or scale your product team?
+              Send a note below and I&apos;ll get back to you within 24 hours.
             </p>
           </div>
         </SectionWrapper>
@@ -123,7 +123,7 @@ export default function ContactPage() {
                         id="name"
                         name="name"
                         required
-                        placeholder="Pratishek Bansal"
+                        placeholder="Your name"
                         className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
                     </div>

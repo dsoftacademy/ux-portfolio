@@ -108,7 +108,7 @@ export default async function HomePage() {
             </h2>
 
             <p className="text-[15px] md:text-lg text-[var(--text-muted)] max-w-[500px] mx-auto mb-12 leading-relaxed font-sans">
-              Looking for a Design Lead who can architect systems, drive AI innovation, and scale product teams?
+              Looking for a Principal Design Lead who can architect systems, drive AI innovation, and scale product teams?
             </p>
 
             <div className="flex flex-wrap justify-center gap-5">

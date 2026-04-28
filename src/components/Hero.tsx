@@ -37,7 +37,7 @@ export const Hero = () => {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border)] bg-[var(--pillBg)] mb-7 animate-fade-up">
             <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse-dot" />
             <span className="font-mono text-[11px] font-medium text-[var(--text-3)] tracking-[0.5px]">
-              Design Lead @ ICICI Lombard · Open to relocation
+              Principal Design Lead @ ICICI Lombard · Open to relocation
             </span>
           </div>
 

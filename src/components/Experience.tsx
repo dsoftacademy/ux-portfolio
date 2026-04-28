@@ -10,7 +10,7 @@ type ExperienceItem = {
 }
 
 const EXPERIENCES: ExperienceItem[] = [
-  { company: "ICICI Lombard", role: "Design Lead", period: "2024 — Present", current: true },
+  { company: "ICICI Lombard", role: "Principal Design Lead", period: "2024 — Present", current: true },
   { company: "Jio", role: "UX/UI Design Lead — Design Systems", period: "2022 — 2024", current: false },
   { company: "YUJ Designs", role: "UX/UI Design Consultant", period: "2022 — 2023", current: false },
   { company: "XR Dial Technologies", role: "Senior UX/UI Designer — AR/VR", period: "2020 — 2022", current: false }
