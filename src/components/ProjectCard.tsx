@@ -11,6 +11,7 @@ export type ProjectCardProps = {
   description: string
   href?: string
   image?: SanityImageSource
+  fallbackImageUrl?: string
 }
 
 export function ProjectCard({
@@ -19,6 +20,7 @@ export function ProjectCard({
   description,
   href = "/projects",
   image,
+  fallbackImageUrl,
 }: ProjectCardProps) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-[32px] border border-[var(--border)] bg-[var(--bg)] transition-all duration-500 hover:border-[var(--accent)] hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)]">
@@ -28,6 +30,14 @@ export function ProjectCard({
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={urlFor(image).width(1200).height(750).fit("crop").auto("format").url()}
+            alt={title}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
+          />
+        ) : fallbackImageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={fallbackImageUrl}
             alt={title}
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             loading="lazy"

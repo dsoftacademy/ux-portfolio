@@ -68,6 +68,7 @@ export default async function HomePage() {
                     category={project.category ?? "Case study"}
                     description={project.excerpt || "Driving impact through research-led design strategy."}
                     image={project.mainImage}
+                    fallbackImageUrl={project.slug?.current === "ilds-design-system" ? "/images/ilds-cover.png" : undefined}
                     href={project.slug?.current ? `/projects/${project.slug.current}` : "/projects"}
                   />
                 ))}
