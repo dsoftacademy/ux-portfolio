@@ -6,6 +6,7 @@ import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
 import { type SanityImageSource } from "@sanity/image-url/lib/types/types"
 import type { PortableTextBlock } from "@portabletext/types"
+import type { Metadata } from "next"
 
 type Project = {
   _id: string;
@@ -65,6 +66,19 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   )
 
   return slugs
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const project = await getProjectBySlug(slug)
+
+  return {
+    title: project?.title ?? "Project",
+  }
 }
 
 export default async function ProjectDetailPage({

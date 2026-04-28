@@ -15,6 +15,8 @@ const inter = Inter({
   display: "swap",
 })
 
+const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
+
 export const metadata: Metadata = {
   title: {
     default: "Pratishek Bansal | Principal Design Lead",
@@ -39,12 +41,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* Umami Analytics */}
-        <Script
-          async
-          src="https://cloud.umami.is/script.js"
-          data-website-id="805ef96e-57da-4e20-98cc-4d37528e461f"
-        />
+        {umamiWebsiteId ? (
+          <Script
+            async
+            src="https://cloud.umami.is/script.js"
+            data-website-id={umamiWebsiteId}
+          />
+        ) : null}
       </head>
       <body className="antialiased">
         <ThemeProvider>

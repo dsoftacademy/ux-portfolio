@@ -3,7 +3,7 @@ import { Button } from "@/components/Button"
 import { SectionWrapper } from "@/components/SectionWrapper"
 
 export const metadata = {
-  title: "About | Pratishek Bansal",
+  title: "About",
   description: "Principal Design Lead with 10+ years of experience in Design Systems and AI strategy.",
 }
 
