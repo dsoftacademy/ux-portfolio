@@ -23,13 +23,18 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
               © 2026 Pratishek Bansal
             </span>
             <div className="flex gap-10">
-              {["LinkedIn", "Dribbble", "Instagram"].map((social) => (
+              {[
+                { label: "LinkedIn", href: "https://www.linkedin.com/in/pratishekbansal" },
+                { label: "Email", href: "mailto:pratishek.designs@gmail.com" },
+              ].map((social) => (
                 <a
-                  key={social}
-                  href="#"
+                  key={social.label}
+                  href={social.href}
+                  target={social.href.startsWith("http") ? "_blank" : undefined}
+                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--accent)] transition-all duration-300"
                 >
-                  {social}
+                  {social.label}
                 </a>
               ))}
             </div>

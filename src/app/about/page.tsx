@@ -71,9 +71,13 @@ export default function AboutPage() {
                     <p className="text-base font-medium text-[var(--text)]">Design Lead @ ICICI Lombard</p>
                   </div>
                   <div className="pt-4">
-                    <Button href="/contact" className="w-full">
+                    <a
+                      href="/Pratishek-Bansal-Resume.txt"
+                      download
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#6366F1] to-[#818CF8] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:scale-105 active:scale-95"
+                    >
                       Download Resume
-                    </Button>
+                    </a>
                   </div>
                 </div>
               </div>

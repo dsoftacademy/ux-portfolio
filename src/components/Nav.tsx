@@ -41,7 +41,7 @@ export function Nav() {
             Pratishek Bansal
           </span>
           <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors">
-            Product Designer
+            Principal Design Lead
           </span>
         </Link>
 

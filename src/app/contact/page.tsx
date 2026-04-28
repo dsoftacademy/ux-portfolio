@@ -7,10 +7,42 @@ import { SectionWrapper } from "@/components/SectionWrapper"
 
 export default function ContactPage() {
   const [success, setSuccess] = React.useState(false)
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSuccess(true)
+    setError(null)
+    setIsSubmitting(true)
+
+    const formData = new FormData(e.currentTarget)
+    const name = String(formData.get("name") || "")
+    const email = String(formData.get("email") || "")
+    const countryCode = String(formData.get("countryCode") || "")
+    const phone = String(formData.get("phone") || "")
+    const subject = String(formData.get("subject") || "Portfolio Inquiry")
+    const message = String(formData.get("message") || "")
+
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Phone: ${countryCode} ${phone}`,
+      "",
+      "Message:",
+      message,
+    ].join("\n")
+
+    const mailtoHref = `mailto:pratishek.designs@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+
+    try {
+      window.location.href = mailtoHref
+      setSuccess(true)
+      e.currentTarget.reset()
+    } catch {
+      setError("Unable to open your email app. Please email me directly at pratishek.designs@gmail.com.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -166,8 +198,11 @@ export default function ContactPage() {
 
                   <div className="pt-4">
                     <Button type="submit" className="w-full md:w-auto min-w-[200px]">
-                      Send Message
+                      {isSubmitting ? "Opening Email..." : "Send Message"}
                     </Button>
+                    {error ? (
+                      <p className="mt-3 text-sm text-red-400">{error}</p>
+                    ) : null}
                   </div>
                 </form>
               </div>

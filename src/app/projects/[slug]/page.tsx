@@ -5,6 +5,7 @@ import { SectionWrapper } from "@/components/SectionWrapper"
 import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
 import { type SanityImageSource } from "@sanity/image-url/lib/types/types"
+import type { PortableTextBlock } from "@portabletext/types"
 
 type Project = {
   _id: string;
@@ -12,10 +13,19 @@ type Project = {
   slug: { current: string };
   category?: string;
   mainImage?: SanityImageSource;
+  heroSummary?: string;
+  status?: "draft" | "review" | "published";
   overviewRole?: string;
   overviewTimeline?: string;
   overviewTools?: string;
-  content?: import("@portabletext/types").PortableTextBlock[];
+  problem?: PortableTextBlock[];
+  context?: PortableTextBlock[];
+  constraints?: PortableTextBlock[];
+  process?: PortableTextBlock[];
+  keyDecisions?: PortableTextBlock[];
+  outcomes?: PortableTextBlock[];
+  reflections?: PortableTextBlock[];
+  content?: PortableTextBlock[];
 }
 
 async function getProjectBySlug(slug: string): Promise<Project | null> {
@@ -32,6 +42,15 @@ async function getProjectBySlug(slug: string): Promise<Project | null> {
       "overviewRole": role,
       "overviewTimeline": timeline,
       "overviewTools": tools,
+      heroSummary,
+      status,
+      problem,
+      context,
+      constraints,
+      process,
+      keyDecisions,
+      outcomes,
+      reflections,
       content
     }`,
     { slug }
@@ -106,6 +125,11 @@ export default async function ProjectDetailPage({
             <h1 className="mt-6 font-sans text-4xl font-extrabold tracking-tighter text-[var(--text)] md:text-6xl lg:text-7xl">
               {project.title}
             </h1>
+            {project.heroSummary ? (
+              <p className="mt-6 max-w-3xl text-lg text-[var(--text-muted)]">
+                {project.heroSummary}
+              </p>
+            ) : null}
 
             <div className="relative mt-12 aspect-[21/9] w-full overflow-hidden rounded-[32px] bg-[var(--surface)] shadow-2xl">
               {project.mainImage ? (
@@ -131,15 +155,15 @@ export default async function ProjectDetailPage({
           <div className="grid gap-6 rounded-[32px] border border-[var(--border)] bg-[var(--bg)] p-8 md:grid-cols-3 md:p-12">
             <div>
               <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)]">Role</p>
-              <p className="mt-3 text-[15px] font-medium text-[var(--text)]">{project.overviewRole ?? "Product Designer"}</p>
+              <p className="mt-3 text-[15px] font-medium text-[var(--text)]">{project.overviewRole ?? "Principal Design Lead"}</p>
             </div>
             <div className="border-[var(--border)] md:border-l md:pl-12">
               <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)]">Timeline</p>
-              <p className="mt-3 text-[15px] font-medium text-[var(--text)]">{project.overviewTimeline ?? "2024 &mdash; Present"}</p>
+              <p className="mt-3 text-[15px] font-medium text-[var(--text)]">{project.overviewTimeline ?? "Timeline available on request"}</p>
             </div>
             <div className="border-[var(--border)] md:border-l md:pl-12">
               <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)]">Focus</p>
-              <p className="mt-3 text-[15px] font-medium text-[var(--text)]">{project.overviewTools ?? "UI/UX, Systems"}</p>
+              <p className="mt-3 text-[15px] font-medium text-[var(--text)]">{project.overviewTools ?? "Design Systems, Product UX, Strategy"}</p>
             </div>
           </div>
         </SectionWrapper>
@@ -149,28 +173,65 @@ export default async function ProjectDetailPage({
       <section>
         <SectionWrapper>
           <div className="rounded-[32px] border border-[var(--border)] bg-[var(--bg)] p-8 md:p-16">
-            <h2 className="mb-12 font-sans text-3xl font-extrabold tracking-tight text-[var(--text)]">The Process</h2>
-            
-            {Array.isArray(project.content) && project.content.length > 0 ? (
-              <div className="prose prose-zinc dark:prose-invert max-w-none prose-p:text-[var(--text-muted)] prose-p:leading-relaxed prose-headings:text-[var(--text)]">
-                <PortableText
-                  value={project.content}
-                  components={{
-                    block: {
-                      h1: ({ children }) => <h1 className="mb-6 text-4xl font-bold">{children}</h1>,
-                      h2: ({ children }) => <h2 className="mb-4 mt-12 text-2xl font-bold">{children}</h2>,
-                      normal: ({ children }) => <p className="mb-6 text-base">{children}</p>,
-                    },
-                  }}
-                />
-              </div>
-            ) : (
-              <div className="flex h-32 items-center justify-center rounded-2xl border-2 border-dashed border-[var(--border)]">
-                <p className="font-mono text-sm italic text-[var(--text-muted)]">
-                  {`// Content is being enriched in Sanity CMS.`}
-                </p>
-              </div>
-            )}
+            <h2 className="mb-12 font-sans text-3xl font-extrabold tracking-tight text-[var(--text)]">Case Study</h2>
+
+            <div className="space-y-12">
+              {[
+                { title: "Problem", value: project.problem },
+                { title: "Context", value: project.context },
+                { title: "Constraints", value: project.constraints },
+                { title: "Process", value: project.process },
+                { title: "Key Decisions", value: project.keyDecisions },
+                { title: "Outcomes", value: project.outcomes },
+                { title: "Reflections", value: project.reflections },
+              ]
+                .filter((section) => Array.isArray(section.value) && section.value.length > 0)
+                .map((section) => (
+                  <div key={section.title}>
+                    <h3 className="mb-4 font-sans text-xl font-bold text-[var(--text)] md:text-2xl">
+                      {section.title}
+                    </h3>
+                    <div className="prose prose-zinc dark:prose-invert max-w-none prose-p:text-[var(--text-muted)] prose-p:leading-relaxed prose-headings:text-[var(--text)]">
+                      <PortableText
+                        value={section.value as PortableTextBlock[]}
+                        components={{
+                          block: {
+                            h1: ({ children }) => <h1 className="mb-6 text-4xl font-bold">{children}</h1>,
+                            h2: ({ children }) => <h2 className="mb-4 mt-12 text-2xl font-bold">{children}</h2>,
+                            normal: ({ children }) => <p className="mb-6 text-base">{children}</p>,
+                          },
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+
+              {Array.isArray(project.content) && project.content.length > 0 ? (
+                <div>
+                  <h3 className="mb-4 font-sans text-xl font-bold text-[var(--text)] md:text-2xl">
+                    Full Narrative
+                  </h3>
+                  <div className="prose prose-zinc dark:prose-invert max-w-none prose-p:text-[var(--text-muted)] prose-p:leading-relaxed prose-headings:text-[var(--text)]">
+                    <PortableText
+                      value={project.content}
+                      components={{
+                        block: {
+                          h1: ({ children }) => <h1 className="mb-6 text-4xl font-bold">{children}</h1>,
+                          h2: ({ children }) => <h2 className="mb-4 mt-12 text-2xl font-bold">{children}</h2>,
+                          normal: ({ children }) => <p className="mb-6 text-base">{children}</p>,
+                        },
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="flex h-32 items-center justify-center rounded-2xl border-2 border-dashed border-[var(--border)]">
+                  <p className="font-mono text-sm italic text-[var(--text-muted)]">
+                    {`// Detailed case study content is being prepared in Sanity.`}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </SectionWrapper>
       </section>
