@@ -104,6 +104,7 @@ export default async function ProjectDetailPage({
   }
 
   const project = await getProjectBySlug(slug)
+  const fallbackHeroImageUrl = project?.slug?.current === "ilds-design-system" ? "/images/ilds-cover.png" : null
 
   if (!project) {
     return (
@@ -150,6 +151,13 @@ export default async function ProjectDetailPage({
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={urlFor(project.mainImage).width(1920).height(820).fit("crop").auto("format").url()}
+                  alt={project.title}
+                  className="h-full w-full object-cover"
+                />
+              ) : fallbackHeroImageUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={fallbackHeroImageUrl}
                   alt={project.title}
                   className="h-full w-full object-cover"
                 />
