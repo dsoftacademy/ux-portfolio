@@ -46,7 +46,7 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] pb-24 pt-32 transition-colors duration-500">
+    <main className="min-h-screen overflow-x-clip bg-[var(--bg)] pb-24 pt-28 md:pt-32 transition-colors duration-500">
       {/* 1. HEADER SECTION */}
       <section className="mb-12">
         <SectionWrapper>
@@ -54,10 +54,10 @@ export default function ContactPage() {
             <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
               Let’s work together
             </span>
-            <h1 className="mt-6 font-sans text-5xl font-extrabold tracking-tighter text-[var(--text)] md:text-7xl">
+            <h1 className="mt-6 font-sans text-4xl font-extrabold tracking-tighter text-[var(--text)] md:text-7xl">
               Contact
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-[var(--text-muted)]">
+            <p className="mt-6 text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
               Looking for a Principal Design Lead to architect your next system or scale your product team?
               Send a note below and I&apos;ll get back to you within 24 hours.
             </p>
@@ -68,7 +68,7 @@ export default function ContactPage() {
       {/* 2. FORM SECTION */}
       <section>
         <SectionWrapper>
-          <div className="overflow-hidden rounded-[32px] border border-[var(--border)] bg-[var(--bg)] transition-all duration-500 shadow-sm">
+          <div className="overflow-hidden rounded-[24px] md:rounded-[32px] border border-[var(--border)] bg-[var(--bg)] transition-all duration-500 shadow-sm">
             {success ? (
               <div className="p-12 md:p-20 text-center">
                 <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500">
@@ -92,12 +92,12 @@ export default function ContactPage() {
             ) : (
               <div className="grid md:grid-cols-5">
                 {/* Contact Info Sidebar */}
-                <div className="md:col-span-2 bg-[var(--surface)] p-8 md:p-12 border-b md:border-b-0 md:border-r border-[var(--border)]">
+                <div className="md:col-span-2 bg-[var(--surface)] p-5 md:p-12 border-b md:border-b-0 md:border-r border-[var(--border)]">
                   <h3 className="text-sm font-bold uppercase tracking-widest text-[var(--text)] mb-8">Direct Channels</h3>
                   <div className="space-y-8">
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Email</p>
-                      <a href="mailto:pratishek.designs@gmail.com" className="text-base font-medium text-[var(--text)] hover:text-[var(--accent)] transition-colors">
+                      <a href="mailto:pratishek.designs@gmail.com" className="break-all text-base font-medium text-[var(--text)] hover:text-[var(--accent)] transition-colors">
                         pratishek.designs@gmail.com
                       </a>
                     </div>
@@ -115,7 +115,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Form Field */}
-                <form onSubmit={onSubmit} className="md:col-span-3 p-8 md:p-12 grid gap-8">
+                <form onSubmit={onSubmit} className="md:col-span-3 p-5 md:p-12 grid gap-8">
                   <div className="grid gap-8 md:grid-cols-2">
                     <div className="grid gap-3">
                       <label htmlFor="name" className="text-[11px] font-bold uppercase tracking-widest text-[var(--text)]">Name</label>
@@ -168,7 +168,7 @@ export default function ContactPage() {
                         type="tel"
                         required
                         placeholder="98765 43210"
-                        className="flex-1 rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
+                        className="min-w-0 flex-1 rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
                     </div>
                   </div>
