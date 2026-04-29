@@ -18,35 +18,21 @@ const EXPERIENCES: ExperienceItem[] = [
 
 export const Experience = () => {
   return (
-    <section 
-      id="experience" 
-      className="transition-colors duration-500"
-      style={{ 
-        padding: "120px 0", 
-        backgroundColor: "var(--bg)", 
-        borderTop: "1px solid var(--border)",
-        position: 'relative',
-        zIndex: 10
-      }}
+    <section
+      id="experience"
+      className="py-20 md:py-[120px] bg-[var(--bg)] border-t border-[var(--border)] relative z-10 transition-colors duration-500"
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 48px" }}>
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         
         {/* Section Label */}
-        <div style={{ marginBottom: "80px" }}>
-          <p style={{ 
-            fontSize: "10px", 
-            fontWeight: 800, 
-            textTransform: "uppercase", 
-            letterSpacing: "0.4em", 
-            color: "var(--accent)",
-            marginBottom: "16px"
-          }}>
+        <div className="mb-16 md:mb-20">
+          <p className="text-[10px] font-extrabold uppercase tracking-[0.4em] text-[var(--accent)]">
             Experience
           </p>
         </div>
 
         {/* The v5 Minimalist Row Logic */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className="flex flex-col">
           {EXPERIENCES.map((exp, idx) => (
             <ExperienceRow key={idx} exp={exp} />
           ))}
@@ -60,19 +46,14 @@ function ExperienceRow({ exp }: { exp: ExperienceItem }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div 
+    <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      className="flex flex-col gap-1 md:grid md:grid-cols-[1.5fr_2fr_1fr] md:items-baseline py-8 md:py-10 border-b border-[var(--border)] cursor-default"
       style={{
-        display: "grid",
-        gridTemplateColumns: "1.5fr 2fr 1fr",
-        alignItems: "baseline",
-        padding: "40px 0",
-        borderBottom: "1px solid var(--border)",
         transition: "all 0.5s cubic-bezier(0.23, 1, 0.32, 1)",
         opacity: isHovered ? 1 : 0.7,
         transform: isHovered ? "translateX(12px)" : "translateX(0)",
-        cursor: "default"
       }}
     >
       {/* Column 1: Company */}
@@ -97,16 +78,7 @@ function ExperienceRow({ exp }: { exp: ExperienceItem }) {
       </p>
 
       {/* Column 3: Year & Status */}
-      <div style={{ 
-        display: "flex", 
-        alignItems: "center", 
-        justifyContent: "flex-end", 
-        gap: "12px",
-        fontFamily: "'GeistMono', monospace",
-        fontSize: "13px",
-        color: "var(--text-4)",
-        transition: "color 0.4s ease"
-      }}>
+      <div className="flex items-center justify-start md:justify-end gap-3 font-mono text-[13px] text-[var(--text-4)]" style={{ transition: "color 0.4s ease" }}>
         <span>{exp.period}</span>
         {exp.current && (
           <span style={{ 

@@ -24,7 +24,7 @@ export const Hero = () => {
     <section
       ref={ref}
       onMouseMove={onMouse}
-      className="relative min-h-[100vh] flex flex-col justify-center px-12 pt-[120px] pb-[80px] overflow-hidden"
+      className="relative min-h-[100vh] flex flex-col justify-center px-6 md:px-12 pt-[120px] pb-[80px] overflow-hidden"
     >
       {/* 1. LAYER: 3D Desk Surface (z-0) */}
       <HeroFloor tiltX={tiltX} tiltY={tiltY} />
