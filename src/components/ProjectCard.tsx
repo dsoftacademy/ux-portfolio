@@ -25,13 +25,13 @@ export function ProjectCard({
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-[32px] border border-[var(--border)] bg-[var(--bg)] transition-all duration-500 hover:border-[var(--accent)] hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)]">
       {/* 1. Image/Thumbnail Section */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--surface)]">
+      <div className="relative w-full overflow-hidden bg-[var(--surface)]">
         {image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={urlFor(image).width(1200).height(750).fit("crop").auto("format").url()}
+            src={urlFor(image).width(1200).auto("format").url()}
             alt={title}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-105"
             loading="lazy"
           />
         ) : fallbackImageUrl ? (
@@ -39,11 +39,11 @@ export function ProjectCard({
           <img
             src={fallbackImageUrl}
             alt={title}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-105"
             loading="lazy"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[var(--border)] to-transparent opacity-20">
+          <div className="flex aspect-[16/10] w-full items-center justify-center bg-gradient-to-br from-[var(--border)] to-transparent opacity-20">
             <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">No Image</span>
           </div>
         )}

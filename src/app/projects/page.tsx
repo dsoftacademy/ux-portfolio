@@ -55,23 +55,23 @@ export default async function ProjectsPage() {
                 key={project._id}
                 className="group block overflow-hidden rounded-[32px] border border-[var(--border)] bg-[var(--bg)] transition-all hover:border-[var(--accent)]/30 hover:shadow-xl"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--surface)]">
+                <div className="relative w-full overflow-hidden bg-[var(--surface)]">
                   {project.mainImage ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={urlFor(project.mainImage).width(800).height(500).url()}
+                      src={urlFor(project.mainImage).width(800).url()}
                       alt={project.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : project.slug?.current === "ilds-design-system" ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src="/images/ilds-cover.png"
                       alt={project.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-[var(--text-muted)] font-mono text-xs uppercase tracking-widest">
+                    <div className="flex aspect-[16/10] w-full items-center justify-center text-[var(--text-muted)] font-mono text-xs uppercase tracking-widest">
                       No Image Available
                     </div>
                   )}

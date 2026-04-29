@@ -146,23 +146,23 @@ export default async function ProjectDetailPage({
               </p>
             ) : null}
 
-            <div className="relative mt-12 aspect-[21/9] w-full overflow-hidden rounded-[32px] bg-[var(--surface)] shadow-2xl">
+            <div className="relative mt-12 w-full overflow-hidden rounded-[32px] bg-[var(--surface)] shadow-2xl">
               {project.mainImage ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={urlFor(project.mainImage).width(1920).height(820).fit("crop").auto("format").url()}
+                  src={urlFor(project.mainImage).width(1920).auto("format").url()}
                   alt={project.title}
-                  className="h-full w-full object-cover"
+                  className="w-full h-auto block"
                 />
               ) : fallbackHeroImageUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={fallbackHeroImageUrl}
                   alt={project.title}
-                  className="h-full w-full object-cover"
+                  className="w-full h-auto block"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[var(--border)] to-transparent opacity-20">
+                <div className="flex aspect-[21/9] w-full items-center justify-center bg-gradient-to-br from-[var(--border)] to-transparent opacity-20">
                    <span className="font-mono text-sm uppercase tracking-widest text-[var(--text-muted)]">Image Coming Soon</span>
                 </div>
               )}
