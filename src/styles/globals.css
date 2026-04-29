@@ -13,8 +13,8 @@
     --surface: #16161C; /* Lighter than BG for card elevation */
     --text: #F0F0F4;
     --text-2: rgba(255, 255, 255, 0.55);
-    --text-muted: rgba(255, 255, 255, 0.42);
-    --accent: #6366F1;
+    --text-muted: rgba(255, 255, 255, 0.55);
+    --accent: #7C7EF5;
     --border: rgba(255, 255, 255, 0.08); /* Slightly more visible */
     --selection: rgba(99, 102, 241, 0.3);
   }

@@ -70,7 +70,7 @@ export function Nav() {
                       "text-[12px] font-medium tracking-wide transition-colors relative",
                       pathname === l.href 
                         ? "text-[var(--text)]" 
-                        : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                        : "text-[var(--text)]/60 hover:text-[var(--text)]"
                     )}
                   >
                     {l.label}
@@ -102,7 +102,7 @@ export function Nav() {
                     "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
                     pathname === l.href
                       ? "bg-[var(--surface)] text-[var(--text)]"
-                      : "text-[var(--text-muted)] hover:bg-[var(--surface)] hover:text-[var(--text)]"
+                      : "text-[var(--text)]/70 hover:bg-[var(--surface)] hover:text-[var(--text)]"
                   )}
                 >
                   {l.label}

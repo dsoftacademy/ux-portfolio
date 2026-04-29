@@ -33,7 +33,7 @@ export default function AboutPage() {
               <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
                 Experience & Strategy
               </span>
-              <h1 className="mt-6 font-sans text-5xl font-extrabold tracking-tighter text-[var(--text)] md:text-7xl">
+              <h1 className="mt-6 font-sans text-[clamp(2rem,6vw,4.5rem)] font-extrabold tracking-tighter text-[var(--text)]">
                 Driving Product Strategy Through Design Leadership
               </h1>
               <div className="mt-8 space-y-6 text-lg leading-relaxed text-[var(--text-muted)] font-sans">
@@ -117,9 +117,9 @@ export default function AboutPage() {
         <SectionWrapper>
           <div className="relative overflow-hidden rounded-[40px] border border-[var(--border)] bg-[var(--surface)] p-12 md:p-24 text-center shadow-sm">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-30" />
-            <h3 className="relative z-10 text-4xl font-extrabold tracking-tighter mb-8 md:text-6xl text-[var(--text)]">
+            <h2 className="relative z-10 text-4xl font-extrabold tracking-tighter mb-8 md:text-6xl text-[var(--text)]">
               Let&apos;s build something <br className="hidden md:block" /> scalable together.
-            </h3>
+            </h2>
             
             <div className="relative z-10 flex flex-wrap justify-center gap-4">
               <Button href="/contact" variant="primary" className="min-w-[180px]">

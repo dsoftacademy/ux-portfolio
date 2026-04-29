@@ -93,7 +93,7 @@ export default function ContactPage() {
               <div className="grid md:grid-cols-5">
                 {/* Contact Info Sidebar */}
                 <div className="md:col-span-2 bg-[var(--surface)] p-5 md:p-12 border-b md:border-b-0 md:border-r border-[var(--border)]">
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-[var(--text)] mb-8">Direct Channels</h3>
+                  <h2 className="text-sm font-bold uppercase tracking-widest text-[var(--text)] mb-8">Direct Channels</h2>
                   <div className="space-y-8">
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Email</p>
@@ -146,7 +146,8 @@ export default function ContactPage() {
                     <div className="flex gap-2">
                       <div className="relative w-[110px] shrink-0">
                         <select 
-                          name="countryCode" 
+                          name="countryCode"
+                          aria-label="Country code"
                           className="w-full h-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3 py-3 text-sm text-[var(--text)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all appearance-none cursor-pointer"
                         >
                           <option value="+91">🇮🇳 +91</option>

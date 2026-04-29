@@ -15,7 +15,7 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Nav />
-      <main>{children}</main>
+      <div>{children}</div>
       <footer className="py-12 border-t border-[var(--border)]">
         <div className="mx-auto w-full max-w-content px-5">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">

@@ -40,7 +40,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       
       // v5 Secondary: Token-Driven Accessibility (Flipping correctly in light/dark)
       variant === "secondary" && 
-        "border border-[var(--border)] bg-transparent text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--text)]/[0.04] hover:border-[var(--text)]/[0.2] hover:scale-105 active:scale-95",
+        "border border-[var(--border)] bg-transparent text-[var(--text)] hover:bg-[var(--text)]/[0.04] hover:border-[var(--text)]/[0.2] hover:scale-105 active:scale-95",
       
       className
     )
