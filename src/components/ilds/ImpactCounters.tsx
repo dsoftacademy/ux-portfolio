@@ -1,7 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion"
+import { motion, useInView, useMotionValue, useTransform, animate, useReducedMotion } from "framer-motion"
+
+function formatMetric(value: number, decimals: number, prefix: string, suffix: string) {
+  return `${prefix}${value.toLocaleString("en-US", {
+    maximumFractionDigits: decimals,
+    minimumFractionDigits: decimals,
+  })}${suffix}`
+}
 
 function Counter({
   to,
@@ -18,32 +25,42 @@ function Counter({
 }) {
   const ref = React.useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.5 })
+  const prefersReducedMotion = useReducedMotion()
   const value = useMotionValue(0)
+  const finalText = formatMetric(to, decimals, prefix, suffix)
   const display = useTransform(value, (v) =>
-    `${prefix}${v.toLocaleString("en-US", {
-      maximumFractionDigits: decimals,
-      minimumFractionDigits: decimals,
-    })}${suffix}`
+    formatMetric(v, decimals, prefix, suffix)
   )
 
   React.useEffect(() => {
-    if (!inView) return
+    if (!inView || prefersReducedMotion) return
     const controls = animate(value, to, { duration, ease: [0.22, 1, 0.36, 1] })
     return () => controls.stop()
-  }, [inView, to, duration, value])
+  }, [inView, to, duration, value, prefersReducedMotion])
 
-  return <motion.span ref={ref}>{display}</motion.span>
+  if (prefersReducedMotion) {
+    return <span ref={ref}>{finalText}</span>
+  }
+
+  return (
+    <span ref={ref}>
+      <span className="sr-only">{finalText}</span>
+      <motion.span aria-hidden>{display}</motion.span>
+    </span>
+  )
 }
 
-const TEAMS = [
-  { name: "PMT Design Team",   variables: 4_033_626, components: 507_381, percent: 85 },
-  { name: "IL Nysa",           variables:   447_199, components:  85_356, percent:  9 },
-  { name: "Project Orion",     variables:   179_755, components:  10_181, percent:  4 },
-  { name: "IL Design System 2.0", variables:  37_107, components:   1_012, percent: 1 },
-  { name: "AutoNinja CRM",     variables:    19_915, components:   2_649, percent: 0.5 },
-  { name: "Lombard Creative",  variables:     3_182, components:   4_208, percent: 0.4 },
-  { name: "NINAD",             variables:     1_605, components:     188, percent: 0.1 },
+/** Component insertions — ILDS Master → Analytics, Type: Components, Duration: Year (May 2024 – Apr 2025). */
+const COMPONENT_ADOPTION = [
+  { name: "PMT Design Team", insertions: 505_360, shareLabel: "83%" },
+  { name: "IL Nysa", insertions: 85_356, shareLabel: "14%" },
+  { name: "Project Orion", insertions: 10_181, shareLabel: "2%" },
+  { name: "Lombard Creative", insertions: 4_191, shareLabel: "1%" },
+  { name: "AutoNinja CRM", insertions: 2_649, shareLabel: "<1%" },
+  { name: "IL Design System 2.0", insertions: 1_012, shareLabel: "<1%" },
 ] as const
+
+const COMPONENT_INSERTION_TOTAL = COMPONENT_ADOPTION.reduce((sum, r) => sum + r.insertions, 0)
 
 const HEADLINE_METRICS = [
   { label: "Projects using",      value: 23,         suffix: "" },
@@ -78,27 +95,30 @@ export function HeadlineMetrics() {
 export function AdoptionBars() {
   const ref = React.useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.2 })
-  const max = TEAMS[0].variables
+  const max = COMPONENT_ADOPTION[0].insertions
+  const totalDisplay = COMPONENT_INSERTION_TOTAL.toLocaleString("en-IN")
 
   return (
     <div ref={ref} className="rounded-3xl border border-[var(--border)] bg-[var(--surface)]/60 p-6 md:p-10 backdrop-blur">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-8">
         <div>
-          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--accent)] mb-2">
-            Adoption Distribution
+          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.26em] text-[var(--accent)] mb-2">
+            Adoption distribution
           </p>
-          <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--text)]">
-            7 adopters, 4.7M variable inserts in year one
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight text-[var(--text)]">
+            Six teams ranked by component insertions ({totalDisplay}/year)
           </h3>
         </div>
-        <p className="font-mono text-[11px] text-[var(--text)]/60 max-w-xs">
-          Live insertions tracked through Figma Library Analytics, May 2024 – Apr 2025.
+        <p className="font-mono text-[11px] text-[var(--text)]/60 max-w-xs leading-relaxed">
+          Source: ILDS Master → Analytics · Type: Components · Duration: Year (May 2024 – Apr 2025). Matches exported
+          Figma Library dashboards.
         </p>
       </div>
 
       <div className="space-y-5">
-        {TEAMS.map((t, i) => {
-          const width = (t.variables / max) * 100
+        {COMPONENT_ADOPTION.map((t, i) => {
+          const width = (t.insertions / max) * 100
+          const countDisplay = t.insertions.toLocaleString("en-IN")
           return (
             <div key={t.name} className="grid grid-cols-12 items-center gap-3">
               <div className="col-span-12 md:col-span-3">
@@ -117,17 +137,17 @@ export function AdoptionBars() {
                     className="absolute inset-y-0 left-0 rounded-full"
                     style={{
                       background: `linear-gradient(90deg, var(--accent) 0%, #A78BFA 100%)`,
-                      opacity: 0.3 + (1 - i * 0.12),
+                      opacity: 0.3 + (1 - i * 0.14),
                     }}
                   />
                 </div>
               </div>
               <div className="col-span-3 md:col-span-2 text-right">
-                <p className="font-mono text-[12px] font-bold tracking-wider text-[var(--text)]">
-                  {(t.variables / 1000).toFixed(0)}K
+                <p className="font-mono text-[12px] font-bold tracking-wider text-[var(--text)] tabular-nums">
+                  {countDisplay}
                 </p>
                 <p className="font-mono text-[10px] tracking-wider text-[var(--text)]/50">
-                  {t.percent}%
+                  {t.shareLabel}
                 </p>
               </div>
             </div>
@@ -136,7 +156,7 @@ export function AdoptionBars() {
       </div>
 
       <p className="mt-8 text-sm text-[var(--text)]/60 max-w-2xl">
-        PMT alone accounts for <span className="text-[var(--text)] font-semibold">85%</span> of insertions — an internal sign of how foundational the tokens became to day-to-day product work.
+        PMT Design Team drove <span className="text-[var(--text)] font-semibold">83%</span> of those component inserts—an internal signal that the library anchored day-to-day product work, not slideware.
       </p>
     </div>
   )

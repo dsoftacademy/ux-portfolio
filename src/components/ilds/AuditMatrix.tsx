@@ -53,15 +53,11 @@ const CELL_FILL: Record<Cell, string> = {
   p: "color-mix(in srgb, var(--accent) 35%, transparent)",
 }
 
+const BASELINE_REUSE = 19.9
+
 export function AuditMatrix() {
   const ref = React.useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.3 })
-
-  // Compute IL DS reusability score from rows that fall in P1+P2 (in-scope)
-  const ilCol = SYSTEMS.indexOf("IL DS")
-  const inScope = ROWS.filter((r) => r.phase === "P1" || r.phase === "P2")
-  const ilHits = inScope.filter((r) => r.cells[ilCol] === "y").length
-  const reuse = Math.round((ilHits / inScope.length) * 100)
 
   return (
     <div ref={ref} className="rounded-3xl border border-[var(--border)] bg-[var(--surface)]/60 p-6 md:p-10 backdrop-blur">
@@ -70,15 +66,20 @@ export function AuditMatrix() {
           <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--accent)] mb-2">
             Competitive Benchmark
           </p>
-          <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--text)]">
-            Audited 28 system dimensions across 7 industry leaders
+          <h3 className="text-[1.35rem] md:text-2xl lg:text-3xl font-extrabold tracking-tight text-[var(--text)]">
+            Comparison grid: 28 dimensions vs 7 benchmark systems
           </h3>
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text)]/50">
+            Snapshot shown: 20 high-signal dimensions from full audit
+          </p>
         </div>
         <div className="flex items-center gap-6">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/60 mb-1">Baseline reuse</p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/60 mb-1">
+              Legacy gap
+            </p>
             <p className="text-3xl font-extrabold tracking-tight text-[var(--text)]">
-              <span className="text-red-400">{reuse}%</span>
+              <span className="text-red-400">{BASELINE_REUSE}%</span>
             </p>
           </div>
           <div className="h-12 w-px bg-[var(--border)]" />
@@ -160,7 +161,11 @@ export function AuditMatrix() {
       </div>
 
       <p className="mt-6 text-sm text-[var(--text)]/60 max-w-2xl">
-        IL&apos;s pre-existing system covered just <span className="text-[var(--text)] font-semibold">{reuse}%</span> of in-scope dimensions adopted by industry-leading systems. The audit framed scope, phasing, and the case for executive sign-off.
+        That matrix showed the pre-ILDS artefacts only covered{" "}
+        <span className="text-[var(--text)] font-semibold">{BASELINE_REUSE}%</span> of the patterns leading systems
+        treat as table stakes—evidence of brittle structure, flawed UX logic, and stalled implementation, not a KPI to
+        trumpet. It directly supported the business case to fund the central ILDS programme and lock phasing with
+        leadership.
       </p>
     </div>
   )

@@ -214,7 +214,7 @@ export function ScrollMorph({ targetRef }: { targetRef: React.RefObject<HTMLDivE
             const totalH = rows * cellH + (rows - 1) * gap
             const startX = (400 - totalW) / 2
             const startY = (400 - totalH) / 2
-            // Pseudorandom pass/fail pattern matching the audit reusability of ~20%
+            // Pseudorandom pass/fail pattern aligned to 19.9% legacy coverage signal
             const passPattern = [
               0, 1, 0, 1, 1, 1, 1,
               0, 0, 0, 0, 0, 1, 0,

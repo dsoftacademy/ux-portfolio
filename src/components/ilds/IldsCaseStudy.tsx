@@ -9,6 +9,9 @@ import { ScrollMorph } from "./ScrollMorph"
 import { AuditMatrix } from "./AuditMatrix"
 import { HeadlineMetrics, AdoptionBars } from "./ImpactCounters"
 
+const SECTION_H2 =
+  "font-sans text-[1.85rem] sm:text-[2.1rem] md:text-[2.65rem] lg:text-[3.35rem] font-extrabold tracking-tighter text-[var(--text)] leading-[1.06]"
+
 // ────────────────────────────────────────────────────────────────────────────
 // Helpers
 // ────────────────────────────────────────────────────────────────────────────
@@ -16,11 +19,11 @@ import { HeadlineMetrics, AdoptionBars } from "./ImpactCounters"
 function StageLabel({ index, label }: { index: string; label: string }) {
   return (
     <div className="flex items-center gap-3 mb-6">
-      <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--accent)]">
+      <span className="font-mono text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] text-[var(--accent)]">
         {index}
       </span>
       <span className="h-px w-12 bg-[var(--accent)]/40" />
-      <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--text)]/50">
+      <span className="font-mono text-[11px] md:text-xs uppercase tracking-[0.18em] text-[var(--text)]/60">
         {label}
       </span>
     </div>
@@ -107,15 +110,15 @@ export function IldsCaseStudy() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--text)]/70">
-              ILDS is the production design system at ICICI Lombard — built from a 28-dimension audit against
-              seven industry-leading systems, shipped in three phases across two design teams, and now the
-              foundation behind 23 active projects company-wide.
+              ILDS is the production design system at ICICI Lombard — surfaced when a comparative audit showed how
+              far the legacy system lagged trusted industry patterns, shipped in three phases across PMT and
+              Digital design, and now the foundation behind 23 active projects company-wide.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.35}>
             <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl">
-              <StatCallout value="19.9%" label="Baseline reuse" tone="negative" />
+              <StatCallout value="19.9%" label="Legacy coverage vs benchmark" tone="negative" />
               <StatCallout value="20" label="Components built" tone="positive" />
               <StatCallout value="23" label="Projects using" />
               <StatCallout value="46.8K" label="Inserts / week" />
@@ -130,11 +133,11 @@ export function IldsCaseStudy() {
               </div>
               <div>
                 <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/50 mb-1">Team</dt>
-                <dd className="text-[var(--text)] font-medium">2 design teams · 4 designers</dd>
+                <dd className="text-[var(--text)] font-medium">3 designers (me + one from each team)</dd>
               </div>
               <div>
                 <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/50 mb-1">Timeline</dt>
-                <dd className="text-[var(--text)] font-medium">Jun 2024 → ongoing</dd>
+                <dd className="text-[var(--text)] font-medium">Jun 2024 → present · three phases thru Nov 2024</dd>
               </div>
               <div>
                 <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/50 mb-1">Recognition</dt>
@@ -167,25 +170,26 @@ export function IldsCaseStudy() {
               {/* 1. The Static Past */}
               <article>
                 <StageLabel index="01" label="The Static Past" />
-                <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-6">
-                  A design system that nobody used.
+                <h2 className={`${SECTION_H2} mb-6`}>
+                  A design system that nobody could rely on.
                 </h2>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70 mb-4">
-                  When I joined ICICI Lombard, &quot;the design system&quot; was a static Figma file built in isolation
-                  for a single product. It had never been implemented in development. The website used a partial
-                  version, and the IL Take Care app referenced none of it.
+                  When I joined ICICI Lombard, what existed wasn&apos;t a working system—it was aimed at marketing
+                  website use cases, outdated and rigid, with broken structure and weak implementation discipline.
+                  Patterns didn&apos;t hold up against real product UX, and downstream teams rightly avoided it.
+                  The flagship IL Take Care app didn&apos;t reference it at all.
                 </p>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70">
-                  Across the company, every interface — internal tools, customer apps, partner portals — was
-                  shipping its own buttons, forms, colors, and copy. There was no shared language, no reuse, no
-                  scale.
+                  Across internal tools, customer apps, and partner surfaces, interfaces kept diverging — each
+                  shipping its own buttons, forms, colour, typography, and copy. There was no shared language,
+                  no reuse at scale.
                 </p>
               </article>
 
               {/* 2. The Chaos */}
               <article>
                 <StageLabel index="02" label="The Cost of Drift" />
-                <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-6">
+                <h2 className={`${SECTION_H2} mb-6`}>
                   No principles. No tokens. No truth.
                 </h2>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70 mb-6">
@@ -212,7 +216,7 @@ export function IldsCaseStudy() {
               {/* 3. The Mandate */}
               <article>
                 <StageLabel index="03" label="The Mandate" />
-                <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-6">
+                <h2 className={`${SECTION_H2} mb-6`}>
                   Align two flagships. Earn the rest.
                 </h2>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70 mb-4">
@@ -230,18 +234,21 @@ export function IldsCaseStudy() {
               {/* 4. The Audit */}
               <article>
                 <StageLabel index="04" label="The Audit" />
-                <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-6">
+                <h2 className={`${SECTION_H2} mb-6`}>
                   Benchmarked 28 dimensions. Across 7 industry leaders. Plus ours.
                 </h2>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70 mb-8">
-                  I built a competitive matrix scoring every system dimension (principles, tokens, color, typography,
-                  motion, accessibility, voice & tone, …) across Adobe Spectrum, Google Material, IBM Carbon, Shopify
-                  Polaris, Salesforce Lightning, Atlassian, and Microsoft Fluent. Then I scored ours.
+                  I built an evidence grid—same dimensions documented in mature systems—against Adobe Spectrum,
+                  Google Material, IBM Carbon, Shopify Polaris, Salesforce Lightning, Atlassian, and Microsoft
+                  Fluent. The goal wasn&apos;t applause; it was to show exactly what ICICI Lombard already had versus
+                  what serious design systems routinely ship, so gaps were undeniable.
                 </p>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70 mb-8">
-                  The result: <span className="text-red-400 font-semibold">19.9% baseline reusability</span> — a
-                  number leadership couldn&apos;t un-see. Within two weeks I had a phased scope, a budget, and the green
-                  light to staff up.
+                  The legacy artefact landed at{" "}
+                  <span className="text-red-400 font-semibold">19.9% coverage versus that benchmark set</span>—not
+                  a KPI to celebrate, but proof the old approach was uncompetitive alongside structural and UX-logic
+                  failures. Combined with stakeholder pressure on the two flagship products, that deficit is what earned
+                  a green light for central ILDS, budget, and a compact core team within two weeks.
                 </p>
                 <FadeIn delay={0.1}>
                   <AuditMatrix />
@@ -251,13 +258,14 @@ export function IldsCaseStudy() {
               {/* 5. Three-Phase Strategy */}
               <article>
                 <StageLabel index="05" label="Three-Phase Plan" />
-                <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-6">
+                <h2 className={`${SECTION_H2} mb-6`}>
                   Foundations before pixels. Phases before promises.
                 </h2>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70 mb-8">
-                  I split the work into three phases — sequenced so the system could ship value early, then
-                  compound. Each phase had a closure criterion, a primary owner, and a measurable adoption gate
-                  before the next started.
+                  I split delivery into three time-boxed phases so value compounded without open-ended commitments.
+                  Each phase had closure criteria before the next started. Since launch we&apos;ve kept shipping
+                  variable and component updates whenever product teams surfaced real requirements—releases never
+                  stayed frozen; they matured on a rhythm.
                 </p>
 
                 <PhaseStrip />
@@ -266,19 +274,26 @@ export function IldsCaseStudy() {
               {/* 6. Phase 1: Foundations */}
               <article>
                 <StageLabel index="06" label="Phase 1 · Foundations" />
-                <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-6">
-                  Brand-led. Token-driven. Design-and-dev parallel.
+                <h2 className={`${SECTION_H2} mb-6`}>
+                  Brand-led anchor. Designer-owned logic.
                 </h2>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70 mb-8">
-                  Phase 1 ran 1.5 months, June through mid-July 2024. I co-led colour and typography directly with
-                  the Central Marketing team — locking the new brand guidelines as the source of truth before
-                  anything else moved. Everything downstream (semantics, ramps, surfaces, elevation, spacing,
-                  iconography) snapped to that decision.
+                  Phase 1 ran 1.5 months, June through mid-July 2024. Marketing provided brand guardrails; we owned
+                  product-grade colour logic. We defined five principle groups (Primary, Black/White, Secondary,
+                  Neutral, Semantic/State), then translated them into 50-900 ramps, semantic tokens, and mode-aware
+                  surface tokens. The outcome was a scalable colour engine teams could ship with, not a static style
+                  reference.
                 </p>
 
                 <FoundationGrid />
 
                 <p className="mt-10 text-base leading-relaxed text-[var(--text)]/60 max-w-3xl">
+                  We enforced one colour contract across products: raw spectrum → semantic tokens → surface tokens →
+                  light/dark modes. Contrast decisions were validated through APCA checks and WCAG baselines, while
+                  OKLCH exploration kept lightness/chroma behaviour perceptually stable across states and surfaces.
+                </p>
+
+                <p className="mt-6 text-base leading-relaxed text-[var(--text)]/60 max-w-3xl">
                   Design tokens shipped in parallel — Figma variables on the design side, a JSON schema on the
                   dev side, with a single Style Dictionary build to keep them aligned. Engineering didn&apos;t wait
                   for the system to be &quot;done&quot;; they integrated tokens the week we published them.
@@ -288,7 +303,7 @@ export function IldsCaseStudy() {
               {/* 7. Phase 2 & 3: Components */}
               <article>
                 <StageLabel index="07" label="Phase 2 & 3 · Components" />
-                <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-6">
+                <h2 className={`${SECTION_H2} mb-6`}>
                   Login first. Logic before logos.
                 </h2>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70 mb-6">
@@ -303,19 +318,25 @@ export function IldsCaseStudy() {
                 </p>
 
                 <ComponentBreakdown />
+
+                <p className="mt-10 text-base leading-relaxed text-[var(--text)]/65 max-w-3xl">
+                  After the three phase closures, upkeep stayed continuous: whenever adoption teams filed gaps, we
+                  extended variables, patched component states, or published library revisions—with change notes in
+                  our shared Slack contract so downstream files never woke up to surprises.
+                </p>
               </article>
 
               {/* 8. Governance */}
               <article>
                 <StageLabel index="08" label="Governance" />
-                <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-6">
+                <h2 className={`${SECTION_H2} mb-6`}>
                   Two design teams. One source of truth.
                 </h2>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70 mb-6">
-                  ILDS spanned two design organisations — the central PMT design team and the Digital team —
-                  each with separate reporting lines, processes, and Figma libraries. I led the joint
-                  programme, with two dedicated resources from each side and a single component creation process
-                  every contributor followed.
+                  ILDS bridged ICICI Lombard&apos;s central PMT design org and Digital—different reporting stacks and
+                  Figma rituals. The core programme stayed intentionally small: myself plus two embedded designers,
+                  each representing one tribe, aligning through a shared component intake, build checklist, and
+                  documentation bar before anything entered the canonical library.
                 </p>
 
                 <GovernanceFlow />
@@ -330,14 +351,15 @@ export function IldsCaseStudy() {
               {/* 9. The Outcome */}
               <article>
                 <StageLabel index="09" label="The Ripple" />
-                <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-6">
+                <h2 className={`${SECTION_H2} mb-6`}>
                   From two products to twenty-three projects.
                 </h2>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70">
-                  Within a year, ILDS went from a stalled Figma file to the substrate every product team builds on.
-                  4.7M variable inserts. 1.17M style inserts. PMT, IL Nysa, Project Orion, AutoNinja CRM,
-                  Lombard Creative — each shipping at speed on a shared foundation. The numbers below are pulled
-                  directly from Figma Library Analytics.
+                  Within a year, ILDS moved from fragile artefacts to measurable infrastructure. The summary tiles
+                  above track variable throughput (inserts / week, style volume, etc.). The adoption bars use
+                  ILDS Master → Analytics → <span className="text-[var(--text)]">Components</span>, duration{" "}
+                  <span className="text-[var(--text)]">Year</span>, and intentionally show only ranked top-team
+                  insertions from production Figma reporting.
                 </p>
               </article>
             </div>
@@ -361,7 +383,7 @@ export function IldsCaseStudy() {
             </p>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-12 max-w-3xl">
+            <h2 className={`${SECTION_H2} mb-12 max-w-3xl`}>
               The system did its job — quietly, every day, across the company.
             </h2>
           </FadeIn>
@@ -388,7 +410,7 @@ export function IldsCaseStudy() {
               </p>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <h2 className="font-sans text-3xl md:text-5xl font-extrabold tracking-tighter text-[var(--text)] leading-[1.1] mb-8">
+              <h2 className={`${SECTION_H2} mb-8`}>
                 The system that earned its way in.
               </h2>
             </FadeIn>
@@ -459,8 +481,8 @@ function PhaseStrip() {
     {
       name: "Phase 3",
       title: "Product Components",
-      duration: "ongoing",
-      window: "Sep 2024 →",
+      duration: "2 months",
+      window: "Sep → Nov 2024",
       items: ["Accordion", "Tab", "Badge", "Toast", "Pagination", "Scrollbar"],
     },
   ]
@@ -477,7 +499,7 @@ function PhaseStrip() {
                 {p.duration}
               </span>
             </div>
-            <h4 className="text-xl font-bold text-[var(--text)] mb-2">{p.title}</h4>
+            <h4 className="text-2xl font-bold text-[var(--text)] mb-2">{p.title}</h4>
             <p className="font-mono text-[10px] tracking-wider text-[var(--text)]/50 mb-5">
               {p.window}
             </p>
@@ -504,13 +526,13 @@ function FoundationGrid() {
     {
       title: "Color",
       detail:
-        "Brand-led ramps locked with Central Marketing. Semantic layer (intent, status, surface) sits on top of raw scales. Every product reads from semantic — no raw access.",
+        "Colour ran through three layers: Spectrum (global ramps), semantic tokens, and mode-aware surface tokens. Core families were Electric Orange (#EC6625), Merlot Maroon (#CC504D), Berkeley Blue (initial placeholder alignment), Tomato Red (#F5503F), Amber (#E49F04), Pigment Green (#01A252), and Warm Gray neutral (#736F6F midpoint). Feedback/state tokens were explicitly defined for text, icon, border, background, and action states.",
       tag: "12 ramps · 4 semantic intents",
     },
     {
       title: "Typography",
       detail:
-        "Two scales — Desktop and Mobile — both rooted in the new Inter type system. Body/Small.12 alone now powers 632K live insertions a year.",
+        "Guidelines anchored type selection, but sizing, responsive scales, pairing rules, truncation, and how styles map into variables were authored and stress-tested inside the design system—not inherited wholesale from decks.",
       tag: "2 scales · 51 styles",
     },
     {
@@ -544,7 +566,7 @@ function FoundationGrid() {
         <FadeIn key={f.title} delay={i * 0.06}>
           <div className="h-full rounded-2xl border border-[var(--border)] bg-[var(--surface)]/50 p-6">
             <div className="flex items-start justify-between gap-4 mb-3">
-              <h4 className="text-lg font-bold text-[var(--text)]">{f.title}</h4>
+              <h4 className="text-xl font-bold text-[var(--text)]">{f.title}</h4>
               <span className="font-mono text-[10px] tracking-wider text-[var(--text)]/50 mt-1.5">
                 {f.tag}
               </span>
@@ -582,7 +604,7 @@ function ComponentBreakdown() {
           <div className={`p-6 md:p-8 ${ti > 0 ? "border-t border-[var(--border)]" : ""}`}>
             <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-5">
               <div>
-                <h4 className="text-xl font-bold text-[var(--text)]">{tier.tier}</h4>
+                <h4 className="text-2xl font-bold text-[var(--text)]">{tier.tier}</h4>
                 <p className="text-sm text-[var(--text)]/60">{tier.desc}</p>
               </div>
               <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/50">
