@@ -65,7 +65,8 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
     }`,
   )
 
-  return slugs
+  // ilds-design-system has a bespoke static route at /projects/ilds-design-system/
+  return slugs.filter((s) => s.slug !== "ilds-design-system")
 }
 
 export async function generateMetadata({
