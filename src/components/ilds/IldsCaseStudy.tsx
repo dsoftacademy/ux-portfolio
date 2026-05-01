@@ -356,7 +356,7 @@ export function IldsCaseStudy() {
                 </h2>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70">
                   Within a year, ILDS moved from fragile artefacts to measurable infrastructure. The summary tiles
-                  above track variable throughput (inserts / week, style volume, etc.). The adoption bars use
+                  below track variable throughput (inserts / week, style volume, etc.). The adoption bars use
                   ILDS Master → Analytics → <span className="text-[var(--text)]">Components</span>, duration{" "}
                   <span className="text-[var(--text)]">Year</span>, and intentionally show only ranked top-team
                   insertions from production Figma reporting.
