@@ -2,48 +2,12 @@
 "use client"
 
 import * as React from "react"
+import { useForm, ValidationError } from "@formspree/react"
 import { Button } from "@/components/Button"
 import { SectionWrapper } from "@/components/SectionWrapper"
 
 export default function ContactPage() {
-  const [success, setSuccess] = React.useState(false)
-  const [isSubmitting, setIsSubmitting] = React.useState(false)
-  const [error, setError] = React.useState<string | null>(null)
-
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setError(null)
-    setIsSubmitting(true)
-
-    const formData = new FormData(e.currentTarget)
-    const name = String(formData.get("name") || "")
-    const email = String(formData.get("email") || "")
-    const countryCode = String(formData.get("countryCode") || "")
-    const phone = String(formData.get("phone") || "")
-    const subject = String(formData.get("subject") || "Portfolio Inquiry")
-    const message = String(formData.get("message") || "")
-
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Phone: ${countryCode} ${phone}`,
-      "",
-      "Message:",
-      message,
-    ].join("\n")
-
-    const mailtoHref = `mailto:pratishek.designs@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-
-    try {
-      window.location.href = mailtoHref
-      setSuccess(true)
-      e.currentTarget.reset()
-    } catch {
-      setError("Unable to open your email app. Please email me directly at pratishek.designs@gmail.com.")
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+  const [state, handleSubmit] = useForm("meenoewr")
 
   return (
     <main className="min-h-screen overflow-x-clip bg-[var(--bg)] pb-24 pt-28 md:pt-32 transition-colors duration-500">
@@ -52,7 +16,7 @@ export default function ContactPage() {
         <SectionWrapper>
           <div className="max-w-3xl">
             <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
-              Let’s work together
+              Let&apos;s work together
             </span>
             <h1 className="mt-6 font-sans text-4xl font-extrabold tracking-tighter text-[var(--text)] md:text-7xl">
               Contact
@@ -69,7 +33,7 @@ export default function ContactPage() {
       <section>
         <SectionWrapper>
           <div className="overflow-hidden rounded-[24px] md:rounded-[32px] border border-[var(--border)] bg-[var(--bg)] transition-all duration-500 shadow-sm">
-            {success ? (
+            {state.succeeded ? (
               <div className="p-12 md:p-20 text-center">
                 <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -81,7 +45,7 @@ export default function ContactPage() {
                   Thanks for reaching out! I&apos;ve received your inquiry and will reply soon.
                 </p>
                 <div className="mt-10 flex flex-wrap justify-center gap-4">
-                  <Button variant="secondary" onClick={() => setSuccess(false)}>
+                  <Button variant="secondary" onClick={() => window.location.reload()}>
                     Send another
                   </Button>
                   <Button href="/">
@@ -114,8 +78,8 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Form Field */}
-                <form onSubmit={onSubmit} className="md:col-span-3 p-5 md:p-12 grid gap-8">
+                {/* Form */}
+                <form onSubmit={handleSubmit} className="md:col-span-3 p-5 md:p-12 grid gap-8">
                   <div className="grid gap-8 md:grid-cols-2">
                     <div className="grid gap-3">
                       <label htmlFor="name" className="text-[11px] font-bold uppercase tracking-widest text-[var(--text)]">Name</label>
@@ -126,6 +90,7 @@ export default function ContactPage() {
                         placeholder="Your name"
                         className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
+                      <ValidationError field="name" prefix="Name" errors={state.errors} className="text-sm text-red-400" />
                     </div>
                     <div className="grid gap-3">
                       <label htmlFor="email" className="text-[11px] font-bold uppercase tracking-widest text-[var(--text)]">Email</label>
@@ -137,15 +102,15 @@ export default function ContactPage() {
                         placeholder="you@company.com"
                         className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
+                      <ValidationError field="email" prefix="Email" errors={state.errors} className="text-sm text-red-400" />
                     </div>
                   </div>
 
-                  {/* Added Mobile number and country code selection */}
                   <div className="grid gap-3">
                     <label htmlFor="phone" className="text-[11px] font-bold uppercase tracking-widest text-[var(--text)]">Phone Number</label>
                     <div className="flex gap-2">
                       <div className="relative w-[110px] shrink-0">
-                        <select 
+                        <select
                           name="countryCode"
                           aria-label="Country code"
                           className="w-full h-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3 py-3 text-sm text-[var(--text)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all appearance-none cursor-pointer"
@@ -172,6 +137,7 @@ export default function ContactPage() {
                         className="min-w-0 flex-1 rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
                     </div>
+                    <ValidationError field="phone" prefix="Phone" errors={state.errors} className="text-sm text-red-400" />
                   </div>
 
                   <div className="grid gap-3">
@@ -183,6 +149,7 @@ export default function ContactPage() {
                       placeholder="Project Inquiry / Design Leadership"
                       className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                     />
+                    <ValidationError field="subject" prefix="Subject" errors={state.errors} className="text-sm text-red-400" />
                   </div>
 
                   <div className="grid gap-3">
@@ -195,15 +162,14 @@ export default function ContactPage() {
                       placeholder="Tell me about your goals..."
                       className="w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-4 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                     />
+                    <ValidationError field="message" prefix="Message" errors={state.errors} className="text-sm text-red-400" />
                   </div>
 
                   <div className="pt-4">
-                    <Button type="submit" className="w-full md:w-auto min-w-[200px]">
-                      {isSubmitting ? "Opening Email..." : "Send Message"}
+                    <Button type="submit" disabled={state.submitting} className="w-full md:w-auto min-w-[200px]">
+                      {state.submitting ? "Sending..." : "Send Message"}
                     </Button>
-                    {error ? (
-                      <p className="mt-3 text-sm text-red-400">{error}</p>
-                    ) : null}
+                    <ValidationError errors={state.errors} className="mt-3 text-sm text-red-400" />
                   </div>
                 </form>
               </div>

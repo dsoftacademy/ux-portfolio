@@ -22,6 +22,7 @@ interface HTMLButtonProps extends BaseProps {
   href?: never
   type?: "button" | "submit" | "reset"
   onClick?: React.MouseEventHandler<HTMLButtonElement>
+  disabled?: boolean
 }
 
 export type ButtonProps = LinkProps | HTMLButtonProps
@@ -66,6 +67,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type={buttonProps.type || "button"}
         className={styles}
         onClick={buttonProps.onClick}
+        disabled={buttonProps.disabled}
       >
         {children}
       </button>
