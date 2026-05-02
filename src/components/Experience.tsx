@@ -20,6 +20,7 @@ export const Experience = () => {
   return (
     <section
       id="experience"
+      aria-label="Work Experience"
       className="py-20 md:py-[120px] bg-[var(--bg)] border-t border-[var(--border)] relative z-10 transition-colors duration-500"
     >
       <div className="max-w-[1200px] mx-auto px-6 md:px-12">

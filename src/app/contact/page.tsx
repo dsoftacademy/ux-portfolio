@@ -61,13 +61,13 @@ export default function ContactPage() {
                   <div className="space-y-8">
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Email</p>
-                      <a href="mailto:pratishek.designs@gmail.com" className="break-all text-base font-medium text-[var(--text)] hover:text-[var(--accent)] transition-colors">
+                      <a href="mailto:pratishek.designs@gmail.com" className="break-all text-base font-medium text-[var(--text)] hover:text-[var(--accent)] transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]">
                         pratishek.designs@gmail.com
                       </a>
                     </div>
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">Social</p>
-                      <a href="https://www.linkedin.com/in/pratishek-bansal-designer/?originalSubdomain=in" target="_blank" rel="noopener noreferrer" className="text-base font-medium text-[var(--text)] hover:text-[var(--accent)] transition-colors">
+                      <a href="https://www.linkedin.com/in/pratishek-bansal-designer/?originalSubdomain=in" target="_blank" rel="noopener noreferrer" className="text-base font-medium text-[var(--text)] hover:text-[var(--accent)] transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]">
                         LinkedIn
                       </a>
                     </div>

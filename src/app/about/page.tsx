@@ -74,7 +74,7 @@ export default function AboutPage() {
                     <a
                       href="/Pratishek-Bansal-Resume.pdf"
                       download
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#6366F1] to-[#818CF8] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:scale-105 active:scale-95"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#6366F1] to-[#818CF8] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                     >
                       Download Resume
                     </a>

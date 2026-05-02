@@ -53,7 +53,7 @@ export default async function ProjectsPage() {
               <Link 
                 href={`/projects/${project.slug.current}`} 
                 key={project._id}
-                className="group block overflow-hidden rounded-[32px] border border-[var(--border)] bg-[var(--bg)] transition-all hover:border-[var(--accent)]/30 hover:shadow-xl"
+                className="group block overflow-hidden rounded-[32px] border border-[var(--border)] bg-[var(--bg)] transition-all hover:border-[var(--accent)]/30 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
               >
                 <div className="relative w-full overflow-hidden bg-[var(--surface)]">
                   {project.mainImage ? (
@@ -117,7 +117,7 @@ export default async function ProjectsPage() {
             <h3 className="text-xl font-bold text-[var(--text)] mb-4">Have a specific project in mind?</h3>
             <Link
               href="/contact"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-[var(--text)] px-8 text-sm font-bold text-[var(--bg)] transition-transform hover:scale-105 active:scale-95"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-[var(--text)] px-8 text-sm font-bold text-[var(--bg)] transition-transform hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
             >
               Get in touch
             </Link>

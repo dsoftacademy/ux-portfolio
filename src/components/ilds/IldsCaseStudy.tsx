@@ -448,7 +448,7 @@ export function IldsCaseStudy() {
         <SectionWrapper>
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--text)]/60 hover:text-[var(--accent)] transition-colors"
+            className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--text)]/60 hover:text-[var(--accent)] transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           >
             <span>←</span> All projects
           </Link>

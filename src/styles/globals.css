@@ -13,9 +13,14 @@
     --surface: #16161C; /* Lighter than BG for card elevation */
     --text: #F0F0F4;
     --text-2: rgba(255, 255, 255, 0.55);
-    --text-muted: rgba(255, 255, 255, 0.55);
+    --text-muted: rgba(255, 255, 255, 0.55); /* ≈5.1:1 on dark bg ✓ */
+    --text-3: rgba(255, 255, 255, 0.70);    /* mid-level secondary text */
+    --text-4: rgba(255, 255, 255, 0.45);    /* tertiary / metadata */
+    --text-5: rgba(255, 255, 255, 0.32);    /* placeholder / decorative */
     --accent: #7C7EF5;
+    --accent-rgb: 124, 126, 245;            /* for rgba() usage */
     --border: rgba(255, 255, 255, 0.08); /* Slightly more visible */
+    --pillBg: rgba(124, 126, 245, 0.10);    /* subtle accent-tinted badge bg */
     --selection: rgba(99, 102, 241, 0.3);
   }
 
@@ -25,9 +30,14 @@
     --surface: #FFFFFF; /* Pure white on off-white background */
     --text: #111827;
     --text-2: rgba(17, 24, 39, 0.68);
-    --text-muted: rgba(17, 24, 39, 0.50);
+    --text-muted: rgba(17, 24, 39, 0.62); /* raised from 0.50 → ≈4.9:1 on light bg ✓ */
+    --text-3: rgba(17, 24, 39, 0.68);     /* mid-level secondary text ≈5.9:1 ✓ */
+    --text-4: rgba(17, 24, 39, 0.50);     /* tertiary / metadata */
+    --text-5: rgba(17, 24, 39, 0.35);     /* placeholder / decorative */
     --accent: #4F46E5;
+    --accent-rgb: 79, 70, 229;             /* for rgba() usage */
     --border: rgba(17, 24, 39, 0.08);
+    --pillBg: rgba(79, 70, 229, 0.07);     /* subtle accent-tinted badge bg */
     --selection: rgba(99, 102, 241, 0.15);
   }
 

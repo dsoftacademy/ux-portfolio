@@ -95,7 +95,7 @@ export default async function ProjectDetailPage({
         <SectionWrapper>
           <div className="rounded-[32px] border border-[var(--border)] bg-[var(--bg)] p-12 text-center">
             <h1 className="text-2xl font-bold text-[var(--text)]">Project not found</h1>
-            <Link href="/projects" className="mt-4 inline-block text-[var(--accent)] hover:underline">
+            <Link href="/projects" className="mt-4 inline-block text-[var(--accent)] hover:underline rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]">
               &larr; Back to projects
             </Link>
           </div>
@@ -113,7 +113,7 @@ export default async function ProjectDetailPage({
         <SectionWrapper>
           <div className="rounded-[32px] border border-[var(--border)] bg-[var(--bg)] p-12 text-center">
             <h1 className="text-2xl font-bold text-[var(--text)]">Project &ldquo;{slug}&rdquo; not found</h1>
-            <Link href="/projects" className="mt-4 inline-block text-[var(--accent)] hover:underline">
+            <Link href="/projects" className="mt-4 inline-block text-[var(--accent)] hover:underline rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]">
               &larr; Back to projects
             </Link>
           </div>
@@ -129,7 +129,7 @@ export default async function ProjectDetailPage({
         <SectionWrapper>
           <Link
             href="/projects"
-            className="group mb-8 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
+            className="group mb-8 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] transition-colors hover:text-[var(--accent)] rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           >
             <span className="transition-transform group-hover:-translate-x-1">&larr;</span> Back to projects
           </Link>

@@ -65,7 +65,7 @@ export function ScrollMorph({ targetRef }: { targetRef: React.RefObject<HTMLDivE
   const drift = useTransform(scrollYProgress, [0, 1], [-6, 6])
 
   return (
-    <div className="relative aspect-square w-full max-w-[440px] mx-auto">
+    <div className="relative aspect-square w-full max-w-[440px] mx-auto overflow-hidden">
       <motion.svg
         viewBox="0 0 400 400"
         className="absolute inset-0 w-full h-full"

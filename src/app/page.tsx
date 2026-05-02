@@ -42,7 +42,7 @@ export default async function HomePage() {
       <Impact />
 
       {/* 4. THE PROJECT VAULT */}
-      <section className="py-24 bg-[var(--bg)] border-t border-[var(--border)] relative z-10">
+      <section id="work" className="py-24 bg-[var(--bg)] border-t border-[var(--border)] relative z-10">
         <SectionWrapper>
           <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-10 md:flex-row md:items-end md:justify-between">
             <div className="space-y-2">
@@ -86,6 +86,7 @@ export default async function HomePage() {
       </section>
 
       {/* 5. CAREER TIMELINE */}
+      <div id="about" className="scroll-mt-24" aria-hidden="true" />
       <Experience />
 
       {/* 6. V5 "GET IN TOUCH" SECTION */}
