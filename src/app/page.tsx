@@ -10,20 +10,37 @@ import { client } from "@/sanity/lib/client"
 interface Project {
   _id: string;
   title: string;
-  mainImage: { asset: { url: string } };
+  mainImage?: { asset: { url: string } };
   slug: { current: string };
-  category?: string; 
+  category?: string;
   excerpt?: string;
 }
 
+// Bespoke case studies (not in Sanity) shown alongside Sanity projects.
+const BESPOKE_PROJECTS: Project[] = [
+  {
+    _id: "static-iltc",
+    title: "IL TakeCare — From complexity to clarity",
+    slug: { current: "il-takecare" },
+    category: "Flagship App Revamp",
+    excerpt:
+      "Rebuilt ICICI Lombard's flagship insurance & lifestyle app — cutting customer-care calls 53.8%, lifting feature utilisation 328.1%, and shrinking feature TAT from ~48 days to 24 hours.",
+  },
+]
+
 async function getProjects(): Promise<Project[]> {
-  return await client.fetch(
+  const sanityProjects: Project[] = await client.fetch(
     `*[_type == "project"] | order(_createdAt desc){
       _id, title, "slug": slug, category,
       mainImage{..., asset->},
       "excerpt": content[0].children[0].text
     }`
   );
+  const bespokeSlugs = new Set(BESPOKE_PROJECTS.map((p) => p.slug.current))
+  return [
+    ...BESPOKE_PROJECTS,
+    ...sanityProjects.filter((p) => !bespokeSlugs.has(p.slug?.current ?? "")),
+  ]
 }
 
 export default async function HomePage() {
@@ -72,7 +89,13 @@ export default async function HomePage() {
                     category={project.category ?? "Case study"}
                     description={project.excerpt || "Driving impact through research-led design strategy."}
                     image={project.mainImage}
-                    fallbackImageUrl={project.slug?.current === "ilds-design-system" ? "/images/ilds-cover.png" : undefined}
+                    fallbackImageUrl={
+                      project.slug?.current === "ilds-design-system"
+                        ? "/images/ilds-cover.png"
+                        : project.slug?.current === "il-takecare"
+                          ? "/images/iltc-cover.svg"
+                          : undefined
+                    }
                     href={project.slug?.current ? `/projects/${project.slug.current}` : "/projects"}
                   />
                 ))}

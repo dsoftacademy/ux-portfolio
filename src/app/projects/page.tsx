@@ -22,6 +22,20 @@ interface Project {
   tags?: string[];
 }
 
+// Bespoke case studies that live as static routes (not in Sanity).
+// They render as cards alongside Sanity-managed projects on the listing.
+const BESPOKE_PROJECTS: Project[] = [
+  {
+    _id: "static-iltc",
+    title: "IL TakeCare — From complexity to clarity",
+    slug: { current: "il-takecare" },
+    category: "Flagship App Revamp",
+    excerpt:
+      "Rebuilt ICICI Lombard's flagship insurance & lifestyle app — cutting customer-care calls 53.8%, lifting feature utilisation 328.1%, and shrinking feature TAT from ~48 days to 24 hours.",
+    tags: ["Mobile", "Insurance", "UX Strategy"],
+  },
+]
+
 const PROJECTS_QUERY = `*[_type == "project"] | order(_createdAt desc) {
   _id,
   title,
@@ -33,7 +47,14 @@ const PROJECTS_QUERY = `*[_type == "project"] | order(_createdAt desc) {
 }`;
 
 export default async function ProjectsPage() {
-  const projects: Project[] = await client.fetch(PROJECTS_QUERY)
+  const sanityProjects: Project[] = await client.fetch(PROJECTS_QUERY)
+  // Surface bespoke case studies first, then Sanity-managed projects.
+  // Filter out any Sanity row that collides with a bespoke slug.
+  const bespokeSlugs = new Set(BESPOKE_PROJECTS.map((p) => p.slug.current))
+  const projects: Project[] = [
+    ...BESPOKE_PROJECTS,
+    ...sanityProjects.filter((p) => !bespokeSlugs.has(p.slug?.current ?? "")),
+  ]
 
   return (
     <div className="min-h-screen bg-[var(--bg)] pb-24 pt-32 transition-colors duration-500">
@@ -67,6 +88,13 @@ export default async function ProjectsPage() {
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src="/images/ilds-cover.png"
+                        alt={project.title}
+                        className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : project.slug?.current === "il-takecare" ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src="/images/iltc-cover.svg"
                         alt={project.title}
                         className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
                       />
