@@ -1,20 +1,33 @@
 # UX Portfolio (Next.js 15)
 
-Minimal UX designer portfolio scaffold built with Next.js (App Router), TypeScript, and Tailwind CSS.
+Personal portfolio: Next.js App Router, TypeScript, Tailwind, Sanity CMS, static export for **Cloudflare Pages**.
 
-## Getting started
+## Quick start
 
 ```bash
-npm install --cache .npm-cache
+npm install
+cp .env.example .env.local   # fill in NEXT_PUBLIC_SANITY_*
 npm run dev
 ```
 
-Then open `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Pages
+## Scripts
 
-- `/` Home (hero + selected work placeholders)
-- `/projects` Projects (placeholder grid)
-- `/about` About (placeholder bio + principles)
-- `/contact` Contact (placeholder email + links)
+| Command | Use |
+|--------|-----|
+| `npm run dev` | Local dev server |
+| `npm run lint` | ESLint (Next + **jsx-a11y/recommended**) |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run validate` | `lint` + `typecheck` (matches CI) |
+| `npm run build` | Production static export to `out/` (needs Sanity env) |
 
+## Documentation
+
+- **[docs/project-brief.md](docs/project-brief.md)** — stack, routes, Sanity model, env, quality checklist
+
+## Pages (high level)
+
+- `/` — Home (hero, work from Sanity, impact, experience)
+- `/projects`, `/projects/[slug]`, `/projects/ilds-design-system`
+- `/about`, `/contact`

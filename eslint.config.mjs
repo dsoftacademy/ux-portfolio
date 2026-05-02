@@ -11,9 +11,24 @@ const compat = new FlatCompat({
 
 const config = [
   {
-    ignores: ["next-env.d.ts"],
+    ignores: [
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/out/**",
+      ".claude/**",
+      "**/.claude/**",
+      "next-env.d.ts",
+      // CJS config files (require is intentional)
+      "*.config.js",
+      "postcss.config.*",
+    ],
   },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends(
+    "next/core-web-vitals",
+    "next/typescript",
+    // Stricter a11y than Next defaults alone; plugin is deduped via compat
+    "plugin:jsx-a11y/recommended",
+  ),
 ]
 
 export default config

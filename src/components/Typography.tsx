@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn"
 
 type HeadingProps = React.HTMLAttributes<HTMLHeadingElement>
 
-export function H1({ className, ...props }: HeadingProps) {
+export function H1({ className, children, ...props }: HeadingProps) {
   return (
     <h1
       className={cn(
@@ -11,11 +11,13 @@ export function H1({ className, ...props }: HeadingProps) {
         className,
       )}
       {...props}
-    />
+    >
+      {children}
+    </h1>
   )
 }
 
-export function H2({ className, ...props }: HeadingProps) {
+export function H2({ className, children, ...props }: HeadingProps) {
   return (
     <h2
       className={cn(
@@ -23,11 +25,13 @@ export function H2({ className, ...props }: HeadingProps) {
         className,
       )}
       {...props}
-    />
+    >
+      {children}
+    </h2>
   )
 }
 
-export function H3({ className, ...props }: HeadingProps) {
+export function H3({ className, children, ...props }: HeadingProps) {
   return (
     <h3
       className={cn(
@@ -35,7 +39,9 @@ export function H3({ className, ...props }: HeadingProps) {
         className,
       )}
       {...props}
-    />
+    >
+      {children}
+    </h3>
   )
 }
 
