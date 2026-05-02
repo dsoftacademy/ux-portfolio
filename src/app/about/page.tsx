@@ -24,7 +24,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] pb-24 pt-32 transition-colors duration-500">
+    <div className="min-h-screen bg-[var(--bg)] pb-24 pt-32 transition-colors duration-500">
       {/* 1. HEADER & BIO SECTION */}
       <section className="mb-12">
         <SectionWrapper>
@@ -132,6 +132,6 @@ export default function AboutPage() {
           </div>
         </SectionWrapper>
       </section>
-    </main>
+    </div>
   )
 }

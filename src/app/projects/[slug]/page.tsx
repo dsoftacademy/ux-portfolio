@@ -91,7 +91,7 @@ export default async function ProjectDetailPage({
 
   if (!slug) {
     return (
-      <main className="min-h-screen bg-[var(--bg)] pt-32">
+      <div className="min-h-screen bg-[var(--bg)] pt-32">
         <SectionWrapper>
           <div className="rounded-[32px] border border-[var(--border)] bg-[var(--bg)] p-12 text-center">
             <h1 className="text-2xl font-bold text-[var(--text)]">Project not found</h1>
@@ -100,7 +100,7 @@ export default async function ProjectDetailPage({
             </Link>
           </div>
         </SectionWrapper>
-      </main>
+      </div>
     )
   }
 
@@ -109,7 +109,7 @@ export default async function ProjectDetailPage({
 
   if (!project) {
     return (
-      <main className="min-h-screen bg-[var(--bg)] pt-32">
+      <div className="min-h-screen bg-[var(--bg)] pt-32">
         <SectionWrapper>
           <div className="rounded-[32px] border border-[var(--border)] bg-[var(--bg)] p-12 text-center">
             <h1 className="text-2xl font-bold text-[var(--text)]">Project &ldquo;{slug}&rdquo; not found</h1>
@@ -118,12 +118,12 @@ export default async function ProjectDetailPage({
             </Link>
           </div>
         </SectionWrapper>
-      </main>
+      </div>
     )
   }
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] pb-24 pt-32 transition-colors duration-500">
+    <div className="min-h-screen bg-[var(--bg)] pb-24 pt-32 transition-colors duration-500">
       {/* 1. HEADER SECTION */}
       <section className="mb-12">
         <SectionWrapper>
@@ -258,6 +258,6 @@ export default async function ProjectDetailPage({
           </div>
         </SectionWrapper>
       </section>
-    </main>
+    </div>
   )
 }

@@ -36,7 +36,7 @@ export default async function ProjectsPage() {
   const projects: Project[] = await client.fetch(PROJECTS_QUERY)
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] pb-24 pt-32 transition-colors duration-500">
+    <div className="min-h-screen bg-[var(--bg)] pb-24 pt-32 transition-colors duration-500">
       <Section
         eyebrow={<span className="text-[var(--accent)]">Selected Work</span>}
         title={<span className="text-[var(--text)]">Projects</span>}
@@ -124,6 +124,6 @@ export default async function ProjectsPage() {
           </div>
         </SectionWrapper>
       </section>
-    </main>
+    </div>
   )
 }

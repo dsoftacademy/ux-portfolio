@@ -41,11 +41,11 @@ export function Nav() {
       )}
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 md:px-12">
-        <Link href="/" className="group flex flex-col">
+        <Link href="/" className="group flex flex-col rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]">
           <span className="text-[15px] font-bold tracking-tight text-[var(--text)] transition-colors">
             Pratishek Bansal
           </span>
-          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors">
             Principal Design Lead
           </span>
         </Link>
@@ -53,7 +53,7 @@ export function Nav() {
         <div className="flex items-center gap-4 md:gap-8">
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center rounded-md border border-[var(--border)] px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--text)]"
+            className="md:hidden inline-flex items-center justify-center rounded-md border border-[var(--border)] px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-[var(--text)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
             aria-label="Toggle navigation menu"
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((open) => !open)}
@@ -67,9 +67,10 @@ export function Nav() {
                   <Link
                     href={l.href}
                     className={cn(
-                      "text-[12px] font-medium tracking-wide transition-colors relative",
-                      pathname === l.href 
-                        ? "text-[var(--text)]" 
+                      "text-[12px] font-medium tracking-wide transition-colors relative rounded px-1 py-0.5",
+                      "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]",
+                      pathname === l.href
+                        ? "text-[var(--text)]"
                         : "text-[var(--text)]/60 hover:text-[var(--text)]"
                     )}
                   >
@@ -100,6 +101,7 @@ export function Nav() {
                   href={l.href}
                   className={cn(
                     "block rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--accent)]",
                     pathname === l.href
                       ? "bg-[var(--surface)] text-[var(--text)]"
                       : "text-[var(--text)]/70 hover:bg-[var(--surface)] hover:text-[var(--text)]"

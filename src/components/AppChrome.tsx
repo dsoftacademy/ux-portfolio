@@ -14,8 +14,15 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      {/* Skip-to-content for keyboard / screen reader users */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:rounded-lg focus:bg-[var(--accent)] focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg focus:outline-none"
+      >
+        Skip to content
+      </a>
       <Nav />
-      <main>{children}</main>
+      <main id="main-content">{children}</main>
       <footer className="py-12 border-t border-[var(--border)]">
         <div className="mx-auto w-full max-w-content px-5">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">

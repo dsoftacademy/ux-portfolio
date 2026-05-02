@@ -72,7 +72,8 @@ export function ProjectCard({
         </div>
 
         <div className="mt-8 flex items-center justify-between">
-          <Link href={href} className="flex items-center gap-2 group/link">
+          {/* aria-hidden + tabIndex=-1: the full-card overlay link below provides the accessible interaction */}
+          <Link href={href} className="flex items-center gap-2 group/link" aria-hidden="true" tabIndex={-1}>
             <span className="text-[13px] font-bold tracking-wide text-[var(--text)]">View Project</span>
             <svg 
               className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" 
@@ -93,7 +94,7 @@ export function ProjectCard({
       </div>
       
       {/* Absolute Overlay Link for entire card accessibility */}
-      <Link href={href} className="absolute inset-0 z-10" aria-label={`View ${title}`}>
+      <Link href={href} className="absolute inset-0 z-10 rounded-[32px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]" aria-label={`View ${title}`}>
         <span className="sr-only">View {title}</span>
       </Link>
     </article>

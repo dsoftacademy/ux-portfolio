@@ -10,7 +10,7 @@ export default function ContactPage() {
   const [state, handleSubmit] = useForm("meenoewr")
 
   return (
-    <main className="min-h-screen overflow-x-clip bg-[var(--bg)] pb-24 pt-28 md:pt-32 transition-colors duration-500">
+    <div className="min-h-screen overflow-x-clip bg-[var(--bg)] pb-24 pt-28 md:pt-32 transition-colors duration-500">
       {/* 1. HEADER SECTION */}
       <section className="mb-12">
         <SectionWrapper>
@@ -87,6 +87,7 @@ export default function ContactPage() {
                         id="name"
                         name="name"
                         required
+                        autoComplete="name"
                         placeholder="Your name"
                         className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
@@ -99,6 +100,7 @@ export default function ContactPage() {
                         name="email"
                         type="email"
                         required
+                        autoComplete="email"
                         placeholder="you@company.com"
                         className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
@@ -111,8 +113,10 @@ export default function ContactPage() {
                     <div className="flex gap-2">
                       <div className="relative w-[110px] shrink-0">
                         <select
+                          id="countryCode"
                           name="countryCode"
                           aria-label="Country code"
+                          autoComplete="tel-country-code"
                           className="w-full h-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3 py-3 text-sm text-[var(--text)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all appearance-none cursor-pointer"
                         >
                           <option value="+91">🇮🇳 +91</option>
@@ -133,6 +137,7 @@ export default function ContactPage() {
                         name="phone"
                         type="tel"
                         required
+                        autoComplete="tel-national"
                         placeholder="98765 43210"
                         className="min-w-0 flex-1 rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
@@ -177,6 +182,6 @@ export default function ContactPage() {
           </div>
         </SectionWrapper>
       </section>
-    </main>
+    </div>
   )
 }

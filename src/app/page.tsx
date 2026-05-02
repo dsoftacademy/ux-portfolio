@@ -30,7 +30,7 @@ export default async function HomePage() {
   const projects = await getProjects();
 
   return (
-    <main className="bg-[var(--bg)] text-[var(--text)] min-h-screen transition-colors duration-500 overflow-x-hidden">
+    <div className="bg-[var(--bg)] text-[var(--text)] min-h-screen transition-colors duration-500 overflow-x-hidden">
       
       {/* 1. HERO SECTION */}
       <Hero />
@@ -128,6 +128,6 @@ export default async function HomePage() {
           </div>
         </SectionWrapper>
       </section>
-    </main>
+    </div>
   );
 }

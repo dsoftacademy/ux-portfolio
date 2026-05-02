@@ -164,7 +164,7 @@ export function IldsCaseStudy() {
       {/* ─── NARRATIVE (sticky morph + scrolling stream) ──────────────────── */}
       <section ref={narrativeRef} className="relative pb-24">
         <SectionWrapper>
-          <div className="grid lg:grid-cols-[1fr_440px] gap-x-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_440px] gap-x-16">
             {/* LEFT — content stream */}
             <div className="space-y-32 md:space-y-48">
               {/* 1. The Static Past */}
