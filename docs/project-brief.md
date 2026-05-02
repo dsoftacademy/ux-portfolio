@@ -86,4 +86,5 @@ npm run build        # static `out/` — needs .env.local or CI env for Sanity f
 
 - **Lint:** `jsx-a11y/recommended` plus Next defaults; keep `npm run lint` clean before merge.
 - **Accessibility / performance:** Run Lighthouse (or axe DevTools) on `/`, `/projects`, `/about`, and `/projects/ilds-design-system` before major releases; static export has no server runtime, so checks are client-side only.
+- **Go / No-Go board:** [docs/go-no-go.md](go-no-go.md) — case-study gates (ILDS, TakeCare, NYSA), site quality, application readiness, completion log.
 - **Docs hub:** Add deeper notes under `docs/` (deploy runbooks, content workflow) and link from here.

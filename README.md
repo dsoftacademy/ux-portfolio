@@ -27,6 +27,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Documentation
 
 - **[docs/project-brief.md](docs/project-brief.md)** — stack, routes, Sanity model, env, quality checklist
+- **[docs/go-no-go.md](docs/go-no-go.md)** — portfolio release gates & completion log
 
 ## Pages (high level)
 
