@@ -58,8 +58,13 @@ export default function AboutPage() {
             {/* Sidebar / Profile Placeholder Area */}
             <div className="lg:col-span-2">
               <div className="sticky top-32 rounded-[32px] border border-[var(--border)] bg-[var(--surface)] p-8 shadow-sm">
-                <div className="aspect-square w-full rounded-2xl bg-[var(--bg)] border border-[var(--border)] mb-8 flex items-center justify-center overflow-hidden">
-                   <span className="text-[var(--text-muted)] font-mono text-xs uppercase tracking-widest">Profile Image</span>
+                <div className="aspect-square w-full rounded-2xl bg-[var(--bg)] border border-[var(--border)] mb-8 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/pratishek.jpg"
+                    alt="Pratishek Bansal — Principal Design Lead"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
                 <div className="space-y-6">
                   <div>
