@@ -2,6 +2,8 @@
 
 Personal portfolio: Next.js App Router, TypeScript, Tailwind, Sanity CMS, static export for **Cloudflare Pages**.
 
+**Status / architecture:** see [docs/project-brief.md](docs/project-brief.md) (includes ILDS static vs Sanity, CI, env, and release checks).
+
 ## Quick start
 
 ```bash
