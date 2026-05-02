@@ -53,7 +53,7 @@ function ExperienceRow({ exp }: { exp: ExperienceItem }) {
       className="flex flex-col gap-1 md:grid md:grid-cols-[1.5fr_2fr_1fr] md:items-baseline py-8 md:py-10 border-b border-[var(--border)] cursor-default"
       style={{
         transition: "all 0.5s cubic-bezier(0.23, 1, 0.32, 1)",
-        opacity: isHovered ? 1 : 0.7,
+        /* Full opacity: row-level dimming failed WCAG on date/metadata text */
         transform: isHovered ? "translateX(12px)" : "translateX(0)",
       }}
     >
