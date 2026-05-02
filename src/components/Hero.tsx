@@ -43,11 +43,14 @@ export const Hero = () => {
 
           {/* Headline */}
           <h1 className="text-[clamp(40px,5.5vw,64px)] font-extrabold leading-[1.08] tracking-[-1.5px] mb-[22px] animate-fade-up-1 text-[var(--text)] font-sans">
-            I design systems<br />that{" "}
-            <span className="bg-gradient-to-br from-[#818CF8] to-[#A78BFA] bg-clip-text text-transparent">
-              scale
-            </span>{" "}
-            products.
+            <span className="block">I design systems</span>{" "}
+            <span className="block">
+              that{" "}
+              <span className="bg-gradient-to-br from-[#818CF8] to-[#A78BFA] bg-clip-text text-transparent">
+                scale
+              </span>{" "}
+              products.
+            </span>
           </h1>
 
           {/* Typing Role */}

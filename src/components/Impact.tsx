@@ -11,7 +11,10 @@ const STATS = [
 
 export const Impact = () => {
   return (
-    <section className="py-24 bg-[var(--bg)] border-t border-[var(--border)] relative z-10 overflow-hidden transition-colors duration-500">
+    <section
+      className="py-24 bg-[var(--bg)] border-t border-[var(--border)] relative z-10 overflow-hidden transition-colors duration-500"
+      aria-label="Impact and scale statistics"
+    >
       <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         <div className="text-center mb-20">
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--accent)] mb-3">

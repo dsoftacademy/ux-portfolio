@@ -55,13 +55,13 @@ export default function AboutPage() {
               </div>
             </div>
             
-            {/* Sidebar / Profile Placeholder Area */}
+            {/* Sidebar profile */}
             <div className="lg:col-span-2">
               <div className="sticky top-32 rounded-[32px] border border-[var(--border)] bg-[var(--surface)] p-8 shadow-sm">
                 <div className="aspect-square w-full rounded-2xl bg-[var(--bg)] border border-[var(--border)] mb-8 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/images/pratishek.jpg"
+                    src="/images/profile.jpg"
                     alt="Pratishek Bansal — Principal Design Lead"
                     className="w-full h-full object-cover object-top"
                   />
@@ -123,7 +123,8 @@ export default function AboutPage() {
           <div className="relative overflow-hidden rounded-[40px] border border-[var(--border)] bg-[var(--surface)] p-12 md:p-24 text-center shadow-sm">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-30" />
             <h2 className="relative z-10 text-4xl font-extrabold tracking-tighter mb-8 md:text-6xl text-[var(--text)]">
-              Let&apos;s build something <br className="hidden md:block" /> scalable together.
+              <span>Let&apos;s build something </span>
+              <span className="md:block">scalable together.</span>
             </h2>
             
             <div className="relative z-10 flex flex-wrap justify-center gap-4">

@@ -499,7 +499,7 @@ function PhaseStrip() {
                 {p.duration}
               </span>
             </div>
-            <h4 className="text-2xl font-bold text-[var(--text)] mb-2">{p.title}</h4>
+            <h3 className="text-2xl font-bold text-[var(--text)] mb-2">{p.title}</h3>
             <p className="font-mono text-[10px] tracking-wider text-[var(--text)]/50 mb-5">
               {p.window}
             </p>
@@ -566,7 +566,7 @@ function FoundationGrid() {
         <FadeIn key={f.title} delay={i * 0.06}>
           <div className="h-full rounded-2xl border border-[var(--border)] bg-[var(--surface)]/50 p-6">
             <div className="flex items-start justify-between gap-4 mb-3">
-              <h4 className="text-xl font-bold text-[var(--text)]">{f.title}</h4>
+              <h3 className="text-xl font-bold text-[var(--text)]">{f.title}</h3>
               <span className="font-mono text-[10px] tracking-wider text-[var(--text)]/50 mt-1.5">
                 {f.tag}
               </span>
@@ -604,7 +604,7 @@ function ComponentBreakdown() {
           <div className={`p-6 md:p-8 ${ti > 0 ? "border-t border-[var(--border)]" : ""}`}>
             <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 mb-5">
               <div>
-                <h4 className="text-2xl font-bold text-[var(--text)]">{tier.tier}</h4>
+                <h3 className="text-2xl font-bold text-[var(--text)]">{tier.tier}</h3>
                 <p className="text-sm text-[var(--text)]/60">{tier.desc}</p>
               </div>
               <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/50">

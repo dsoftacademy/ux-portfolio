@@ -42,7 +42,11 @@ export default async function HomePage() {
       <Impact />
 
       {/* 4. THE PROJECT VAULT */}
-      <section id="work" className="py-24 bg-[var(--bg)] border-t border-[var(--border)] relative z-10">
+      <section
+        id="work"
+        className="py-24 bg-[var(--bg)] border-t border-[var(--border)] relative z-10"
+        aria-label="Selected work and case studies"
+      >
         <SectionWrapper>
           <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-10 md:flex-row md:items-end md:justify-between">
             <div className="space-y-2">
@@ -90,7 +94,10 @@ export default async function HomePage() {
       <Experience />
 
       {/* 6. V5 "GET IN TOUCH" SECTION */}
-      <section className="py-32 md:py-56 text-center relative overflow-hidden">
+      <section
+        className="py-32 md:py-56 text-center relative overflow-hidden"
+        aria-label="Get in touch"
+      >
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none opacity-20 blur-[120px]"
           style={{ background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)' }}
@@ -103,8 +110,8 @@ export default async function HomePage() {
             </span>
 
             <h2 className="font-sans text-4xl md:text-7xl font-extrabold tracking-tighter mb-8 text-[var(--text)] leading-[1.05]">
-              Let&apos;s build something<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#818CF8] via-[#A78BFA] to-[#6366F1]">
+              <span className="block">Let&apos;s build something</span>{" "}
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#818CF8] via-[#A78BFA] to-[#6366F1]">
                 extraordinary.
               </span>
             </h2>

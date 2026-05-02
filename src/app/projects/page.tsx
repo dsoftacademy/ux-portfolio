@@ -50,65 +50,66 @@ export default async function ProjectsPage() {
         <SectionWrapper>
           <div className="grid gap-8 md:grid-cols-2">
             {projects.map((project) => (
-              <Link 
-                href={`/projects/${project.slug.current}`} 
-                key={project._id}
-                className="group block overflow-hidden rounded-[32px] border border-[var(--border)] bg-[var(--bg)] transition-all hover:border-[var(--accent)]/30 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-              >
-                <div className="relative w-full overflow-hidden bg-[var(--surface)]">
-                  {project.mainImage ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={urlFor(project.mainImage).width(800).url()}
-                      alt={project.title}
-                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : project.slug?.current === "ilds-design-system" ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src="/images/ilds-cover.png"
-                      alt={project.title}
-                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex aspect-[16/10] w-full items-center justify-center text-[var(--text-muted)] font-mono text-xs uppercase tracking-widest">
-                      No Image Available
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[var(--accent)]">
-                      {project.category || "Case Study"}
-                    </span>
-                    <div className="h-8 w-8 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--text)] group-hover:bg-[var(--accent)] group-hover:text-white transition-all">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14m-7-7 7 7-7 7"/>
-                      </svg>
-                    </div>
+              <article key={project._id}>
+                <Link
+                  href={`/projects/${project.slug.current}`}
+                  className="group block overflow-hidden rounded-[32px] border border-[var(--border)] bg-[var(--bg)] transition-all hover:border-[var(--accent)]/30 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+                >
+                  <div className="relative w-full overflow-hidden bg-[var(--surface)]">
+                    {project.mainImage ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={urlFor(project.mainImage).width(800).url()}
+                        alt={project.title}
+                        className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : project.slug?.current === "ilds-design-system" ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src="/images/ilds-cover.png"
+                        alt={project.title}
+                        className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="flex aspect-[16/10] w-full items-center justify-center text-[var(--text-muted)] font-mono text-xs uppercase tracking-widest">
+                        No Image Available
+                      </div>
+                    )}
                   </div>
-                  
-                  <h2 className="text-2xl font-bold tracking-tight text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
-                    {project.title}
-                  </h2>
-                  
-                  <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)] line-clamp-2">
-                    {project.excerpt || "View the full case study and design process."}
-                  </p>
 
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {project.tags?.slice(0, 3).map((tag) => (
-                      <span 
-                        key={tag}
-                        className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-[10px] font-medium text-[var(--text-muted)]"
-                      >
-                        {tag}
+                  <div className="p-8">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[var(--accent)]">
+                        {project.category || "Case Study"}
                       </span>
-                    ))}
+                      <div className="h-8 w-8 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--text)] group-hover:bg-[var(--accent)] group-hover:text-white transition-all">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14m-7-7 7 7-7 7"/>
+                        </svg>
+                      </div>
+                    </div>
+
+                    <h2 className="text-2xl font-bold tracking-tight text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
+                      {project.title}
+                    </h2>
+
+                    <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)] line-clamp-2">
+                      {project.excerpt || "View the full case study and design process."}
+                    </p>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.tags?.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-[10px] font-medium text-[var(--text-muted)]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </article>
             ))}
           </div>
 
