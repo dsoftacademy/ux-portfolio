@@ -132,7 +132,7 @@ export default async function ProjectDetailPage({
             href="/projects"
             className="group mb-8 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] transition-colors hover:text-[var(--accent)] rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           >
-            <span className="transition-transform group-hover:-translate-x-1">&larr;</span> Back to projects
+            <span className="transition-transform motion-safe:group-hover:-translate-x-1">&larr;</span> Back to projects
           </Link>
 
           <div className="overflow-hidden rounded-[40px] border border-[var(--border)] bg-[var(--bg)] p-8 md:p-16">

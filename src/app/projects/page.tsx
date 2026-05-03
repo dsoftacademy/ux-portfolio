@@ -83,21 +83,21 @@ export default async function ProjectsPage() {
                       <img
                         src={urlFor(project.mainImage).width(800).url()}
                         alt={project.title}
-                        className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-auto block transition-transform duration-500 motion-safe:group-hover:scale-105"
                       />
                     ) : project.slug?.current === "ilds-design-system" ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src="/images/ilds-cover.png"
                         alt={project.title}
-                        className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-auto block transition-transform duration-500 motion-safe:group-hover:scale-105"
                       />
                     ) : project.slug?.current === "il-takecare" ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src="/images/iltc-cover.svg"
                         alt={project.title}
-                        className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-auto block transition-transform duration-500 motion-safe:group-hover:scale-105"
                       />
                     ) : (
                       <div className="flex aspect-[16/10] w-full items-center justify-center text-[var(--text-muted)] font-mono text-xs uppercase tracking-widest">
@@ -147,7 +147,7 @@ export default async function ProjectsPage() {
             <h3 className="text-xl font-bold text-[var(--text)] mb-4">Have a specific project in mind?</h3>
             <Link
               href="/contact"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-[var(--text)] px-8 text-sm font-bold text-[var(--bg)] transition-transform hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-[var(--text)] px-8 text-sm font-bold text-[var(--bg)] transition-transform motion-safe:hover:scale-105 motion-safe:active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
             >
               Get in touch
             </Link>

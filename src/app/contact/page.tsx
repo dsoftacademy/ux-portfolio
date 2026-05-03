@@ -91,7 +91,7 @@ export default function ContactPage() {
                         placeholder="Your name"
                         className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
-                      <ValidationError field="name" prefix="Name" errors={state.errors} className="text-sm text-red-400" />
+                      <ValidationError field="name" prefix="Name" errors={state.errors} className="text-sm text-[var(--danger)]" />
                     </div>
                     <div className="grid gap-3">
                       <label htmlFor="email" className="text-[11px] font-bold uppercase tracking-widest text-[var(--text)]">Email</label>
@@ -104,7 +104,7 @@ export default function ContactPage() {
                         placeholder="you@company.com"
                         className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
-                      <ValidationError field="email" prefix="Email" errors={state.errors} className="text-sm text-red-400" />
+                      <ValidationError field="email" prefix="Email" errors={state.errors} className="text-sm text-[var(--danger)]" />
                     </div>
                   </div>
 
@@ -142,7 +142,7 @@ export default function ContactPage() {
                         className="min-w-0 flex-1 rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                       />
                     </div>
-                    <ValidationError field="phone" prefix="Phone" errors={state.errors} className="text-sm text-red-400" />
+                    <ValidationError field="phone" prefix="Phone" errors={state.errors} className="text-sm text-[var(--danger)]" />
                   </div>
 
                   <div className="grid gap-3">
@@ -154,7 +154,7 @@ export default function ContactPage() {
                       placeholder="Project Inquiry / Design Leadership"
                       className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                     />
-                    <ValidationError field="subject" prefix="Subject" errors={state.errors} className="text-sm text-red-400" />
+                    <ValidationError field="subject" prefix="Subject" errors={state.errors} className="text-sm text-[var(--danger)]" />
                   </div>
 
                   <div className="grid gap-3">
@@ -167,14 +167,14 @@ export default function ContactPage() {
                       placeholder="Tell me about your goals..."
                       className="w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-4 text-sm text-[var(--text)] placeholder:text-[var(--text-5)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] transition-all"
                     />
-                    <ValidationError field="message" prefix="Message" errors={state.errors} className="text-sm text-red-400" />
+                    <ValidationError field="message" prefix="Message" errors={state.errors} className="text-sm text-[var(--danger)]" />
                   </div>
 
                   <div className="pt-4">
                     <Button type="submit" disabled={state.submitting} className="w-full md:w-auto min-w-[200px]">
                       {state.submitting ? "Sending..." : "Send Message"}
                     </Button>
-                    <ValidationError errors={state.errors} className="mt-3 text-sm text-red-400" />
+                    <ValidationError errors={state.errors} className="mt-3 text-sm text-[var(--danger)]" />
                   </div>
                 </form>
               </div>

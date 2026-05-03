@@ -42,7 +42,7 @@ function StatCard({ stat }: { stat: typeof STATS[0] }) {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative p-10 rounded-2xl border border-[var(--border)] bg-[var(--surface)] text-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:shadow-2xl"
+      className="relative p-10 rounded-2xl border border-[var(--border)] bg-[var(--surface)] text-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] motion-safe:hover:-translate-y-1 hover:shadow-2xl"
       style={{
         boxShadow: isHovered ? '0 12px 32px rgba(99,102,241,0.06)' : 'none'
       }}

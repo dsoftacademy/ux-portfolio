@@ -36,12 +36,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       "inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-[13px] font-bold uppercase tracking-[0.15em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] disabled:pointer-events-none disabled:opacity-50 font-sans cursor-pointer",
       
       // v5 Primary: Tokenized Brand Gradient (Same in all modes)
-      variant === "primary" && 
-        "bg-gradient-to-br from-[#6366F1] to-[#818CF8] text-white shadow-[0_6px_20px_rgba(99,102,241,0.25)] border-none hover:scale-105 active:scale-95",
-      
+      variant === "primary" &&
+        "bg-gradient-to-br from-[#6366F1] to-[#818CF8] text-white shadow-[0_6px_20px_rgba(99,102,241,0.25)] border-none motion-safe:hover:scale-105 motion-safe:active:scale-95",
+
       // v5 Secondary: Token-Driven Accessibility (Flipping correctly in light/dark)
-      variant === "secondary" && 
-        "border border-[var(--border)] bg-transparent text-[var(--text)] hover:bg-[var(--text)]/[0.04] hover:border-[var(--text)]/[0.2] hover:scale-105 active:scale-95",
+      variant === "secondary" &&
+        "border border-[var(--border)] bg-transparent text-[var(--text)] hover:bg-[var(--text)]/[0.04] hover:border-[var(--text)]/[0.2] motion-safe:hover:scale-105 motion-safe:active:scale-95",
       
       className
     )

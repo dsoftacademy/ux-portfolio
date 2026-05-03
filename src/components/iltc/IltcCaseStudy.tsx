@@ -49,7 +49,7 @@ function StatCallout({
 }) {
   const colorClass =
     tone === "negative"
-      ? "text-red-400"
+      ? "text-[var(--danger)]"
       : tone === "positive"
       ? "text-[#EC6625]"
       : "text-[var(--text)]"
@@ -541,7 +541,7 @@ function GapGrid() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {gaps.map((g, i) => (
         <FadeIn key={g.key} delay={i * 0.07}>
-          <div className="group h-full rounded-2xl border border-[var(--border)] bg-[var(--surface)]/50 p-6 transition-all hover:border-[#EC6625]/40 hover:-translate-y-1">
+          <div className="group h-full rounded-2xl border border-[var(--border)] bg-[var(--surface)]/50 p-6 transition-all hover:border-[#EC6625]/40 motion-safe:hover:-translate-y-1">
             <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--bg)] group-hover:border-[#EC6625]/40">
               <g.Icon />
             </div>

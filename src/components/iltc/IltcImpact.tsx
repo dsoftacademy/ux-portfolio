@@ -304,15 +304,16 @@ const QUOTES = [
 ] as const
 
 export function UserVoices() {
+  const reduce = useReducedMotion()
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {QUOTES.map((q, i) => (
         <motion.figure
           key={q.name}
-          initial={{ opacity: 0, x: i % 2 === 0 ? -16 : 16 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={reduce ? false : { opacity: 0, x: i % 2 === 0 ? -16 : 16 }}
+          whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+          transition={reduce ? { duration: 0 } : { duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
           className="relative rounded-2xl border border-[var(--border)] bg-[var(--surface)]/55 p-6 md:p-7"
         >
           <svg

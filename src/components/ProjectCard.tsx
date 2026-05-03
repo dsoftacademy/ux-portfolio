@@ -31,7 +31,7 @@ export function ProjectCard({
           <img
             src={urlFor(image).width(1200).auto("format").url()}
             alt={title}
-            className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-105"
+            className="w-full h-auto block transition-transform duration-700 ease-out motion-safe:group-hover:scale-105"
             loading="lazy"
           />
         ) : fallbackImageUrl ? (
@@ -39,7 +39,7 @@ export function ProjectCard({
           <img
             src={fallbackImageUrl}
             alt={title}
-            className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-105"
+            className="w-full h-auto block transition-transform duration-700 ease-out motion-safe:group-hover:scale-105"
             loading="lazy"
           />
         ) : (

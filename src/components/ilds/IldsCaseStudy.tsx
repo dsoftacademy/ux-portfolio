@@ -41,7 +41,7 @@ function StatCallout({
 }) {
   const colorClass =
     tone === "negative"
-      ? "text-red-400"
+      ? "text-[var(--danger)]"
       : tone === "positive"
       ? "text-[var(--accent)]"
       : "text-[var(--text)]"
@@ -245,7 +245,7 @@ export function IldsCaseStudy() {
                 </p>
                 <p className="text-lg leading-relaxed text-[var(--text)]/70 mb-8">
                   The legacy artefact landed at{" "}
-                  <span className="text-red-400 font-semibold">19.9% coverage versus that benchmark set</span>—not
+                  <span className="text-[var(--danger)] font-semibold">19.9% coverage versus that benchmark set</span>—not
                   a KPI to celebrate, but proof the old approach was uncompetitive alongside structural and UX-logic
                   failures. Combined with stakeholder pressure on the two flagship products, that deficit is what earned
                   a green light for central ILDS, budget, and a compact core team within two weeks.

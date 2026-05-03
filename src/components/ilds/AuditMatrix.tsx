@@ -79,7 +79,7 @@ export function AuditMatrix() {
               Legacy gap
             </p>
             <p className="text-3xl font-extrabold tracking-tight text-[var(--text)]">
-              <span className="text-red-400">{BASELINE_REUSE}%</span>
+              <span className="text-[var(--danger)]">{BASELINE_REUSE}%</span>
             </p>
           </div>
           <div className="h-12 w-px bg-[var(--border)]" />

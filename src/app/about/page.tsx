@@ -79,7 +79,7 @@ export default function AboutPage() {
                     <a
                       href="/Pratishek-Bansal-Resume.pdf"
                       download
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#6366F1] to-[#818CF8] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#6366F1] to-[#818CF8] px-8 py-4 text-[13px] font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 motion-safe:hover:scale-105 motion-safe:active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                     >
                       Download Resume
                     </a>
@@ -100,7 +100,7 @@ export default function AboutPage() {
                 key={v.title}
                 className="rounded-[32px] border border-[var(--border)] p-8 transition-all bg-[var(--surface)] shadow-sm hover:border-[var(--accent)]/30 group"
               >
-                <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--bg)] border border-[var(--border)] text-[var(--accent)] group-hover:scale-110 transition-transform">
+                <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--bg)] border border-[var(--border)] text-[var(--accent)] motion-safe:group-hover:scale-110 transition-transform">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
                   </svg>
