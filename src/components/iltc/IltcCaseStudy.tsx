@@ -1176,30 +1176,39 @@ function SurfaceShowcase() {
             Each section adapts in real time to surface content relevant to that persona.
           </p>
 
-          {/* 3-col phone grid — negative margin to break out of p-5 padding */}
-          <div className="grid grid-cols-3 -mx-5 mt-5 border-t border-[rgba(255,255,255,0.07)]">
+          {/* 3-col phone grid — break out of p-5; stack on small viewports */}
+          <div className="grid grid-cols-1 min-w-0 md:grid-cols-3 -mx-5 mt-5 border-t border-[rgba(255,255,255,0.07)]">
             {[
-              { label: "New User",            src: "/images/s08-cohort-new.png",     alt: "New user home — add-policy widget, banners, quick buy" },
+              { label: "New User",            src: "/images/s08-cohort-new.png",     alt: "New user home — profile prompt, spotlight, buy insurance grid, how insurance works, chat expert, wellness face scan, testimonials, blogs, bottom nav" },
               { label: "Active Policyholder", src: "/images/s08-cohort-active.png",  alt: "Active policyholder home — policy card, health vitals, wellness" },
               { label: "Win-back User",       src: "/images/s08-cohort-winback.png", alt: "Win-back user home — renewal nudge and one-tap buy" },
             ].map((c, i) => (
-              <div key={c.label} className={i > 0 ? "border-l border-[rgba(255,255,255,0.07)]" : ""}>
+              <div
+                key={c.label}
+                className={
+                  i > 0
+                    ? "min-w-0 border-t border-[rgba(255,255,255,0.07)] md:border-t-0 md:border-l"
+                    : "min-w-0"
+                }
+              >
                 <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[rgba(240,240,244,0.4)] text-center py-2.5 border-b border-[rgba(255,255,255,0.07)]">
                   {c.label}
                 </p>
-                {/* Phone image — tall enough to show complete mobile page */}
+                {/* Phone screenshot: 10px inset; object-contain avoids cropping mixed aspect ratios */}
                 <div
-                  className="relative overflow-hidden"
+                  className="relative overflow-hidden bg-black/25"
                   style={{ height: "clamp(600px, 99.21vw, 1500px)" }}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={c.src}
-                    alt={c.alt}
-                    className="absolute inset-0 w-full h-full object-cover object-top block"
-                    loading="lazy"
-                    draggable={false}
-                  />
+                  <div className="absolute inset-[10px]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={c.src}
+                      alt={c.alt}
+                      className="block h-full w-full object-contain object-top"
+                      loading="lazy"
+                      draggable={false}
+                    />
+                  </div>
                 </div>
               </div>
             ))}
