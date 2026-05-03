@@ -5,6 +5,7 @@ import {
   motion,
   useScroll,
   useTransform,
+  useReducedMotion,
   type MotionValue,
 } from "framer-motion"
 
@@ -71,9 +72,77 @@ export function IltcMorph({
 
   // Subtle global rotation that drifts through the whole narrative
   const drift = useTransform(scrollYProgress, [0, 1], [-4, 4])
+  const prefersReducedMotion = useReducedMotion()
 
   return (
     <div className="relative aspect-square w-full max-w-[440px] mx-auto overflow-hidden">
+      {prefersReducedMotion ? (
+        <svg
+          viewBox="0 0 400 400"
+          className="absolute inset-0 w-full h-full"
+          aria-hidden="true"
+        >
+          <circle
+            cx="200"
+            cy="200"
+            r="180"
+            fill="none"
+            stroke="rgba(255,255,255,0.04)"
+            strokeWidth="1"
+          />
+          <circle
+            cx="200"
+            cy="200"
+            r="120"
+            fill="none"
+            stroke="rgba(255,255,255,0.06)"
+            strokeWidth="1"
+          />
+          <g>
+            <rect
+              x="140"
+              y="80"
+              width="120"
+              height="240"
+              rx="22"
+              fill={SURFACE}
+              stroke={ORANGE}
+              strokeOpacity="0.4"
+              strokeWidth="1.2"
+            />
+            <rect x="180" y="92" width="40" height="6" rx="3" fill={ORANGE} fillOpacity="0.3" />
+            {[...Array(6)].map((_, r) =>
+              [...Array(3)].map((_, c) => (
+                <rect
+                  key={`${r}-${c}`}
+                  x={150 + c * 36}
+                  y={108 + r * 32}
+                  width="32"
+                  height="28"
+                  rx="3"
+                  fill={ORANGE}
+                  fillOpacity={0.12 + (r * 3 + c) * 0.04}
+                  stroke={ORANGE}
+                  strokeOpacity="0.25"
+                  strokeWidth="0.5"
+                />
+              )),
+            )}
+            <text
+              x="200"
+              y="345"
+              textAnchor="middle"
+              fontSize="9"
+              fill={TEXT}
+              fillOpacity="0.55"
+              fontFamily="Geist Mono, monospace"
+              letterSpacing="2"
+            >
+              LEGACY · CLUTTERED
+            </text>
+          </g>
+        </svg>
+      ) : (
       <motion.svg
         viewBox="0 0 400 400"
         className="absolute inset-0 w-full h-full"
@@ -611,6 +680,7 @@ export function IltcMorph({
           </text>
         </Scene>
       </motion.svg>
+      )}
     </div>
   )
 }

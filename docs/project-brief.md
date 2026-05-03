@@ -38,18 +38,19 @@
 ## Routes (App Router)
 
 - `/` — Home: hero, skill marquee, impact, experience, selected work from Sanity `project` documents
-- `/projects` — Project grid (Sanity)
-- `/projects/[slug]` — CMS-driven case study (GROQ + Portable Text / images). **Slug `ilds-design-system` is excluded** from this route so it does not duplicate the bespoke page (`generateStaticParams` filter in `src/app/projects/[slug]/page.tsx`).
-- `/projects/ilds-design-system` — **Static** ILDS case study: `src/app/projects/ilds-design-system/page.tsx` renders `IldsCaseStudy` (no Sanity body fetch).
+- `/projects` — Project grid (Sanity + bespoke cards for static flagship case studies)
+- `/projects/[slug]` — CMS-driven case study (GROQ + Portable Text / images). **Slugs `ilds-design-system` and `il-takecare` are excluded** from this route so bespoke pages own them (`generateStaticParams` in `src/app/projects/[slug]/page.tsx`).
+- `/projects/ilds-design-system` — **Static** ILDS case study (`IldsCaseStudy`).
+- `/projects/il-takecare` — **Static** IL TakeCare case study (`IltcCaseStudy`, `IltcMorph`, `IltcImpact`).
 - `/about`, `/contact` — Static pages
 - **Sanity Studio** — `basePath: '/studio'` in `sanity.config.ts`; embed under `src/app/studio` when you wire the dev route
 
 ---
 
-## CMS vs static (ILDS)
+## CMS vs static (ILDS & IL TakeCare)
 
-- **Sanity `project` with slug `ilds-design-system`** can still appear on the **home** and **`/projects`** grids (title, excerpt, category, link to `/projects/ilds-design-system`). The repo uses a local hero fallback image `public/images/ilds-cover.png` when CMS image is missing.
-- **Full ILDS narrative** (phases, audit, numbers, components) lives in **`src/components/ilds/`** and is **not** edited through Sanity today. To CMS-drive ILDS later, you would replace or hydrate `IldsCaseStudy` with Portable Text + structured fields and remove the static route / `generateStaticParams` exclusion.
+- **Sanity `project` rows** with slugs **`ilds-design-system`** or **`il-takecare`** may still appear on grids; the repo prepends **bespoke** entries and filters duplicate slugs, with local art (`ilds-cover.png`, `iltc-cover.svg`) when CMS has no image.
+- **Full narratives** live in **`src/components/ilds/`** and **`src/components/iltc/`** (not Portable Text in Sanity). CMS-driving later means structured fields + removing the static route / `generateStaticParams` exclusions for that slug.
 
 ---
 

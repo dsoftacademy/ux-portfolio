@@ -127,7 +127,7 @@ export function InsightCounters() {
         <div key={m.tag} className="bg-[var(--bg)] p-6 md:p-8">
           <div className="flex items-center gap-2 mb-3">
             {m.icon}
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text)]/55">
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">
               {m.tag}
             </span>
           </div>
@@ -223,32 +223,53 @@ function ArrowIcon({ direction }: { direction: Direction }) {
   return null
 }
 
+function ImpactMetricCard({
+  m,
+  index,
+}: {
+  m: ImpactMetric
+  index: number
+}) {
+  const reduce = useReducedMotion()
+  const className = `relative h-full rounded-3xl border border-[var(--border)] bg-[var(--surface)]/70 p-7 md:p-8 backdrop-blur ${
+    m.span === 2 ? "md:col-span-2" : ""
+  }`
+  const body = (
+    <>
+      <div className="flex items-start justify-between gap-4 mb-2">
+        <ArrowIcon direction={m.direction} />
+        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
+          {m.direction === "down" ? "Decrease" : "Increase"}
+        </span>
+      </div>
+      <p className="font-sans text-[clamp(2.4rem,5vw,4rem)] font-extrabold tracking-tighter leading-[1] text-[var(--text)] tabular-nums">
+        <Counter to={m.value} decimals={m.decimals ?? 0} suffix={m.suffix} prefix={m.prefix ?? ""} />
+      </p>
+      <p className="mt-4 text-base font-semibold text-[var(--text)]">{m.label}</p>
+      <p className="mt-1.5 text-sm leading-relaxed text-[var(--text)]/65">{m.detail}</p>
+    </>
+  )
+  if (reduce) {
+    return <article className={className}>{body}</article>
+  }
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {body}
+    </motion.article>
+  )
+}
+
 export function ImpactScoreboard() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {IMPACT.map((m, i) => (
-        <motion.article
-          key={m.label}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className={`relative h-full rounded-3xl border border-[var(--border)] bg-[var(--surface)]/70 p-7 md:p-8 backdrop-blur ${
-            m.span === 2 ? "md:col-span-2" : ""
-          }`}
-        >
-          <div className="flex items-start justify-between gap-4 mb-2">
-            <ArrowIcon direction={m.direction} />
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text)]/45">
-              {m.direction === "down" ? "Decrease" : "Increase"}
-            </span>
-          </div>
-          <p className="font-sans text-[clamp(2.4rem,5vw,4rem)] font-extrabold tracking-tighter leading-[1] text-[var(--text)] tabular-nums">
-            <Counter to={m.value} decimals={m.decimals ?? 0} suffix={m.suffix} prefix={m.prefix ?? ""} />
-          </p>
-          <p className="mt-4 text-base font-semibold text-[var(--text)]">{m.label}</p>
-          <p className="mt-1.5 text-sm leading-relaxed text-[var(--text)]/65">{m.detail}</p>
-        </motion.article>
+        <ImpactMetricCard key={m.label} m={m} index={i} />
       ))}
     </div>
   )

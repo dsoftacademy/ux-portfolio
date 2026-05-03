@@ -31,7 +31,7 @@ const BESPOKE_PROJECTS: Project[] = [
     slug: { current: "il-takecare" },
     category: "Flagship App Revamp",
     excerpt:
-      "Rebuilt ICICI Lombard's flagship insurance & lifestyle app — cutting customer-care calls 53.8%, lifting feature utilisation 328.1%, and shrinking feature TAT from ~48 days to 24 hours.",
+      "Rebuilt ICICI Lombard's flagship insurance & lifestyle app — cutting customer-care calls 53.8%, lifting feature utilisation 328.1%, cutting feature TAT by 85.4%, and landing a 24-hour rollout cadence.",
     tags: ["Mobile", "Insurance", "UX Strategy"],
   },
 ]
@@ -63,7 +63,8 @@ export default async function ProjectsPage() {
         title={<span className="text-[var(--text)]">Projects</span>}
       >
         <p className="max-w-2xl text-lg text-[var(--text-muted)] leading-relaxed">
-          A few recent case studies and explorations. These are fetched directly from Sanity CMS.
+          A few recent case studies and explorations. Most entries load from Sanity CMS; flagship
+          write-ups (ILDS, IL TakeCare) ship as static routes with bespoke cards in this grid.
         </p>
       </Section>
 

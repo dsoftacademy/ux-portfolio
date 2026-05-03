@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { SectionWrapper } from "@/components/SectionWrapper"
 import { Button } from "@/components/Button"
 import { IltcMorph } from "./IltcMorph"
@@ -31,7 +31,7 @@ function StageLabel({ index, label }: { index: string; label: string }) {
         {index}
       </span>
       <span className="h-px w-12 bg-[#EC6625]/40" />
-      <span className="font-mono text-[11px] md:text-xs uppercase tracking-[0.18em] text-[var(--text)]/60">
+      <span className="font-mono text-[11px] md:text-xs uppercase tracking-[0.18em] text-[var(--text-muted)]">
         {label}
       </span>
     </div>
@@ -58,7 +58,7 @@ function StatCallout({
       <span className={`text-3xl font-extrabold tracking-tight ${colorClass}`}>
         {value}
       </span>
-      <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/60">
+      <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
         {label}
       </span>
     </div>
@@ -74,6 +74,10 @@ function FadeIn({
   delay?: number
   className?: string
 }) {
+  const reduce = useReducedMotion()
+  if (reduce) {
+    return <div className={className}>{children}</div>
+  }
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -95,7 +99,7 @@ export function IltcCaseStudy() {
   const narrativeRef = React.useRef<HTMLDivElement>(null)
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] pb-24 transition-colors duration-500">
+    <main className="min-h-screen bg-[var(--bg)] pb-24 transition-colors duration-500">
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-x-clip">
         <div
@@ -133,14 +137,14 @@ export function IltcCaseStudy() {
               <StatCallout value="−53.8%" label="Customer-care calls" tone="positive" />
               <StatCallout value="+328.1%" label="Feature utilisation" tone="positive" />
               <StatCallout value="+34.2%" label="Monthly installs" tone="positive" />
-              <StatCallout value="24 hrs" label="Feature TAT (was ~48d)" tone="positive" />
+              <StatCallout value="−85.4%" label="Feature TAT reduced" tone="positive" />
             </div>
           </FadeIn>
 
           <FadeIn delay={0.5}>
             <dl className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 max-w-4xl text-sm">
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/50 mb-1">
+                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
                   Role
                 </dt>
                 <dd className="text-[var(--text)] font-medium">
@@ -148,7 +152,7 @@ export function IltcCaseStudy() {
                 </dd>
               </div>
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/50 mb-1">
+                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
                   Team
                 </dt>
                 <dd className="text-[var(--text)] font-medium">
@@ -156,7 +160,7 @@ export function IltcCaseStudy() {
                 </dd>
               </div>
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/50 mb-1">
+                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
                   Platform
                 </dt>
                 <dd className="text-[var(--text)] font-medium">
@@ -164,7 +168,7 @@ export function IltcCaseStudy() {
                 </dd>
               </div>
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/50 mb-1">
+                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
                   Outcome window
                 </dt>
                 <dd className="text-[var(--text)] font-medium">
@@ -175,16 +179,9 @@ export function IltcCaseStudy() {
           </FadeIn>
 
           <FadeIn delay={0.65}>
-            <div className="mt-16 flex items-center gap-2 text-[var(--text)]/40 font-mono text-[10px] uppercase tracking-[0.25em]">
+            <div className="mt-16 flex items-center gap-2 text-[var(--text-muted)] font-mono text-[10px] uppercase tracking-[0.25em]">
               <span>Scroll to read</span>
-              <motion.span
-                animate={{ y: [0, 6, 0] }}
-                transition={{ repeat: Infinity, duration: 1.6 }}
-                className="inline-block"
-                aria-hidden
-              >
-                ↓
-              </motion.span>
+              <ScrollCueArrow />
             </div>
           </FadeIn>
         </SectionWrapper>
@@ -200,7 +197,7 @@ export function IltcCaseStudy() {
               <Meta label="Domain" value="Insurance Tech" />
               <Meta label="Role" value="Design Lead" />
               <Meta label="Design Team" value="6 Designers" />
-              <Meta label="Platform" value="iOS &amp; Android" />
+              <Meta label="Platform" value="iOS & Android" />
             </div>
           </FadeIn>
         </SectionWrapper>
@@ -448,13 +445,49 @@ export function IltcCaseStudy() {
         <SectionWrapper>
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--text)]/60 hover:text-[#EC6625] transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+            className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] hover:text-[#EC6625] transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           >
             <span aria-hidden>←</span> All projects
           </Link>
         </SectionWrapper>
       </section>
-    </div>
+    </main>
+  )
+}
+
+function ScrollCueArrow() {
+  const reduce = useReducedMotion()
+  if (reduce) {
+    return (
+      <span className="inline-block" aria-hidden>
+        ↓
+      </span>
+    )
+  }
+  return (
+    <motion.span
+      animate={{ y: [0, 6, 0] }}
+      transition={{ repeat: Infinity, duration: 1.6 }}
+      className="inline-block"
+      aria-hidden
+    >
+      ↓
+    </motion.span>
+  )
+}
+
+function PhoneFloatWrap({ children }: { children: React.ReactNode }) {
+  const reduce = useReducedMotion()
+  if (reduce) {
+    return <div>{children}</div>
+  }
+  return (
+    <motion.div
+      animate={{ y: [0, -14, 0] }}
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+    >
+      {children}
+    </motion.div>
   )
 }
 
@@ -465,13 +498,10 @@ export function IltcCaseStudy() {
 function Meta({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text)]/55 mb-2">
+      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)] mb-2">
         {label}
       </p>
-      <p
-        className="text-[15px] leading-relaxed text-[var(--text)]"
-        dangerouslySetInnerHTML={{ __html: value }}
-      />
+      <p className="text-[15px] leading-relaxed text-[var(--text)]">{value}</p>
     </div>
   )
 }
@@ -720,7 +750,10 @@ function PrincipleGrid() {
               {p.n}
             </span>
             <div className="relative">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#EC6625] text-[11px] font-bold text-white">
+              <span
+                className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#EC6625] text-[11px] font-bold text-white"
+                aria-hidden
+              >
                 ✓
               </span>
               <h3 className="mt-5 text-lg font-bold text-[var(--text)]">
@@ -927,10 +960,7 @@ function SurfaceShowcase() {
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             className="relative flex-shrink-0 w-full max-w-[480px] mx-auto lg:mx-0"
           >
-            <motion.div
-              animate={{ y: [0, -14, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            >
+            <PhoneFloatWrap>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/iltc-mockup.png"
@@ -938,7 +968,7 @@ function SurfaceShowcase() {
                 className="w-full h-auto drop-shadow-2xl"
                 draggable={false}
               />
-            </motion.div>
+            </PhoneFloatWrap>
             {/* Glow under phone */}
             <div
               aria-hidden

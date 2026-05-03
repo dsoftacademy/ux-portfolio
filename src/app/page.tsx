@@ -24,7 +24,7 @@ const BESPOKE_PROJECTS: Project[] = [
     slug: { current: "il-takecare" },
     category: "Flagship App Revamp",
     excerpt:
-      "Rebuilt ICICI Lombard's flagship insurance & lifestyle app — cutting customer-care calls 53.8%, lifting feature utilisation 328.1%, and shrinking feature TAT from ~48 days to 24 hours.",
+      "Rebuilt ICICI Lombard's flagship insurance & lifestyle app — cutting customer-care calls 53.8%, lifting feature utilisation 328.1%, cutting feature TAT by 85.4%, and landing a 24-hour rollout cadence.",
   },
 ]
 

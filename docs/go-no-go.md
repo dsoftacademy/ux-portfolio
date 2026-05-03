@@ -1,6 +1,6 @@
 # Portfolio Go / No-Go Tracker
 
-Last updated: 2026-05-03 (board refresh — ILDS content audit + site/tooling status)
+Last updated: 2026-05-03 (IL TakeCare Figma QA + a11y pass)
 Owner: Pratishek Bansal
 
 > **Canonical file in git.** (A copy may exist under `.session/` for local habits — keep this file as source of truth.)
@@ -13,7 +13,7 @@ Owner: Pratishek Bansal
 ## Current Status
 - Overall status: **NO-GO**
 - **Resolved from last review:** Site quality gate **D** satisfied on live; **ILDS flagship gate A** satisfied in shipped `IldsCaseStudy` (static route `/projects/ilds-design-system`, not Sanity body).
-- **Blocking items open:** `B) IL TakeCare case study`, `C) IL NYSA case study`, `E) application readiness` (CV alignment, WIP sweep, verbal summaries).
+- **Blocking items open:** `C) IL NYSA case study`, `E) application readiness` (CV alignment, WIP sweep, verbal summaries). **IL TakeCare (B)** aligned to Figma `42:540` and shipped on `/projects/il-takecare`.
 
 ---
 
@@ -30,11 +30,14 @@ Evidence: production `/projects/ilds-design-system` + `src/components/ilds/IldsC
 - [x] Impact section includes real numbers + visual evidence (`HeadlineMetrics`, `AdoptionBars`, audit matrix)
 - [x] Reflection section includes trade-offs and learnings (voluntary adoption vs forced rollout, PM-style measurement, “contract” framing)
 
-## B) IL TakeCare Gate (P0)
-- [ ] Hero includes 53.8% and 328.1% outcome framing
-- [ ] Problem, intervention, and results are causally linked
-- [ ] Role ownership is explicit
-- [ ] Visual evidence (before/after or flow outcomes) is present
+## B) IL TakeCare Gate (P0) — **PASS (live + repo vs Figma `42:540`)**
+
+Evidence: `/projects/il-takecare`, `IltcCaseStudy.tsx`, `IltcMorph.tsx`, `IltcImpact.tsx`, listing/home bespoke cards, `public/images/iltc-cover.svg`.
+
+- [x] Hero includes 53.8%, 328.1%, 34.2%, and **−85.4% Feature TAT reduced** (matches Figma hero stat row `42:543`; scoreboard row 4 remains **24 hrs** per `42:182725`)
+- [x] Problem, intervention, and results are causally linked (drift → gaps → listening → signal → strategy → execution → product → outcome)
+- [x] Role ownership is explicit (hero `dl`, meta strip `42:576`, narrative voice)
+- [x] Visual evidence (morph scroll illustration, `iltc-mockup.png`, `iltc-feat-*.png` frames, impact bento)
 
 ## C) IL NYSA Gate (P1)
 - [ ] AI scope and boundaries are specific
@@ -56,7 +59,7 @@ Evidence: production `/projects/ilds-design-system` + `src/components/ilds/IldsC
 
 ## E) Application Readiness Gate (Go Decision)
 - [x] ILDS is publish-quality on live site *(gate A)*
-- [ ] IL TakeCare is publish-quality *(gate B)*
+- [x] IL TakeCare is publish-quality on live site *(gate B)*
 - [ ] IL NYSA is at least strong v1 *(gate C)*
 - [ ] CV (ATS + designed) aligns with case-study claims
 - [ ] No visible WIP signals on live portfolio
@@ -86,3 +89,4 @@ If no checkbox moved, log why:
 - `[2026-05-01 22:52] Completed: Contact submission migrated to Formspree; Evidence: commit aa5a713 + live form test success; Gate impact: D/contact path remains verified`
 - `[2026-05-01 23:10] Completed: ILDS case-study component audit prepared for content rewrite; Evidence: src/components/ilds/IldsCaseStudy.tsx snapshot; Gate impact: no gate movement (content quality work pending)`
 - `[2026-05-03] Completed: Board refresh + ILDS gate closure; Evidence: live ILDS page + repo audit of IldsCaseStudy.tsx; Gate impact: **A all [x]**, **D extended (CI, docs, a11y contrast)**, **E partial** (ILDS publish-quality checked); overall still **NO-GO** (B, C, E remainder)`
+- `[2026-05-03] Completed: IL TakeCare Figma parity + QA; Evidence: Figma node 42:540 metadata vs code, hero −85.4% stat, PRM branches (morph/FadeIn/phone float/scoreboard), `<main>`, Meta XSS removal, projects copy, poster SVG chip; Gate impact: **B all [x]**, **E** ILTC checked; overall **NO-GO** (C, E remainder)`
