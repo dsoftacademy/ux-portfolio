@@ -338,6 +338,7 @@ export function IltcCaseStudy() {
                 </p>
 
                 <ExecutionTracks />
+                <DesignSystemCallout />
               </article>
 
               {/* 8. The refreshed experience */}
@@ -834,6 +835,67 @@ function PrincipleGrid() {
   )
 }
 
+function DesignSystemCallout() {
+  return (
+    <FadeIn delay={0.1}>
+      <div className="mt-8 grid md:grid-cols-[1fr_1.4fr] gap-4 rounded-2xl overflow-hidden border border-[var(--border)]">
+        {/* Left — ILDS brand tile */}
+        <div
+          className="p-8 flex flex-col justify-between min-h-[200px]"
+          style={{ background: "linear-gradient(135deg,#EC6625 0%,#F5A06A 100%)" }}
+        >
+          <div className="flex gap-2">
+            <span className="h-3 w-3 rounded-full bg-white/80" aria-hidden />
+            <span className="h-3 w-3 rounded-full bg-white/50" aria-hidden />
+            <span className="h-3 w-3 rounded-full bg-white/30" aria-hidden />
+          </div>
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/70 mb-2">
+              Built on
+            </p>
+            <p className="text-2xl font-extrabold text-white tracking-tight leading-tight">
+              IL Design System
+            </p>
+            <p className="mt-2 text-sm text-white/75 leading-relaxed">
+              Shared tokens, reusable components, zero drift between design and production.
+            </p>
+          </div>
+        </div>
+        {/* Right — type specimen */}
+        <div className="bg-[var(--surface)]/70 p-8 flex flex-col justify-between">
+          <p
+            className="text-[4rem] font-extrabold tracking-tighter leading-none text-[var(--text)]"
+            aria-hidden
+          >
+            Aa
+          </p>
+          <div className="space-y-3 mt-4">
+            {[
+              { label: "Tokens", tags: ["Colour", "Spacing", "Radius"] },
+              { label: "Components", tags: ["Button", "Card", "Input", "Toggle"] },
+              { label: "Delivery", tags: ["TAT 24 hrs", "Figma → Code"] },
+            ].map((row) => (
+              <div key={row.label} className="flex items-center gap-3 flex-wrap">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/45 w-24 flex-shrink-0">
+                  {row.label}
+                </span>
+                {row.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="px-2.5 py-1 rounded-full text-[11px] font-medium border border-[var(--border)] text-[var(--text)]/70"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </FadeIn>
+  )
+}
+
 function ExecutionTracks() {
   const tracks = [
     {
@@ -915,116 +977,148 @@ function ExecutionTracks() {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// SurfaceShowcase — real app screenshots with user-state labels + feature list
+// SurfaceShowcase — matches Figma exactly:
+//   1. Animated iPhone mockup hero
+//   2. Cohort-based customisation image (3-user columns)
+//   3. Feature showcase images (Core Insurance, Lifestyle, Wellness)
 // ────────────────────────────────────────────────────────────────────────────
 
-const APP_SCREENS = [
+const FEATURE_FRAMES = [
   {
-    src: "/images/iltc-screen-active.png",
-    state: "Active Policyholder",
-    detail: "Policy card at a glance, quick-action rail, wellness nudges — everything a returning user needs, one scroll away.",
+    eyebrow: "01 — Core Insurance",
+    title: "Simplified Core Insurance Services",
+    image: "/images/iltc-feat-core.png",
+    alt: "Quick actions, seamless onboarding, and policy & e-Cards",
   },
   {
-    src: "/images/iltc-screen-new.png",
-    state: "New User",
-    detail: "Onboarding-first home: add-policy widget, spotlight offers, and guided insurance discovery before anything else.",
+    eyebrow: "02 — Lifestyle Coverage",
+    title: "Beyond Insurance: A Holistic Lifestyle Coverage",
+    image: "/images/iltc-feat-lifestyle.png",
+    alt: "Health vitals, expert reviews, driving score, OPD consultations",
   },
   {
-    src: "/images/iltc-screen-winback.png",
-    state: "Win-back User",
-    detail: "Renewal-led layout with missed-benefit highlights and a one-tap \"Renew now\" bar — re-earning the relationship.",
-  },
-]
-
-const SURFACE_FEATURES = [
-  {
-    title: "Policy at a glance",
-    detail:
-      "Coverage, dependants, and renewal status surfaced before claims — the single most-asked question, answered on launch.",
+    eyebrow: "03 — Cohort Customisation",
+    title: "Cohort Based Customisation",
+    image: "/images/iltc-feat-cohort.png",
+    alt: "Personalised home screens for New User, Active Policyholder, and Win-back User",
   },
   {
-    title: "Two-tap claims",
-    detail:
-      "Pre-fill from policy + camera + location. A 7-screen flow collapsed to a 3-screen card stack.",
-  },
-  {
-    title: "Wellness in context",
-    detail:
-      "Teleconsult and OPD slots surface based on policy benefits — not buried under a tab.",
-  },
-  {
-    title: "Lifestyle, opt-in",
-    detail:
-      "Flight tracking, challan pay, and roadside assistance live behind a personalised quick-action rail.",
+    eyebrow: "04 — Wellness",
+    title: "Wellness That Pays Off",
+    image: "/images/iltc-feat-wellness.png",
+    alt: "Gamified wellness challenges and engagement nudges",
   },
 ]
 
 function SurfaceShowcase() {
   return (
-    <div className="space-y-12">
-      {/* ── Real phone screenshots ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-8">
-        {APP_SCREENS.map((s, i) => (
-          <FadeIn key={s.state} delay={i * 0.1}>
-            <div className="flex flex-col gap-3">
-              {/* Phone frame */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                className="relative w-full overflow-hidden rounded-[28px] border border-[var(--border)] shadow-2xl"
-                style={{ aspectRatio: "9/19" }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={s.src}
-                  alt={`IL TakeCare — ${s.state} home screen`}
-                  className="absolute inset-0 w-full h-full object-cover object-top"
-                />
-                {/* Subtle bottom fade */}
-                <div
-                  aria-hidden
-                  className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
-                  style={{
-                    background: "linear-gradient(to top, rgba(15,14,19,0.55) 0%, transparent 100%)",
-                  }}
-                />
-              </motion.div>
-              {/* State label */}
-              <div className="text-center">
-                <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#EC6625]">
-                  {s.state}
-                </span>
-                <p className="mt-1 text-xs leading-relaxed text-[var(--text)]/55 px-2">
-                  {s.detail}
-                </p>
-              </div>
-            </div>
-          </FadeIn>
-        ))}
-      </div>
+    <div className="space-y-16">
 
-      {/* ── Feature call-outs ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {SURFACE_FEATURES.map((s, i) => (
-          <FadeIn key={s.title} delay={0.1 + i * 0.07}>
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]/55 p-5 md:p-6">
-              <div className="flex items-baseline gap-3 mb-1.5">
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#EC6625]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-lg font-bold text-[var(--text)]">
-                  {s.title}
-                </h3>
-              </div>
-              <p className="text-sm leading-relaxed text-[var(--text)]/65">
-                {s.detail}
-              </p>
+      {/* ── iPhone mockup hero — animated float ── */}
+      <FadeIn>
+        <div className="flex flex-col lg:flex-row items-center gap-10">
+          {/* Mockup */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="relative flex-shrink-0 w-full max-w-[340px] mx-auto lg:mx-0"
+          >
+            <motion.div
+              animate={{ y: [0, -14, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/iltc-mockup.png"
+                alt="IL TakeCare app — Win-back user home screen"
+                className="w-full h-auto drop-shadow-2xl"
+                draggable={false}
+              />
+            </motion.div>
+            {/* Glow under phone */}
+            <div
+              aria-hidden
+              className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-12 rounded-full blur-2xl pointer-events-none"
+              style={{ background: "rgba(236,102,37,0.25)" }}
+            />
+          </motion.div>
+
+          {/* Caption block */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-6 max-w-lg"
+          >
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#EC6625]">
+              Designed for every user state
+            </p>
+            <p className="text-lg leading-relaxed text-[var(--text)]/70">
+              The home screen dynamically adapts to who&apos;s opening the app — a win-back
+              user sees a renewal nudge; a new user sees an onboarding widget; an active
+              policyholder gets their policy card front-and-centre.
+            </p>
+            <div className="flex flex-col gap-3">
+              {[
+                { label: "Active Policyholder", detail: "Policy at a glance · quick claims · wellness" },
+                { label: "New User", detail: "Onboarding · add-policy widget · spotlight" },
+                { label: "Win-back User", detail: "Renewal nudge · missed benefits · one-tap buy" },
+              ].map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, x: 16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.5, delay: 0.35 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)]/50 px-4 py-3"
+                >
+                  <span
+                    className="mt-0.5 h-2 w-2 flex-shrink-0 rounded-full"
+                    style={{ background: "#EC6625" }}
+                    aria-hidden
+                  />
+                  <div>
+                    <p className="text-sm font-semibold text-[var(--text)]">{s.label}</p>
+                    <p className="text-xs text-[var(--text)]/55 mt-0.5">{s.detail}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </FadeIn>
-        ))}
-      </div>
+          </motion.div>
+        </div>
+      </FadeIn>
+
+      {/* ── Feature showcase images (from Figma) ── */}
+      {FEATURE_FRAMES.map((f, i) => (
+        <FadeIn key={f.eyebrow} delay={i * 0.05}>
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-[#EC6625]">
+                {f.eyebrow}
+              </span>
+            </div>
+            <h3 className="text-xl md:text-2xl font-bold text-[var(--text)]">{f.title}</h3>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="rounded-2xl overflow-hidden border border-[var(--border)]"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={f.image}
+                alt={f.alt}
+                className="w-full h-auto block"
+                loading="lazy"
+              />
+            </motion.div>
+          </div>
+        </FadeIn>
+      ))}
     </div>
   )
 }
