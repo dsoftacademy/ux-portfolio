@@ -912,78 +912,73 @@ function ExecutionTracks() {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// SurfaceShowcase — matches Figma exactly:
-//   1. Animated iPhone mockup hero
-//   2. Cohort-based customisation image (3-user columns)
-//   3. Feature showcase images (Core Insurance, Lifestyle, Wellness)
+// SurfaceShowcase — S08 The Product: floating phone hero, then Figma exports
+// (node 42:150176 — frames 42:161939, 42:161940, 42:164533).
 // ────────────────────────────────────────────────────────────────────────────
 
-const FEATURE_FRAMES = [
+const PRODUCT_S08_BLOCKS = [
   {
-    eyebrow: "01 — Core Insurance",
-    title: "Simplified Core Insurance Services",
-    image: "/images/iltc-feat-core.png",
-    alt: "Quick actions, seamless onboarding, and policy & e-Cards",
+    src: "/images/iltc-product-s08-core.png",
+    width: 744,
+    height: 794,
+    alt: "Simplified Core Insurance services: Policy at a glance, Hassle-Free Insurance Management, and Seamless Onboarding, matching the shipped IL TakeCare product UI.",
   },
   {
-    eyebrow: "02 — Lifestyle Coverage",
-    title: "Beyond Insurance: A Holistic Lifestyle Coverage",
-    image: "/images/iltc-feat-lifestyle.png",
-    alt: "Health vitals, expert reviews, driving score, OPD consultations",
+    src: "/images/iltc-product-s08-lifestyle.png",
+    width: 744,
+    height: 794,
+    alt: "Beyond Insurance: A Holistic Lifestyle Solutions — wellness in context, expert insights and health monitoring, and smarter driving with telematics.",
   },
   {
-    eyebrow: "03 — Cohort Customisation",
-    title: "Cohort Based Customisation",
-    image: "/images/iltc-feat-cohort.png",
-    alt: "Personalised home screens for New User, Active Policyholder, and Win-back User",
+    src: "/images/iltc-product-s08-cohort.png",
+    width: 553,
+    height: 1024,
+    alt: "Cohort based Customisation: dynamic homepage with a personalised experience for New User, Active Policyholder, and Win-back User states.",
+    /** Wider Figma export (node 42:178930); centered in 744px strip like core/lifestyle. */
+    centerInStrip: true,
   },
-  {
-    eyebrow: "04 — Wellness",
-    title: "Wellness That Pays Off",
-    image: "/images/iltc-feat-wellness.png",
-    alt: "Gamified wellness challenges and engagement nudges",
-  },
-]
+] as const
 
 function SurfaceShowcase() {
   return (
-    <div className="space-y-16">
-
-      {/* ── iPhone mockup hero — animated float ── */}
+    <div className="space-y-10 md:space-y-16">
+      {/* Floating phone + cohort narrative (above Figma product strips) */}
       <FadeIn>
-        <div className="flex flex-col lg:flex-row items-center gap-10">
-          {/* Mockup */}
+        <div className="flex flex-col lg:grid lg:grid-cols-[minmax(0,240px)_minmax(0,1fr)] xl:grid-cols-[minmax(0,260px)_minmax(0,1fr)] lg:items-start gap-8 lg:gap-10 w-full max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex-shrink-0 w-full max-w-[480px] mx-auto lg:mx-0"
+            className="relative flex-shrink-0 w-full max-w-[220px] sm:max-w-[240px] mx-auto lg:mx-0 lg:w-full lg:max-w-none justify-self-start overflow-hidden flex justify-end"
           >
             <PhoneFloatWrap>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/iltc-mockup.png"
-                alt="IL TakeCare app — Win-back user home screen"
-                className="w-full h-auto drop-shadow-2xl"
-                draggable={false}
-              />
+              {/* Slightly wider than column + right-aligned: clips excess canvas on the left so the copy column can stay wide. */}
+              <div className="w-[118%] max-w-none shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/iltc-app-mockup.jpg"
+                  alt="IL TakeCare app — personalised home screen with policy card, quick actions, and buy insurance shortcuts"
+                  className="w-full h-auto block drop-shadow-2xl"
+                  width={610}
+                  height={1024}
+                  draggable={false}
+                />
+              </div>
             </PhoneFloatWrap>
-            {/* Glow under phone */}
             <div
               aria-hidden
-              className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-12 rounded-full blur-2xl pointer-events-none"
+              className="absolute -bottom-8 right-[18%] w-48 h-12 rounded-full blur-2xl pointer-events-none"
               style={{ background: "rgba(236,102,37,0.25)" }}
             />
           </motion.div>
 
-          {/* Caption block */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-6 max-w-lg"
+            className="space-y-6 min-w-0 w-full lg:pt-1"
           >
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#EC6625]">
               Designed for every user state
@@ -1023,26 +1018,35 @@ function SurfaceShowcase() {
         </div>
       </FadeIn>
 
-      {/* ── Feature showcase images (from Figma, node 42:162269) ── */}
-      {FEATURE_FRAMES.map((f, i) => (
-        <FadeIn key={f.eyebrow} delay={i * 0.05}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl overflow-hidden border border-[var(--border)]"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={f.image}
-              alt={f.alt}
-              className="w-full h-auto block"
-              loading="lazy"
-            />
-          </motion.div>
-        </FadeIn>
-      ))}
+      <div className="space-y-10 md:space-y-14 max-w-[744px] mx-auto w-full">
+        {PRODUCT_S08_BLOCKS.map((block, i) => {
+          const center = "centerInStrip" in block && block.centerInStrip
+          return (
+            <FadeIn key={block.src} delay={i * 0.06}>
+              <div
+                className={`rounded-2xl overflow-hidden border border-[var(--border)] bg-black ${
+                  center ? "flex justify-center" : ""
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={block.src}
+                  alt={block.alt}
+                  width={block.width}
+                  height={block.height}
+                  className={
+                    center
+                      ? "h-auto w-auto max-w-full block"
+                      : "w-full h-auto block"
+                  }
+                  loading={i === 0 ? "eager" : "lazy"}
+                  sizes="(min-width: 768px) 744px, 100vw"
+                />
+              </div>
+            </FadeIn>
+          )
+        })}
+      </div>
     </div>
   )
 }
