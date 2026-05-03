@@ -913,9 +913,9 @@ function ExecutionTracks() {
 
 // ────────────────────────────────────────────────────────────────────────────
 // SurfaceShowcase — S08 The Product (node 77:17075)
-// Whole-card overflow-hidden per Figma dev mode:
-//   bg rgba(23,22,28,0.55) · border rgba(255,255,255,0.07) · rounded-2xl
-//   p-5 · flex-col · fixed vw-based height · image fills flex-1 and bleeds
+// Card = sole clip surface (overflow-hidden). Raster images: w-full h-auto shrink-0;
+// no object-cover / no inner clip box — tall art extends past the card box and the
+// card crops (Figma: 228px frame is a layout anchor for abs children; PNGs bleed).
 // ────────────────────────────────────────────────────────────────────────────
 
 /** Section heading for each of the 3 product categories. */
@@ -928,10 +928,10 @@ function S08Heading({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * Feature card — exact Figma spec (node 77:17207 et al.)
- * The WHOLE card is the clip container (overflow-hidden).
- * Text header sits at top (shrink-0); image fills the remaining flex-1 space.
- * Images bleed/scale within the card; card clips the overflow.
+ * Feature card — Figma dev mode (e.g. node 77:17207).
+ * Only the outer card clips (`overflow-hidden`). Image is natural aspect:
+ * `w-full h-auto shrink-0` — no object-cover, no absolute fill, no inner clip wrapper.
+ * Optional `imgClassName` for layout nudges (e.g. `mt-auto`), not object-position.
  *
  * Standard card height: 352px @ 1512px viewport → 23.28vw (clamped).
  * Pass a custom `style` to override height per use-case.
@@ -942,7 +942,7 @@ function S08Card({
   description,
   src,
   alt,
-  imgPos = "center center",
+  imgClassName = "",
   style,
   className = "",
 }: {
@@ -951,7 +951,7 @@ function S08Card({
   description: string
   src: string
   alt: string
-  imgPos?: string
+  imgClassName?: string
   style?: React.CSSProperties
   className?: string
 }) {
@@ -976,14 +976,13 @@ function S08Card({
       >
         {description}
       </p>
-      {/* ── Image — fills remaining card height; card clips bleed ── */}
-      <div className="flex-1 relative min-h-0">
+      {/* ── Image — natural height; card clips overflow (Figma: frame is anchor, clip on card) ── */}
+      <div className={`shrink-0 w-full ${imgClassName}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={alt}
-          className="absolute inset-0 w-full h-full object-cover block"
-          style={{ objectPosition: imgPos }}
+          className="w-full h-auto block"
           loading="lazy"
           draggable={false}
         />
@@ -1080,7 +1079,6 @@ function SurfaceShowcase() {
             description="Coverage, dependants, and renewal status surfaced before claims — the single most-asked question, answered on launch."
             src="/images/s08-policy-glance.png"
             alt="Policy at a glance — Two Wheeler Insurance card with Active badge, policyholder and vehicle details"
-            imgPos="center center"
             style={{ height: "clamp(260px, 23.28vw, 352px)" }}
           />
 
@@ -1092,7 +1090,6 @@ function SurfaceShowcase() {
               description="Quick and easy access to core services like claims, network hospitals, and policy details"
               src="/images/s08-quick-actions.png"
               alt="Quick actions — Register a claim, Edit policy details, Find local services"
-              imgPos="center 25%"
               style={{ height: "clamp(260px, 23.28vw, 352px)" }}
             />
             <S08Card
@@ -1101,7 +1098,6 @@ function SurfaceShowcase() {
               description="Guided onboarding with coach-marks to help users navigate seamlessly"
               src="/images/s08-onboarding.png"
               alt="Seamless onboarding — coach-mark guided setup flow"
-              imgPos="center center"
               style={{ height: "clamp(260px, 23.28vw, 352px)" }}
             />
           </div>
@@ -1110,7 +1106,7 @@ function SurfaceShowcase() {
 
       {/* ══════════════════════════════════════════════════════════════════════
           SECTION 2 — Beyond Insurance: A Holistic Lifestyle Solutions  (node 77:17254)
-          Same card height. Wellness: doctor right-bleeds. Health vitals: face bleeds bottom.
+          Same card height; raster bleeds are cropped only by the card edge.
       ══════════════════════════════════════════════════════════════════════ */}
       <FadeIn delay={0.04}>
         <S08Heading>Beyond Insurance: A Holistic Lifestyle Solutions</S08Heading>
@@ -1124,7 +1120,6 @@ function SurfaceShowcase() {
               description="Teleconsult and OPD slots surface based on policy benefits — not buried under a tab."
               src="/images/s08-wellness.png"
               alt="Wellness — teleconsultation with video and audio call cards, doctor profile"
-              imgPos="35% center"
               style={{ height: "clamp(260px, 23.28vw, 352px)" }}
             />
             <S08Card
@@ -1133,7 +1128,6 @@ function SurfaceShowcase() {
               description="Real-time insights into your health vitals and tips from our experts"
               src="/images/s08-health-vitals.png"
               alt="Health monitoring — face scan showing HR, SpO2, RR and HRV readings"
-              imgPos="left top"
               style={{ height: "clamp(260px, 23.28vw, 352px)" }}
             />
           </div>
@@ -1145,7 +1139,6 @@ function SurfaceShowcase() {
             description="Track and improve your driving with real-time telematics data and real time insights."
             src="/images/s08-telematics.png"
             alt="Telematics — Driving Score card, Acceleration and Turning metrics with car"
-            imgPos="30% top"
             style={{ height: "clamp(260px, 23.28vw, 352px)" }}
           />
         </div>
@@ -1153,8 +1146,7 @@ function SurfaceShowcase() {
 
       {/* ══════════════════════════════════════════════════════════════════════
           SECTION 3 — Cohort based Customisation  (node 77:17524)
-          Cohort card height: 1500px @ 1512px → clamp(600px, 99.21vw, 1500px)
-          Shows complete mobile homepage per user state.
+          Three full-height phone PNGs; natural h-auto — outer card overflow-hidden only.
       ══════════════════════════════════════════════════════════════════════ */}
       <FadeIn delay={0.04}>
         <S08Heading>Cohort based Customisation</S08Heading>
@@ -1187,16 +1179,13 @@ function SurfaceShowcase() {
                 <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[rgba(240,240,244,0.4)] text-center py-2.5 border-b border-[rgba(255,255,255,0.07)]">
                   {c.label}
                 </p>
-                {/* Phone image — tall enough to show complete mobile page */}
-                <div
-                  className="relative overflow-hidden"
-                  style={{ height: "clamp(600px, 99.21vw, 1500px)" }}
-                >
+                {/* Phone screenshot — natural aspect; outer cohort card clips if needed */}
+                <div className="relative w-full">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={c.src}
                     alt={c.alt}
-                    className="absolute inset-0 w-full h-full object-cover object-top block"
+                    className="w-full h-auto shrink-0 block"
                     loading="lazy"
                     draggable={false}
                   />
