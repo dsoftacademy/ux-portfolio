@@ -2,70 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Anantapur Design System — single source of truth for all tokens.
+ * See docs/design-system.md. Do not redefine these values elsewhere. */
+@import "./tokens.css";
+
 @layer base {
-  :root {
-    /* v5 Font System Mapping */
-    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-    --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
-
-    /* Dark theme variables (v5 Spec) - Default */
-    --bg: #0C0C10;
-    --surface: #16161C; /* Lighter than BG for card elevation */
-    --text: #F0F0F4;
-    --text-2: rgba(255, 255, 255, 0.55);
-    --text-muted: rgba(255, 255, 255, 0.55); /* ≈5.1:1 on dark bg ✓ */
-    --text-3: rgba(255, 255, 255, 0.70);    /* mid-level secondary text */
-    /* ~4.6:1 on --bg at 13px+ (WCAG AA); still clearly softer than --text-3 */
-    --text-4: rgba(255, 255, 255, 0.58);    /* tertiary / metadata */
-    --text-5: rgba(255, 255, 255, 0.32);    /* placeholder / decorative */
-    --accent: #7C7EF5;
-    --accent-rgb: 124, 126, 245;            /* for rgba() usage */
-    --border: rgba(255, 255, 255, 0.08); /* Slightly more visible */
-    --pillBg: rgba(124, 126, 245, 0.10);    /* subtle accent-tinted badge bg */
-    --selection: rgba(99, 102, 241, 0.3);
-  }
-
-  [data-theme='light'] {
-    /* Light theme overrides (v5 Spec) */
-    --bg: #F5F5F2;
-    --surface: #FFFFFF; /* Pure white on off-white background */
-    --text: #111827;
-    --text-2: rgba(17, 24, 39, 0.68);
-    --text-muted: rgba(17, 24, 39, 0.62); /* raised from 0.50 → ≈4.9:1 on light bg ✓ */
-    --text-3: rgba(17, 24, 39, 0.68);     /* mid-level secondary text ≈5.9:1 ✓ */
-    /* Tertiary on light surface: AA-safe vs --bg / cards */
-    --text-4: rgba(17, 24, 39, 0.58);     /* tertiary / metadata */
-    --text-5: rgba(17, 24, 39, 0.35);     /* placeholder / decorative */
-    --accent: #4F46E5;
-    --accent-rgb: 79, 70, 229;             /* for rgba() usage */
-    --border: rgba(17, 24, 39, 0.08);
-    --pillBg: rgba(79, 70, 229, 0.07);     /* subtle accent-tinted badge bg */
-    --selection: rgba(99, 102, 241, 0.15);
-  }
-
   body {
     @apply antialiased;
     background-color: var(--bg);
     color: var(--text);
-    /* FORCED FONT HANDSHAKE */
     font-family: var(--font-sans);
-    transition: background-color 0.45s cubic-bezier(0.23, 1, 0.32, 1), 
-                color 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    transition:
+      background-color var(--dur-slow) var(--ease-out),
+      color var(--dur-slow) var(--ease-out);
   }
 
-  /* Force Headings to use the Design System Font */
+  /* Force headings to use the Design System sans family.
+   * Per-heading SIZE / leading / tracking is owned by Heading components
+   * (src/components/typography/*) — never set inline. */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
     @apply tracking-tight;
   }
 }
 
-/* Design System Helpers */
 ::selection {
   background: var(--selection);
   color: var(--text);
 }
 
 .ease-v5 {
-  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  transition-timing-function: var(--ease-out);
 }

@@ -1,0 +1,193 @@
+/* =====================================================================
+ * tokens.css — Anantapur Design System
+ * SINGLE SOURCE OF TRUTH for typography, color, motion, radius, shadow.
+ * Edit this file to change the system. Components must consume tokens,
+ * never raw hex / ad-hoc clamp() / Tailwind palette colors.
+ * Spec: docs/design-system.md
+ * ===================================================================== */
+
+:root {
+    /* -------------------------------------------------------------------
+     * FONT FAMILIES
+     * Two families only. No font-serif. No third family.
+     * ------------------------------------------------------------------- */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* -------------------------------------------------------------------
+     * TYPE SCALE — fluid clamp() values; never override at the call site
+     * ------------------------------------------------------------------- */
+    --fs-display:  clamp(2.25rem, 7vw,    5.5rem);   /* page hero only */
+    --fs-h1:       clamp(2rem,    5.5vw,  4rem);     /* rare; only when no display above */
+    --fs-h2:       clamp(1.85rem, 3.5vw,  3.35rem);  /* section heading */
+    --fs-h3:       clamp(1.25rem, 2vw,    1.75rem);  /* sub-section */
+    --fs-h4:       clamp(1.05rem, 1.4vw,  1.25rem);  /* card / inline title */
+    --fs-body-lg:  clamp(1.05rem, 1.2vw,  1.15rem);  /* lead paragraph */
+    --fs-body:     1rem;                              /* 16px — body */
+    --fs-body-sm:  0.875rem;                          /* 14px — caption / helper */
+    --fs-eyebrow:  0.6875rem;                         /* 11px — eyebrow / label */
+    --fs-meta:     0.625rem;                          /* 10px — micro meta */
+
+    --lh-display:  1.04;
+    --lh-h1:       1.08;
+    --lh-h2:       1.12;
+    --lh-h3:       1.2;
+    --lh-h4:       1.3;
+    --lh-body:     1.65;
+    --lh-tight:    1.25;
+    --lh-flush:    1;
+
+    --tr-display:  -0.03em;
+    --tr-h1:       -0.025em;
+    --tr-h2:       -0.02em;
+    --tr-h3:       -0.01em;
+    --tr-eyebrow:   0.22em;
+    --tr-meta:      0.18em;
+
+    /* -------------------------------------------------------------------
+     * COLOR — DARK (default)
+     * Neutrals
+     * ------------------------------------------------------------------- */
+    --bg:              #0C0C10;
+    --surface:         #16161C;
+    --surface-2:       #1E1E26;                      /* elevated card / nested */
+    --border:          rgba(255, 255, 255, 0.08);
+    --border-strong:   rgba(255, 255, 255, 0.16);
+
+    --text:            #F0F0F4;
+    --text-muted:      rgba(255, 255, 255, 0.70);    /* mid-priority body */
+    --text-subtle:     rgba(255, 255, 255, 0.55);    /* secondary */
+    --text-faint:      rgba(255, 255, 255, 0.32);    /* placeholder / decorative */
+
+    /* Legacy aliases — DO NOT introduce new uses. Will be removed in P3. */
+    --text-2: rgba(255, 255, 255, 0.55);
+    --text-3: rgba(255, 255, 255, 0.70);
+    --text-4: rgba(255, 255, 255, 0.58);
+    --text-5: rgba(255, 255, 255, 0.32);
+
+    /* Brand — portfolio purple ramp (default --accent track) */
+    --accent:          #7C7EF5;
+    --accent-2:        #818CF8;                      /* gradient mid */
+    --accent-3:        #A78BFA;                      /* gradient end */
+    --accent-rgb:      124, 126, 245;
+    --pillBg:          rgba(124, 126, 245, 0.10);
+    --selection:       rgba(99, 102, 241, 0.30);
+
+    /* Project brand ramps — applied via [data-project="..."] scope */
+    --brand-iltc:      #EC6625;
+    --brand-iltc-2:    #F08C46;
+    --brand-iltc-3:    #F5A06A;
+
+    --brand-ilds:      #7C7EF5;
+    --brand-ilds-2:    #A78BFA;
+    --brand-ilds-3:    #EC4899;
+
+    /* Semantic state */
+    --success:         #22C55E;
+    --warning:         #F59E0B;
+    --danger:          #F87171;                      /* dark-mode-friendly red */
+    --info:            #38BDF8;
+
+    /* -------------------------------------------------------------------
+     * RADIUS
+     * ------------------------------------------------------------------- */
+    --r-sm:   0.5rem;     /*  8px */
+    --r-md:   0.75rem;    /* 12px */
+    --r-lg:   1rem;       /* 16px */
+    --r-xl:   1.25rem;    /* 20px */
+    --r-2xl:  1.5rem;     /* 24px */
+    --r-full: 9999px;
+
+    /* -------------------------------------------------------------------
+     * SHADOW
+     * ------------------------------------------------------------------- */
+    --shadow-sm:    0 1px 2px rgba(0,0,0,0.20);
+    --shadow-md:    0 6px 20px rgba(0,0,0,0.25);
+    --shadow-lg:    0 18px 40px rgba(0,0,0,0.35);
+    --shadow-accent: 0 6px 20px rgba(var(--accent-rgb), 0.25);
+
+    /* -------------------------------------------------------------------
+     * MOTION — easing + durations
+     * ------------------------------------------------------------------- */
+    --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --dur-fast:    150ms;
+    --dur-base:    300ms;
+    --dur-slow:    500ms;
+    --dur-xslow:   700ms;
+  }
+
+  /* ---------------------------------------------------------------------
+   * COLOR — LIGHT
+   * --------------------------------------------------------------------- */
+  [data-theme='light'] {
+    --bg:              #F5F5F2;
+    --surface:         #FFFFFF;
+    --surface-2:       #FAFAF7;
+    --border:          rgba(17, 24, 39, 0.08);
+    --border-strong:   rgba(17, 24, 39, 0.16);
+
+    --text:            #111827;
+    --text-muted:      rgba(17, 24, 39, 0.68);
+    --text-subtle:     rgba(17, 24, 39, 0.55);
+    --text-faint:      rgba(17, 24, 39, 0.35);
+
+    --text-2: rgba(17, 24, 39, 0.68);
+    --text-3: rgba(17, 24, 39, 0.68);
+    --text-4: rgba(17, 24, 39, 0.58);
+    --text-5: rgba(17, 24, 39, 0.35);
+
+    --accent:          #4F46E5;
+    --accent-2:        #6366F1;
+    --accent-3:        #818CF8;
+    --accent-rgb:      79, 70, 229;
+    --pillBg:          rgba(79, 70, 229, 0.07);
+    --selection:       rgba(99, 102, 241, 0.15);
+
+    --brand-iltc:      #D9531A;                      /* darker for AA on light */
+    --brand-iltc-2:    #EC6625;
+    --brand-iltc-3:    #F08C46;
+
+    --brand-ilds:      #4F46E5;
+    --brand-ilds-2:    #7C7EF5;
+    --brand-ilds-3:    #DB2777;
+
+    --success:         #16A34A;                      /* AA on light bg */
+    --warning:         #B45309;
+    --danger:          #DC2626;
+    --info:            #0284C7;
+
+    --shadow-sm:       0 1px 2px rgba(17,24,39,0.08);
+    --shadow-md:       0 6px 20px rgba(17,24,39,0.10);
+    --shadow-lg:       0 18px 40px rgba(17,24,39,0.14);
+  }
+
+  /* ---------------------------------------------------------------------
+   * PROJECT SCOPES — case studies remap --accent to their brand ramp.
+   * Apply via <article data-project="iltc"> or <article data-project="ilds">.
+   * Anything inside that subtree using --accent automatically themes correctly.
+   * --------------------------------------------------------------------- */
+  [data-project='iltc'] {
+    --accent:    var(--brand-iltc);
+    --accent-2:  var(--brand-iltc-2);
+    --accent-3:  var(--brand-iltc-3);
+  }
+  [data-project='ilds'] {
+    --accent:    var(--brand-ilds);
+    --accent-2:  var(--brand-ilds-2);
+    --accent-3:  var(--brand-ilds-3);
+  }
+
+  /* ---------------------------------------------------------------------
+   * MOTION — global reduced-motion safety net.
+   * Components should still prefer Tailwind motion-safe: variants, but this
+   * is the WCAG 2.3.3 floor for any CSS animation that slips through.
+   * --------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
