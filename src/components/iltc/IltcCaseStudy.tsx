@@ -99,7 +99,7 @@ export function IltcCaseStudy() {
   const narrativeRef = React.useRef<HTMLDivElement>(null)
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] pb-24 transition-colors duration-500">
+    <div className="min-h-screen bg-[var(--bg)] pb-24 transition-colors duration-500">
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-x-clip">
         <div
@@ -451,7 +451,7 @@ export function IltcCaseStudy() {
           </Link>
         </SectionWrapper>
       </section>
-    </main>
+    </div>
   )
 }
 
