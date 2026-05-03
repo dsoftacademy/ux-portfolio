@@ -27,11 +27,11 @@ const ORANGE_GRAD =
 function StageLabel({ index, label }: { index: string; label: string }) {
   return (
     <div className="flex items-center gap-3 mb-6">
-      <span className="font-mono text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] text-[#EC6625]">
+      <span className="font-sans text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] text-[#EC6625]">
         {index}
       </span>
       <span className="h-px w-12 bg-[#EC6625]/40" />
-      <span className="font-mono text-[11px] md:text-xs uppercase tracking-[0.18em] text-[var(--text-muted)]">
+      <span className="font-sans text-[11px] md:text-xs uppercase tracking-[0.18em] text-[var(--text-muted)]">
         {label}
       </span>
     </div>
@@ -58,7 +58,7 @@ function StatCallout({
       <span className={`text-3xl font-extrabold tracking-tight ${colorClass}`}>
         {value}
       </span>
-      <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
+      <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
         {label}
       </span>
     </div>
@@ -112,7 +112,7 @@ export function IltcCaseStudy() {
         />
         <SectionWrapper>
           <FadeIn>
-            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-[#EC6625] mb-6">
+            <p className="font-sans text-[11px] font-bold uppercase tracking-[0.3em] text-[#EC6625] mb-6">
               Case Study · Flagship App Revamp · ICICI Lombard
             </p>
           </FadeIn>
@@ -144,7 +144,7 @@ export function IltcCaseStudy() {
           <FadeIn delay={0.5}>
             <dl className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 max-w-4xl text-sm">
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
+                <dt className="font-sans text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
                   Role
                 </dt>
                 <dd className="text-[var(--text)] font-medium">
@@ -152,7 +152,7 @@ export function IltcCaseStudy() {
                 </dd>
               </div>
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
+                <dt className="font-sans text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
                   Team
                 </dt>
                 <dd className="text-[var(--text)] font-medium">
@@ -160,7 +160,7 @@ export function IltcCaseStudy() {
                 </dd>
               </div>
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
+                <dt className="font-sans text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
                   Platform
                 </dt>
                 <dd className="text-[var(--text)] font-medium">
@@ -168,7 +168,7 @@ export function IltcCaseStudy() {
                 </dd>
               </div>
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
+                <dt className="font-sans text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">
                   Outcome window
                 </dt>
                 <dd className="text-[var(--text)] font-medium">
@@ -179,7 +179,7 @@ export function IltcCaseStudy() {
           </FadeIn>
 
           <FadeIn delay={0.65}>
-            <div className="mt-16 flex items-center gap-2 text-[var(--text-muted)] font-mono text-[10px] uppercase tracking-[0.25em]">
+            <div className="mt-16 flex items-center gap-2 text-[var(--text-muted)] font-sans text-[10px] uppercase tracking-[0.25em]">
               <span>Scroll to read</span>
               <ScrollCueArrow />
             </div>
@@ -378,7 +378,7 @@ export function IltcCaseStudy() {
       <section className="py-20 md:py-32 border-t border-[var(--border)] bg-gradient-to-b from-transparent via-[var(--surface)]/30 to-transparent">
         <SectionWrapper>
           <FadeIn>
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#EC6625] mb-4">
+            <p className="font-sans text-[10px] font-bold uppercase tracking-[0.3em] text-[#EC6625] mb-4">
               Transformation in numbers · within 3 months
             </p>
           </FadeIn>
@@ -400,7 +400,7 @@ export function IltcCaseStudy() {
         <SectionWrapper>
           <div className="max-w-3xl">
             <FadeIn>
-              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#EC6625] mb-4">
+              <p className="font-sans text-[10px] font-bold uppercase tracking-[0.3em] text-[#EC6625] mb-4">
                 Reflection
               </p>
             </FadeIn>
@@ -445,7 +445,7 @@ export function IltcCaseStudy() {
         <SectionWrapper>
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] hover:text-[#EC6625] transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+            className="inline-flex items-center gap-2 font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] hover:text-[#EC6625] transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           >
             <span aria-hidden>←</span> All projects
           </Link>
@@ -498,7 +498,7 @@ function PhoneFloatWrap({ children }: { children: React.ReactNode }) {
 function Meta({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)] mb-2">
+      <p className="font-sans text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)] mb-2">
         {label}
       </p>
       <p className="text-[15px] leading-relaxed text-[var(--text)]">{value}</p>
@@ -744,8 +744,7 @@ function PrincipleGrid() {
           <div className="relative h-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]/55 p-7">
             <span
               aria-hidden
-              className="pointer-events-none select-none absolute -bottom-6 -right-1 text-[8rem] font-extrabold tracking-tighter leading-none"
-              style={{ color: "rgba(240,240,244,0.018)" }}
+              className="pointer-events-none select-none absolute -bottom-6 -right-1 text-[8rem] font-extrabold tracking-tighter leading-none text-[var(--text)] opacity-[0.06]"
             >
               {p.n}
             </span>
@@ -785,7 +784,7 @@ function DesignSystemCallout() {
             <span className="h-3 w-3 rounded-full bg-white/30" aria-hidden />
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/70 mb-2">
+            <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-white/70 mb-2">
               Built on
             </p>
             <p className="text-2xl font-extrabold text-white tracking-tight leading-tight">
@@ -811,7 +810,7 @@ function DesignSystemCallout() {
               { label: "Delivery", tags: ["TAT 24 hrs", "Figma → Code"] },
             ].map((row) => (
               <div key={row.label} className="flex items-center gap-3 flex-wrap">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--text)]/45 w-24 flex-shrink-0">
+                <span className="font-sans text-[10px] uppercase tracking-widest text-[var(--text)]/45 w-24 flex-shrink-0">
                   {row.label}
                 </span>
                 {row.tags.map((t) => (
@@ -913,9 +912,8 @@ function ExecutionTracks() {
 
 // ────────────────────────────────────────────────────────────────────────────
 // SurfaceShowcase — S08 The Product (node 77:17075)
-// Whole-card overflow-hidden per Figma dev mode:
-//   bg rgba(23,22,28,0.55) · border rgba(255,255,255,0.07) · rounded-2xl
-//   p-5 · flex-col · fixed vw-based height · image fills flex-1 and bleeds
+// Cards use theme tokens (--surface, --border, --text) for light/dark cohesion.
+// Image rail: 10px inset inside flex-1; object-cover within inset.
 // ────────────────────────────────────────────────────────────────────────────
 
 /** Section heading for each of the 3 product categories. */
@@ -957,36 +955,38 @@ function S08Card({
 }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.07)] flex flex-col p-5 ${className}`}
-      style={{ background: "rgba(23,22,28,0.55)", ...style }}
+      className={`relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] flex flex-col p-5 ${className}`}
+      style={style}
     >
       {/* ── Number + Title ── */}
       <div className="flex items-center gap-3 shrink-0">
-        <span className="font-mono text-[10px] font-semibold text-[#EC6625] tracking-[2px]">
+        <span className="font-sans text-[10px] font-semibold text-[#EC6625] tracking-[2px]">
           {num}
         </span>
-        <h4 className="font-bold text-[15px] text-[#F0F0F4] leading-tight">{title}</h4>
+        <h4 className="font-bold text-[15px] text-[var(--text)] leading-tight">{title}</h4>
       </div>
       {/* ── Spacer (Figma: 4×8px) ── */}
       <div className="h-2 w-1 shrink-0" aria-hidden />
       {/* ── Description (Figma: h-60px, text-13px, leading-1.55) ── */}
       <p
-        className="text-[13px] text-[rgba(240,240,244,0.5)] leading-[1.55] shrink-0 overflow-hidden"
+        className="text-[13px] text-[var(--text-muted)] leading-[1.55] shrink-0 overflow-hidden"
         style={{ height: "60px" }}
       >
         {description}
       </p>
-      {/* ── Image — fills remaining card height; card clips bleed ── */}
+      {/* ── Image — 10px inset on all sides within remaining height ── */}
       <div className="flex-1 relative min-h-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={src}
-          alt={alt}
-          className="absolute inset-0 w-full h-full object-cover block"
-          style={{ objectPosition: imgPos }}
-          loading="lazy"
-          draggable={false}
-        />
+        <div className="absolute inset-[10px] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt={alt}
+            className="absolute inset-0 h-full w-full object-cover block"
+            style={{ objectPosition: imgPos }}
+            loading="lazy"
+            draggable={false}
+          />
+        </div>
       </div>
     </div>
   )
@@ -1031,7 +1031,7 @@ function SurfaceShowcase() {
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="space-y-6 min-w-0 w-full lg:pt-1"
           >
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#EC6625]">
+            <p className="font-sans text-[10px] font-bold uppercase tracking-[0.3em] text-[#EC6625]">
               Designed for every user state
             </p>
             <p className="text-lg leading-relaxed text-[var(--text)]/70">
@@ -1159,25 +1159,22 @@ function SurfaceShowcase() {
       <FadeIn delay={0.04}>
         <S08Heading>Cohort based Customisation</S08Heading>
         {/* Outer card — same fill + border, no fixed height (phone columns dictate height) */}
-        <div
-          className="relative overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.07)] flex flex-col p-5"
-          style={{ background: "rgba(23,22,28,0.55)" }}
-        >
+        <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] flex flex-col p-5">
           {/* Card header */}
           <div className="flex items-center gap-3 shrink-0">
-            <span className="font-mono text-[10px] font-semibold text-[#EC6625] tracking-[2px]">07</span>
-            <h4 className="font-bold text-[15px] text-[#F0F0F4] leading-tight">
+            <span className="font-sans text-[10px] font-semibold text-[#EC6625] tracking-[2px]">07</span>
+            <h4 className="font-bold text-[15px] text-[var(--text)] leading-tight">
               Dynamic Homepage with personalised experience
             </h4>
           </div>
           <div className="h-2 w-1 shrink-0" aria-hidden />
-          <p className="text-[13px] text-[rgba(240,240,244,0.5)] leading-[1.55] shrink-0">
+          <p className="text-[13px] text-[var(--text-muted)] leading-[1.55] shrink-0">
             Dynamically personalising the homepage to align with the target user&apos;s preferences.
             Each section adapts in real time to surface content relevant to that persona.
           </p>
 
           {/* 3-col phone grid — break out of p-5; stack on small viewports */}
-          <div className="grid grid-cols-1 min-w-0 md:grid-cols-3 -mx-5 mt-5 border-t border-[rgba(255,255,255,0.07)]">
+          <div className="grid grid-cols-1 min-w-0 md:grid-cols-3 -mx-5 mt-5 border-t border-[var(--border)]">
             {[
               { label: "New User",            src: "/images/s08-cohort-new.png",     alt: "New user home — profile prompt, spotlight, buy insurance grid, how insurance works, chat expert, wellness face scan, testimonials, blogs, bottom nav" },
               { label: "Active Policyholder", src: "/images/s08-cohort-active.png",  alt: "Active policyholder home — policy card, health vitals, wellness" },
@@ -1187,16 +1184,16 @@ function SurfaceShowcase() {
                 key={c.label}
                 className={
                   i > 0
-                    ? "min-w-0 border-t border-[rgba(255,255,255,0.07)] md:border-t-0 md:border-l"
+                    ? "min-w-0 border-t border-[var(--border)] md:border-t-0 md:border-l"
                     : "min-w-0"
                 }
               >
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[rgba(240,240,244,0.4)] text-center py-2.5 border-b border-[rgba(255,255,255,0.07)]">
+                <p className="font-sans text-[9px] uppercase tracking-[0.18em] text-[var(--text-muted)] text-center py-2.5 border-b border-[var(--border)]">
                   {c.label}
                 </p>
                 {/* Phone screenshot: 10px inset; object-contain avoids cropping mixed aspect ratios */}
                 <div
-                  className="relative overflow-hidden bg-black/25"
+                  className="relative overflow-hidden bg-[var(--bg)]/35"
                   style={{ height: "clamp(600px, 99.21vw, 1500px)" }}
                 >
                   <div className="absolute inset-[10px]">

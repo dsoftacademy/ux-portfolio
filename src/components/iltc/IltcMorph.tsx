@@ -135,7 +135,7 @@ export function IltcMorph({
               fontSize="9"
               fill={TEXT}
               fillOpacity="0.55"
-              fontFamily="Geist Mono, monospace"
+              fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
               letterSpacing="2"
             >
               LEGACY · CLUTTERED
@@ -207,7 +207,7 @@ export function IltcMorph({
             fontSize="9"
             fill={TEXT}
             fillOpacity="0.5"
-            fontFamily="Geist Mono, monospace"
+            fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
             letterSpacing="2"
           >
             LEGACY · CLUTTERED
@@ -250,7 +250,7 @@ export function IltcMorph({
                 fontSize="8"
                 fill={TEXT}
                 fillOpacity="0.7"
-                fontFamily="Geist Mono, monospace"
+                fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
                 letterSpacing="1.5"
               >
                 {d.label}
@@ -329,7 +329,7 @@ export function IltcMorph({
                 fontSize="9"
                 fill={TEXT}
                 fillOpacity="0.7"
-                fontFamily="Geist Mono, monospace"
+                fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
                 letterSpacing="1"
               >
                 {c.label}
@@ -381,7 +381,7 @@ export function IltcMorph({
             fontSize="8"
             fill={TEXT}
             fillOpacity="0.6"
-            fontFamily="Geist Mono, monospace"
+            fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
             letterSpacing="2"
           >
             OPTIMISE
@@ -393,7 +393,7 @@ export function IltcMorph({
             fontSize="8"
             fill={TEXT}
             fillOpacity="0.6"
-            fontFamily="Geist Mono, monospace"
+            fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
             letterSpacing="2"
           >
             BOOST
@@ -405,7 +405,7 @@ export function IltcMorph({
             fontSize="8"
             fill={TEXT}
             fillOpacity="0.6"
-            fontFamily="Geist Mono, monospace"
+            fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
             letterSpacing="2"
           >
             DELIGHT
@@ -417,7 +417,7 @@ export function IltcMorph({
             fontSize="8"
             fill={TEXT}
             fillOpacity="0.6"
-            fontFamily="Geist Mono, monospace"
+            fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
             letterSpacing="2"
           >
             CONSIST
@@ -457,7 +457,7 @@ export function IltcMorph({
                   fontSize="9"
                   fill={TEXT}
                   fillOpacity="0.6"
-                  fontFamily="Geist Mono, monospace"
+                  fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
                   letterSpacing="0.5"
                 >
                   {i}
@@ -472,7 +472,7 @@ export function IltcMorph({
             fontSize="9"
             fill={TEXT}
             fillOpacity="0.5"
-            fontFamily="Geist Mono, monospace"
+            fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
             letterSpacing="2"
           >
             CLARITY · CONTROL · CARE
@@ -498,7 +498,7 @@ export function IltcMorph({
                 fontSize="8"
                 fill={TEXT}
                 fillOpacity="0.6"
-                fontFamily="Geist Mono, monospace"
+                fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
                 letterSpacing="1"
               >
                 {track.toUpperCase()}
@@ -529,7 +529,7 @@ export function IltcMorph({
             fontSize="9"
             fill={TEXT}
             fillOpacity="0.5"
-            fontFamily="Geist Mono, monospace"
+            fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
             letterSpacing="2"
           >
             AGILE · CROSS-FUNCTIONAL
@@ -598,7 +598,7 @@ export function IltcMorph({
             fontSize="9"
             fill={TEXT}
             fillOpacity="0.55"
-            fontFamily="Geist Mono, monospace"
+            fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
             letterSpacing="2"
           >
             CLEAN · GUIDED · CALM
@@ -649,7 +649,7 @@ export function IltcMorph({
                   fontSize="8"
                   fontWeight="bold"
                   fill={s.color}
-                  fontFamily="Geist Mono, monospace"
+                  fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
                   letterSpacing="0.5"
                 >
                   {s.label}
@@ -673,7 +673,7 @@ export function IltcMorph({
             fontSize="11"
             fontWeight="bold"
             fill="white"
-            fontFamily="Geist Mono, monospace"
+            fontFamily="Inter, ui-sans-serif, system-ui, sans-serif"
             letterSpacing="1.5"
           >
             ILTC

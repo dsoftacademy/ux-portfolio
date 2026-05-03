@@ -127,7 +127,7 @@ export function InsightCounters() {
         <div key={m.tag} className="bg-[var(--bg)] p-6 md:p-8">
           <div className="flex items-center gap-2 mb-3">
             {m.icon}
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">
+            <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)]">
               {m.tag}
             </span>
           </div>
@@ -238,7 +238,7 @@ function ImpactMetricCard({
     <>
       <div className="flex items-start justify-between gap-4 mb-2">
         <ArrowIcon direction={m.direction} />
-        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
+        <span className="font-sans text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
           {m.direction === "down" ? "Decrease" : "Increase"}
         </span>
       </div>
@@ -341,7 +341,7 @@ export function UserVoices() {
             </span>
             <div>
               <p className="text-sm font-semibold text-[var(--text)]">{q.name}</p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--text)]/55">
+              <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-[var(--text)]/55">
                 {q.persona}
               </p>
             </div>
