@@ -939,6 +939,34 @@ function FeatureCardHeader({ num, title, description }: { num: string; title: st
   )
 }
 
+/**
+ * Fixed-height image crop box.
+ * Container stays at the given height; the image inside scales to fill (object-cover)
+ * and bleeds/overflows before being clipped by overflow-hidden.
+ */
+function FeatureImageBox({
+  src,
+  alt,
+  className = "",
+}: {
+  src: string
+  alt: string
+  className?: string
+}) {
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
+        className="absolute inset-0 w-full h-full object-cover object-center block"
+        loading="lazy"
+        draggable={false}
+      />
+    </div>
+  )
+}
+
 /** Section heading for each of the 3 product categories. */
 function S08Heading({ children }: { children: React.ReactNode }) {
   return (
@@ -1028,15 +1056,18 @@ function SurfaceShowcase() {
         <S08Heading>Simplified Core Insurance services</S08Heading>
         <div className="space-y-3">
 
-          {/* 01 — Policy at a glance (full width) */}
+          {/* 01 — Policy at a glance (full width, short/wide image) */}
           <FeatureCard>
             <FeatureCardHeader
               num="01"
               title="Policy at a glance"
               description="Coverage, dependants, and renewal status surfaced before claims — the single most-asked question, answered on launch."
             />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/s08-policy-glance.png" alt="Policy at a glance — Two Wheeler Insurance card with Active badge, policyholder and vehicle details" className="w-full h-auto block" loading="lazy" />
+            <FeatureImageBox
+              src="/images/s08-policy-glance.png"
+              alt="Policy at a glance — Two Wheeler Insurance card with Active badge, policyholder and vehicle details"
+              className="h-[180px] md:h-[220px]"
+            />
           </FeatureCard>
 
           {/* 02 + 03 — two column */}
@@ -1047,8 +1078,11 @@ function SurfaceShowcase() {
                 title="Hassle-Free Insurance Management"
                 description="Quick and easy access to core services like claims, network hospitals, and policy details"
               />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/s08-quick-actions.png" alt="Quick actions — Register a claim, Edit policy details, Find local services" className="w-full h-auto block" loading="lazy" />
+              <FeatureImageBox
+                src="/images/s08-quick-actions.png"
+                alt="Quick actions — Register a claim, Edit policy details, Find local services"
+                className="h-[240px] md:h-[260px]"
+              />
             </FeatureCard>
             <FeatureCard>
               <FeatureCardHeader
@@ -1056,8 +1090,11 @@ function SurfaceShowcase() {
                 title="Seamless Onboarding"
                 description="Guided onboarding with coach-marks to help users navigate seamlessly"
               />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/s08-onboarding.png" alt="Seamless onboarding — coach-mark guided setup flow" className="w-full h-auto block" loading="lazy" />
+              <FeatureImageBox
+                src="/images/s08-onboarding.png"
+                alt="Seamless onboarding — coach-mark guided setup flow"
+                className="h-[240px] md:h-[260px]"
+              />
             </FeatureCard>
           </div>
         </div>
@@ -1078,8 +1115,11 @@ function SurfaceShowcase() {
                 title="Wellness in context"
                 description="Teleconsult and OPD slots surface based on policy benefits — not buried under a tab."
               />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/s08-wellness.png" alt="Wellness — teleconsultation with video and audio call cards, doctor profile" className="w-full h-auto block" loading="lazy" />
+              <FeatureImageBox
+                src="/images/s08-wellness.png"
+                alt="Wellness — teleconsultation with video and audio call cards, doctor profile"
+                className="h-[240px] md:h-[260px]"
+              />
             </FeatureCard>
             <FeatureCard>
               <FeatureCardHeader
@@ -1087,8 +1127,11 @@ function SurfaceShowcase() {
                 title="Expert Insights &amp; Health monitoring"
                 description="Real-time insights into your health vitals and tips from our experts"
               />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/s08-health-vitals.png" alt="Health monitoring — face scan showing HR, SpO2, RR and HRV readings" className="w-full h-auto block" loading="lazy" />
+              <FeatureImageBox
+                src="/images/s08-health-vitals.png"
+                alt="Health monitoring — face scan showing HR, SpO2, RR and HRV readings"
+                className="h-[240px] md:h-[260px]"
+              />
             </FeatureCard>
           </div>
 
@@ -1099,8 +1142,11 @@ function SurfaceShowcase() {
               title="Unlock smarter, safer driving habits"
               description="Track and improve your driving with real-time telematics data and real time insights."
             />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/s08-telematics.png" alt="Telematics — Driving Score card, Acceleration and Turning metrics with car" className="w-full h-auto block" loading="lazy" />
+            <FeatureImageBox
+              src="/images/s08-telematics.png"
+              alt="Telematics — Driving Score card, Acceleration and Turning metrics with car"
+              className="h-[260px] md:h-[320px]"
+            />
           </FeatureCard>
         </div>
       </FadeIn>
@@ -1119,16 +1165,18 @@ function SurfaceShowcase() {
           {/* 3-col phone grid with cohort labels */}
           <div className="grid grid-cols-3 border-t border-[var(--border)]">
             {[
-              { label: "← New User",            src: "/images/s08-cohort-new.png",     alt: "New user home — add policy widget, business banners, quick buy" },
-              { label: "← Active Policyholder", src: "/images/s08-cohort-active.png",  alt: "Active policyholder home — policy card, health vitals, wellness" },
-              { label: "← Win-back User",        src: "/images/s08-cohort-winback.png", alt: "Win-back user home — renewal nudge and one-tap buy" },
+              { label: "New User",            src: "/images/s08-cohort-new.png",     alt: "New user home — add policy widget, business banners, quick buy" },
+              { label: "Active Policyholder", src: "/images/s08-cohort-active.png",  alt: "Active policyholder home — policy card, health vitals, wellness" },
+              { label: "Win-back User",        src: "/images/s08-cohort-winback.png", alt: "Win-back user home — renewal nudge and one-tap buy" },
             ].map((c, i) => (
               <div key={c.label} className={i > 0 ? "border-l border-[var(--border)]" : ""}>
                 <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--text)]/45 text-center py-2.5 border-b border-[var(--border)]">
                   {c.label}
                 </p>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={c.src} alt={c.alt} className="w-full h-auto block" loading="lazy" />
+                <div className="relative overflow-hidden h-[320px] md:h-[400px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={c.src} alt={c.alt} className="absolute inset-0 w-full h-full object-cover object-top block" loading="lazy" draggable={false} />
+                </div>
               </div>
             ))}
           </div>
