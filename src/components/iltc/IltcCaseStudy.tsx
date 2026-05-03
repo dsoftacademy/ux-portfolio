@@ -912,71 +912,60 @@ function ExecutionTracks() {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// SurfaceShowcase — S08 The Product: floating phone hero + 3 code-built
-// feature sections (node 42:162269 → 42:161939, 42:161940, 42:164533).
-// Assets downloaded from Figma node 77:12165.
+// SurfaceShowcase — S08 The Product: floating phone hero, then Figma exports
+// (node 42:150176 — frames 42:161939, 42:161940, 42:164533).
 // ────────────────────────────────────────────────────────────────────────────
 
-/** Shared card shell used by every sub-feature block. */
-function FeatureCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <div className={`rounded-2xl border border-[var(--border)] bg-[var(--surface)]/50 overflow-hidden ${className}`}>
-      {children}
-    </div>
-  )
-}
-
-/** Number badge + heading + description inside a card. */
-function FeatureCardHeader({ num, title, description }: { num: string; title: string; description: string }) {
-  return (
-    <div className="p-5 md:p-6">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="font-mono text-[11px] font-bold text-[#EC6625]">{num}</span>
-        <h4 className="text-[15px] font-semibold text-[var(--text)]">{title}</h4>
-      </div>
-      <p className="text-sm leading-relaxed text-[var(--text)]/60">{description}</p>
-    </div>
-  )
-}
-
-/** Section-level heading (h3 equivalent — scoped inside article S08). */
-function ProductSectionHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h3 className="text-[1.55rem] md:text-[1.9rem] lg:text-[2.2rem] font-extrabold tracking-tight text-[var(--text)] mb-5 leading-tight">
-      {children}
-    </h3>
-  )
-}
+const PRODUCT_S08_BLOCKS = [
+  {
+    src: "/images/iltc-product-s08-core.png",
+    width: 744,
+    height: 794,
+    alt: "Simplified Core Insurance services: Policy at a glance, Hassle-Free Insurance Management, and Seamless Onboarding, matching the shipped IL TakeCare product UI.",
+  },
+  {
+    src: "/images/iltc-product-s08-lifestyle.png",
+    width: 744,
+    height: 794,
+    alt: "Beyond Insurance: A Holistic Lifestyle Solutions — wellness in context, expert insights and health monitoring, and smarter driving with telematics.",
+  },
+  {
+    src: "/images/iltc-product-s08-cohort.png",
+    width: 553,
+    height: 1024,
+    alt: "Cohort based Customisation: dynamic homepage with a personalised experience for New User, Active Policyholder, and Win-back User states.",
+    /** Wider Figma export (node 42:178930); centered in 744px strip like core/lifestyle. */
+    centerInStrip: true,
+  },
+] as const
 
 function SurfaceShowcase() {
   return (
     <div className="space-y-10 md:space-y-16">
       {/* Floating phone + cohort narrative (above Figma product strips) */}
       <FadeIn>
-        <div className="flex flex-col lg:flex-row lg:flex-wrap lg:items-start gap-10 lg:gap-12 w-full">
+        <div className="flex flex-col lg:grid lg:grid-cols-[minmax(0,240px)_minmax(0,1fr)] xl:grid-cols-[minmax(0,260px)_minmax(0,1fr)] lg:items-start gap-8 lg:gap-10 w-full max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-0 shrink-0 w-full max-w-[min(100%,440px)] sm:max-w-[min(100%,480px)] lg:max-w-[min(100%,520px)] lg:w-[min(100%,520px)] mx-auto lg:mx-0 pb-10 overflow-visible"
+            className="relative flex-shrink-0 w-full max-w-[220px] sm:max-w-[240px] mx-auto lg:mx-0 lg:w-full lg:max-w-none justify-self-start pb-10"
           >
             <PhoneFloatWrap>
-              <div className="origin-top [transform:translateZ(0)] scale-[1.06] sm:scale-110 lg:scale-[1.14] xl:scale-[1.18] motion-reduce:scale-100">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/iltc-app-mockup.png"
-                  alt="IL TakeCare app — personalised home screen with policy card, quick actions, and buy insurance shortcuts"
-                  className="w-full h-auto block drop-shadow-2xl"
-                  width={2136}
-                  height={3584}
-                  draggable={false}
-                />
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/iltc-mockup.png"
+                alt="IL TakeCare app — personalised home screen with policy card, quick actions, and buy insurance shortcuts"
+                className="w-full h-auto block drop-shadow-2xl"
+                width={610}
+                height={1024}
+                draggable={false}
+              />
             </PhoneFloatWrap>
             <div
               aria-hidden
-              className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-56 h-14 rounded-full blur-2xl pointer-events-none"
+              className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-48 h-12 rounded-full blur-2xl pointer-events-none"
               style={{ background: "rgba(236,102,37,0.35)" }}
             />
           </motion.div>
@@ -986,7 +975,7 @@ function SurfaceShowcase() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 space-y-6 w-full min-w-0 lg:flex-1 lg:min-w-[24rem] xl:min-w-[28rem] lg:pt-1"
+            className="space-y-6 min-w-0 w-full lg:pt-1"
           >
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-[#EC6625]">
               Designed for every user state
@@ -1026,111 +1015,35 @@ function SurfaceShowcase() {
         </div>
       </FadeIn>
 
-      {/* ── SECTION 1: Simplified Core Insurance services (42:161939) ── */}
-      <FadeIn delay={0.04}>
-        <ProductSectionHeading>Simplified Core Insurance services</ProductSectionHeading>
-        <div className="space-y-3">
-          {/* 01 — Policy at a glance (full width) */}
-          <FeatureCard>
-            <FeatureCardHeader
-              num="01"
-              title="Policy at a glance"
-              description="Coverage, dependants, and renewal status surfaced before claims — the single most-asked question, answered on launch."
-            />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/s08-policy-glance.png" alt="Policy at a glance — Two Wheeler Insurance card with Active badge, policyholder and vehicle details" className="w-full h-auto block" loading="lazy" />
-          </FeatureCard>
-
-          {/* 02 + 03 — two column */}
-          <div className="grid md:grid-cols-2 gap-3">
-            <FeatureCard>
-              <FeatureCardHeader
-                num="02"
-                title="Hassle-Free Insurance Management"
-                description="Quick and easy access to core services like claims, network hospitals, and policy details"
-              />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/s08-quick-actions.png" alt="Quick actions — Register a claim, Edit policy details, Find local services" className="w-full h-auto block" loading="lazy" />
-            </FeatureCard>
-            <FeatureCard>
-              <FeatureCardHeader
-                num="03"
-                title="Seamless Onboarding"
-                description="Guided onboarding with coach-marks to help users navigate seamlessly"
-              />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/s08-onboarding.png" alt="Seamless onboarding — coach-mark guided setup flow" className="w-full h-auto block" loading="lazy" />
-            </FeatureCard>
-          </div>
-        </div>
-      </FadeIn>
-
-      {/* ── SECTION 2: Beyond Insurance (42:161940) ── */}
-      <FadeIn delay={0.04}>
-        <ProductSectionHeading>Beyond Insurance: A Holistic Lifestyle Solutions</ProductSectionHeading>
-        <div className="space-y-3">
-          {/* 04 + 05 — two column */}
-          <div className="grid md:grid-cols-2 gap-3">
-            <FeatureCard>
-              <FeatureCardHeader
-                num="04"
-                title="Wellness in context"
-                description="Teleconsult and OPD slots surface based on policy benefits — not buried under a tab."
-              />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/s08-wellness.png" alt="Wellness — teleconsultation with video and audio call cards" className="w-full h-auto block" loading="lazy" />
-            </FeatureCard>
-            <FeatureCard>
-              <FeatureCardHeader
-                num="05"
-                title="Expert Insights &amp; Health monitoring"
-                description="Real-time insights into your health vitals and tips from our experts"
-              />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/s08-health-vitals.png" alt="Health monitoring — face scan showing HR, SpO2, RR and HRV readings" className="w-full h-auto block" loading="lazy" />
-            </FeatureCard>
-          </div>
-
-          {/* 06 — full width */}
-          <FeatureCard>
-            <FeatureCardHeader
-              num="06"
-              title="Unlock smarter, safer driving habits"
-              description="Track and improve your driving with real-time telematics data and real time insights."
-            />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/s08-telematics.png" alt="Telematics — Driving Score card, Acceleration and Turning metrics with car" className="w-full h-auto block" loading="lazy" />
-          </FeatureCard>
-        </div>
-      </FadeIn>
-
-      {/* ── SECTION 3: Cohort based Customisation (42:164533) ── */}
-      <FadeIn delay={0.04}>
-        <ProductSectionHeading>Cohort based Customisation</ProductSectionHeading>
-        <FeatureCard>
-          <FeatureCardHeader
-            num="07"
-            title="Dynamic Homepage with personalised experience"
-            description="Dynamically personalising the homepage to align with the target user's preferences. Each section changes in real time to provide user specific sections which are relevant to their persona."
-          />
-          {/* 3 cohort phone columns with labels */}
-          <div className="grid grid-cols-3 border-t border-[var(--border)]">
-            {[
-              { label: "← New User",            src: "/images/s08-cohort-new.png",     alt: "New user home — add policy widget, business banners, quick buy" },
-              { label: "← Active Policyholder", src: "/images/s08-cohort-active.png",  alt: "Active policyholder home — policy card, health vitals, wellness" },
-              { label: "← Win-back User",        src: "/images/s08-cohort-winback.png", alt: "Win-back user home — renewal nudge and one-tap buy" },
-            ].map((c, i) => (
-              <div key={c.label} className={i > 0 ? "border-l border-[var(--border)]" : ""}>
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--text)]/45 text-center py-2.5 border-b border-[var(--border)]">
-                  {c.label}
-                </p>
+      <div className="space-y-10 md:space-y-14 max-w-[744px] mx-auto w-full">
+        {PRODUCT_S08_BLOCKS.map((block, i) => {
+          const center = "centerInStrip" in block && block.centerInStrip
+          return (
+            <FadeIn key={block.src} delay={i * 0.06}>
+              <div
+                className={`rounded-2xl overflow-hidden border border-[var(--border)] bg-black ${
+                  center ? "flex justify-center" : ""
+                }`}
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={c.src} alt={c.alt} className="w-full h-auto block" loading="lazy" />
+                <img
+                  src={block.src}
+                  alt={block.alt}
+                  width={block.width}
+                  height={block.height}
+                  className={
+                    center
+                      ? "h-auto w-auto max-w-full block"
+                      : "w-full h-auto block"
+                  }
+                  loading={i === 0 ? "eager" : "lazy"}
+                  sizes="(min-width: 768px) 744px, 100vw"
+                />
               </div>
-            ))}
-          </div>
-        </FeatureCard>
-      </FadeIn>
+            </FadeIn>
+          )
+        })}
+      </div>
     </div>
   )
 }
