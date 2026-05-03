@@ -915,41 +915,99 @@ function ExecutionTracks() {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// SurfaceShowcase — animated phone mockup illustrating key surfaces
+// SurfaceShowcase — real app screenshots with user-state labels + feature list
 // ────────────────────────────────────────────────────────────────────────────
 
+const APP_SCREENS = [
+  {
+    src: "/images/iltc-screen-active.png",
+    state: "Active Policyholder",
+    detail: "Policy card at a glance, quick-action rail, wellness nudges — everything a returning user needs, one scroll away.",
+  },
+  {
+    src: "/images/iltc-screen-new.png",
+    state: "New User",
+    detail: "Onboarding-first home: add-policy widget, spotlight offers, and guided insurance discovery before anything else.",
+  },
+  {
+    src: "/images/iltc-screen-winback.png",
+    state: "Win-back User",
+    detail: "Renewal-led layout with missed-benefit highlights and a one-tap \"Renew now\" bar — re-earning the relationship.",
+  },
+]
+
+const SURFACE_FEATURES = [
+  {
+    title: "Policy at a glance",
+    detail:
+      "Coverage, dependants, and renewal status surfaced before claims — the single most-asked question, answered on launch.",
+  },
+  {
+    title: "Two-tap claims",
+    detail:
+      "Pre-fill from policy + camera + location. A 7-screen flow collapsed to a 3-screen card stack.",
+  },
+  {
+    title: "Wellness in context",
+    detail:
+      "Teleconsult and OPD slots surface based on policy benefits — not buried under a tab.",
+  },
+  {
+    title: "Lifestyle, opt-in",
+    detail:
+      "Flight tracking, challan pay, and roadside assistance live behind a personalised quick-action rail.",
+  },
+]
+
 function SurfaceShowcase() {
-  const surfaces = [
-    {
-      title: "Policy at a glance",
-      detail:
-        "Coverage, dependants, and renewal status surfaced before claims — the single most-asked question, answered on launch.",
-    },
-    {
-      title: "Two-tap claims",
-      detail:
-        "Pre-fill from policy + camera + location. A 7-screen flow collapsed to a 3-screen card stack.",
-    },
-    {
-      title: "Wellness in context",
-      detail:
-        "Teleconsult and OPD slots surface based on policy benefits — not buried under a tab.",
-    },
-    {
-      title: "Lifestyle, opt-in",
-      detail:
-        "Flight tracking, challan pay, and roadside assistance live behind a personalised quick-action rail.",
-    },
-  ]
-
   return (
-    <div className="grid lg:grid-cols-[420px_1fr] gap-8 items-start">
-      <FadeIn>
-        <PhoneMock />
-      </FadeIn>
+    <div className="space-y-12">
+      {/* ── Real phone screenshots ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-8">
+        {APP_SCREENS.map((s, i) => (
+          <FadeIn key={s.state} delay={i * 0.1}>
+            <div className="flex flex-col gap-3">
+              {/* Phone frame */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="relative w-full overflow-hidden rounded-[28px] border border-[var(--border)] shadow-2xl"
+                style={{ aspectRatio: "9/19" }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={s.src}
+                  alt={`IL TakeCare — ${s.state} home screen`}
+                  className="absolute inset-0 w-full h-full object-cover object-top"
+                />
+                {/* Subtle bottom fade */}
+                <div
+                  aria-hidden
+                  className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(to top, rgba(15,14,19,0.55) 0%, transparent 100%)",
+                  }}
+                />
+              </motion.div>
+              {/* State label */}
+              <div className="text-center">
+                <span className="inline-block font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#EC6625]">
+                  {s.state}
+                </span>
+                <p className="mt-1 text-xs leading-relaxed text-[var(--text)]/55 px-2">
+                  {s.detail}
+                </p>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
 
-      <div className="space-y-3">
-        {surfaces.map((s, i) => (
+      {/* ── Feature call-outs ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {SURFACE_FEATURES.map((s, i) => (
           <FadeIn key={s.title} delay={0.1 + i * 0.07}>
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]/55 p-5 md:p-6">
               <div className="flex items-baseline gap-3 mb-1.5">
@@ -965,125 +1023,6 @@ function SurfaceShowcase() {
               </p>
             </div>
           </FadeIn>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function PhoneMock() {
-  return (
-    <div className="relative mx-auto w-full max-w-[360px] aspect-[9/19] rounded-[42px] border border-[var(--border)] bg-[var(--surface)]/70 p-4 shadow-2xl">
-      {/* Notch */}
-      <div className="mx-auto h-5 w-24 rounded-full bg-[var(--bg)]" />
-
-      {/* Status row */}
-      <div className="mt-3 flex justify-between items-center text-[10px] font-mono text-[var(--text)]/55">
-        <span>9:41</span>
-        <span>● ● ●</span>
-      </div>
-
-      {/* Greeting */}
-      <div className="mt-4 flex items-center justify-between">
-        <div>
-          <p className="text-[10px] font-mono text-[var(--text)]/55">Hello,</p>
-          <p className="text-base font-bold text-[var(--text)]">Aryaan</p>
-        </div>
-        <span className="grid h-9 w-9 place-items-center rounded-full bg-[#EC6625] text-white text-xs font-bold">
-          A
-        </span>
-      </div>
-
-      {/* Hero card */}
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="mt-4 rounded-2xl p-4"
-        style={{
-          background:
-            "linear-gradient(135deg,#EC6625 0%,#F5A06A 100%)",
-        }}
-      >
-        <p className="text-[10px] font-mono uppercase tracking-widest text-white/85">
-          My policies
-        </p>
-        <p className="mt-1 text-lg font-bold text-white">
-          Health Plus &nbsp;·&nbsp; ₹5L sum insured
-        </p>
-        <p className="mt-1 text-[11px] text-white/85">Renews 12 Mar · 2 dependants covered</p>
-      </motion.div>
-
-      {/* Quick actions */}
-      <div className="mt-4 grid grid-cols-4 gap-2">
-        {[
-          { label: "Claim", c: "#EC6625" },
-          { label: "Wellness", c: "#01A252" },
-          { label: "OPD", c: "#7C7EF5" },
-          { label: "Pay", c: "#F08C46" },
-        ].map((q, i) => (
-          <motion.div
-            key={q.label}
-            initial={{ opacity: 0, y: 6 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.4, delay: 0.2 + i * 0.05 }}
-            className="aspect-square rounded-xl bg-[var(--bg)] border border-[var(--border)] flex flex-col items-center justify-center gap-1"
-          >
-            <span
-              className="h-3 w-3 rounded-full"
-              style={{ backgroundColor: q.c }}
-              aria-hidden
-            />
-            <span className="text-[9px] text-[var(--text)]/70">{q.label}</span>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Wellness card */}
-      <motion.div
-        initial={{ opacity: 0, x: -8 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="mt-4 rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-4"
-      >
-        <p className="text-[10px] font-mono uppercase tracking-widest text-[#EC6625]">
-          Today
-        </p>
-        <p className="mt-1 text-sm font-semibold text-[var(--text)]">
-          Teleconsult — covered free
-        </p>
-        <div className="mt-3 flex items-center gap-3">
-          <div className="h-1.5 flex-1 rounded-full bg-[var(--text)]/[0.06]">
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: "62%" }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 1.2, delay: 0.6 }}
-              className="h-full rounded-full"
-              style={{
-                background:
-                  "linear-gradient(90deg,#EC6625 0%,#F5A06A 100%)",
-              }}
-            />
-          </div>
-          <span className="font-mono text-[10px] text-[var(--text)]/55">62%</span>
-        </div>
-      </motion.div>
-
-      {/* Bottom nav */}
-      <div className="absolute bottom-4 left-4 right-4 rounded-full border border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur p-2 flex justify-around">
-        {[0, 1, 2, 3].map((i) => (
-          <span
-            key={i}
-            className="h-2 w-2 rounded-full"
-            style={{
-              backgroundColor: i === 0 ? "#EC6625" : "rgba(255,255,255,0.25)",
-            }}
-            aria-hidden
-          />
         ))}
       </div>
     </div>
