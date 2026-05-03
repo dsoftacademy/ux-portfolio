@@ -912,60 +912,11 @@ function ExecutionTracks() {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// SurfaceShowcase — S08 The Product (node 42:162269)
-// Phone hero + 3 code-built feature sections using individual Figma assets
-// (node 77:12165). No screenshot-as-image; every section is built in code.
+// SurfaceShowcase — S08 The Product (node 77:17075)
+// Whole-card overflow-hidden per Figma dev mode:
+//   bg rgba(23,22,28,0.55) · border rgba(255,255,255,0.07) · rounded-2xl
+//   p-5 · flex-col · fixed vw-based height · image fills flex-1 and bleeds
 // ────────────────────────────────────────────────────────────────────────────
-
-/** Dark rounded card that wraps each sub-feature block. */
-function FeatureCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <div className={`rounded-2xl border border-[var(--border)] bg-[var(--surface)]/50 overflow-hidden ${className}`}>
-      {children}
-    </div>
-  )
-}
-
-/** Numbered badge + bold title + description — top of every card. */
-function FeatureCardHeader({ num, title, description }: { num: string; title: string; description: string }) {
-  return (
-    <div className="p-5 md:p-6">
-      <div className="flex items-center gap-3 mb-2">
-        <span className="font-mono text-[11px] font-bold text-[#EC6625]">{num}</span>
-        <h4 className="text-[15px] font-semibold text-[var(--text)]">{title}</h4>
-      </div>
-      <p className="text-sm leading-relaxed text-[var(--text)]/60 pl-[calc(2ch+12px)]">{description}</p>
-    </div>
-  )
-}
-
-/**
- * Fixed-height image crop box.
- * Container stays at the given height; the image inside scales to fill (object-cover)
- * and bleeds/overflows before being clipped by overflow-hidden.
- */
-function FeatureImageBox({
-  src,
-  alt,
-  className = "",
-}: {
-  src: string
-  alt: string
-  className?: string
-}) {
-  return (
-    <div className={`relative overflow-hidden ${className}`}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={alt}
-        className="absolute inset-0 w-full h-full object-cover object-center block"
-        loading="lazy"
-        draggable={false}
-      />
-    </div>
-  )
-}
 
 /** Section heading for each of the 3 product categories. */
 function S08Heading({ children }: { children: React.ReactNode }) {
@@ -973,6 +924,71 @@ function S08Heading({ children }: { children: React.ReactNode }) {
     <h3 className="text-[1.55rem] md:text-[1.9rem] lg:text-[2.15rem] font-extrabold tracking-tight text-[var(--text)] mb-5 leading-tight">
       {children}
     </h3>
+  )
+}
+
+/**
+ * Feature card — exact Figma spec (node 77:17207 et al.)
+ * The WHOLE card is the clip container (overflow-hidden).
+ * Text header sits at top (shrink-0); image fills the remaining flex-1 space.
+ * Images bleed/scale within the card; card clips the overflow.
+ *
+ * Standard card height: 352px @ 1512px viewport → 23.28vw (clamped).
+ * Pass a custom `style` to override height per use-case.
+ */
+function S08Card({
+  num,
+  title,
+  description,
+  src,
+  alt,
+  imgPos = "center center",
+  style,
+  className = "",
+}: {
+  num: string
+  title: string
+  description: string
+  src: string
+  alt: string
+  imgPos?: string
+  style?: React.CSSProperties
+  className?: string
+}) {
+  return (
+    <div
+      className={`relative overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.07)] flex flex-col p-5 ${className}`}
+      style={{ background: "rgba(23,22,28,0.55)", ...style }}
+    >
+      {/* ── Number + Title ── */}
+      <div className="flex items-center gap-3 shrink-0">
+        <span className="font-mono text-[10px] font-semibold text-[#EC6625] tracking-[2px]">
+          {num}
+        </span>
+        <h4 className="font-bold text-[15px] text-[#F0F0F4] leading-tight">{title}</h4>
+      </div>
+      {/* ── Spacer (Figma: 4×8px) ── */}
+      <div className="h-2 w-1 shrink-0" aria-hidden />
+      {/* ── Description (Figma: h-60px, text-13px, leading-1.55) ── */}
+      <p
+        className="text-[13px] text-[rgba(240,240,244,0.5)] leading-[1.55] shrink-0 overflow-hidden"
+        style={{ height: "60px" }}
+      >
+        {description}
+      </p>
+      {/* ── Image — fills remaining card height; card clips bleed ── */}
+      <div className="flex-1 relative min-h-0">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt}
+          className="absolute inset-0 w-full h-full object-cover block"
+          style={{ objectPosition: imgPos }}
+          loading="lazy"
+          draggable={false}
+        />
+      </div>
+    </div>
   )
 }
 
@@ -1050,58 +1066,51 @@ function SurfaceShowcase() {
       </FadeIn>
 
       {/* ══════════════════════════════════════════════════════════════════════
-          SECTION 1 — Simplified Core Insurance services  (node 42:161939)
+          SECTION 1 — Simplified Core Insurance services  (node 77:17076)
+          Card height: 352px @ 1512px → clamp(260px, 23.28vw, 352px)
       ══════════════════════════════════════════════════════════════════════ */}
       <FadeIn delay={0.04}>
         <S08Heading>Simplified Core Insurance services</S08Heading>
         <div className="space-y-3">
 
-          {/* 01 — Policy at a glance (full width, short/wide image) */}
-          <FeatureCard>
-            <FeatureCardHeader
-              num="01"
-              title="Policy at a glance"
-              description="Coverage, dependants, and renewal status surfaced before claims — the single most-asked question, answered on launch."
-            />
-            <FeatureImageBox
-              src="/images/s08-policy-glance.png"
-              alt="Policy at a glance — Two Wheeler Insurance card with Active badge, policyholder and vehicle details"
-              className="h-[180px] md:h-[220px]"
-            />
-          </FeatureCard>
+          {/* 01 — Policy at a glance (full width) */}
+          <S08Card
+            num="01"
+            title="Policy at a glance"
+            description="Coverage, dependants, and renewal status surfaced before claims — the single most-asked question, answered on launch."
+            src="/images/s08-policy-glance.png"
+            alt="Policy at a glance — Two Wheeler Insurance card with Active badge, policyholder and vehicle details"
+            imgPos="center center"
+            style={{ height: "clamp(260px, 23.28vw, 352px)" }}
+          />
 
           {/* 02 + 03 — two column */}
           <div className="grid md:grid-cols-2 gap-3">
-            <FeatureCard>
-              <FeatureCardHeader
-                num="02"
-                title="Hassle-Free Insurance Management"
-                description="Quick and easy access to core services like claims, network hospitals, and policy details"
-              />
-              <FeatureImageBox
-                src="/images/s08-quick-actions.png"
-                alt="Quick actions — Register a claim, Edit policy details, Find local services"
-                className="h-[240px] md:h-[260px]"
-              />
-            </FeatureCard>
-            <FeatureCard>
-              <FeatureCardHeader
-                num="03"
-                title="Seamless Onboarding"
-                description="Guided onboarding with coach-marks to help users navigate seamlessly"
-              />
-              <FeatureImageBox
-                src="/images/s08-onboarding.png"
-                alt="Seamless onboarding — coach-mark guided setup flow"
-                className="h-[240px] md:h-[260px]"
-              />
-            </FeatureCard>
+            <S08Card
+              num="02"
+              title="Hassle-Free Insurance Management"
+              description="Quick and easy access to core services like claims, network hospitals, and policy details"
+              src="/images/s08-quick-actions.png"
+              alt="Quick actions — Register a claim, Edit policy details, Find local services"
+              imgPos="center 25%"
+              style={{ height: "clamp(260px, 23.28vw, 352px)" }}
+            />
+            <S08Card
+              num="03"
+              title="Seamless Onboarding"
+              description="Guided onboarding with coach-marks to help users navigate seamlessly"
+              src="/images/s08-onboarding.png"
+              alt="Seamless onboarding — coach-mark guided setup flow"
+              imgPos="center center"
+              style={{ height: "clamp(260px, 23.28vw, 352px)" }}
+            />
           </div>
         </div>
       </FadeIn>
 
       {/* ══════════════════════════════════════════════════════════════════════
-          SECTION 2 — Beyond Insurance: A Holistic Lifestyle Solutions  (42:161940)
+          SECTION 2 — Beyond Insurance: A Holistic Lifestyle Solutions  (node 77:17254)
+          Same card height. Wellness: doctor right-bleeds. Health vitals: face bleeds bottom.
       ══════════════════════════════════════════════════════════════════════ */}
       <FadeIn delay={0.04}>
         <S08Heading>Beyond Insurance: A Holistic Lifestyle Solutions</S08Heading>
@@ -1109,78 +1118,93 @@ function SurfaceShowcase() {
 
           {/* 04 + 05 — two column */}
           <div className="grid md:grid-cols-2 gap-3">
-            <FeatureCard>
-              <FeatureCardHeader
-                num="04"
-                title="Wellness in context"
-                description="Teleconsult and OPD slots surface based on policy benefits — not buried under a tab."
-              />
-              <FeatureImageBox
-                src="/images/s08-wellness.png"
-                alt="Wellness — teleconsultation with video and audio call cards, doctor profile"
-                className="h-[240px] md:h-[260px]"
-              />
-            </FeatureCard>
-            <FeatureCard>
-              <FeatureCardHeader
-                num="05"
-                title="Expert Insights &amp; Health monitoring"
-                description="Real-time insights into your health vitals and tips from our experts"
-              />
-              <FeatureImageBox
-                src="/images/s08-health-vitals.png"
-                alt="Health monitoring — face scan showing HR, SpO2, RR and HRV readings"
-                className="h-[240px] md:h-[260px]"
-              />
-            </FeatureCard>
+            <S08Card
+              num="04"
+              title="Wellness in context"
+              description="Teleconsult and OPD slots surface based on policy benefits — not buried under a tab."
+              src="/images/s08-wellness.png"
+              alt="Wellness — teleconsultation with video and audio call cards, doctor profile"
+              imgPos="35% center"
+              style={{ height: "clamp(260px, 23.28vw, 352px)" }}
+            />
+            <S08Card
+              num="05"
+              title="Expert Insights &amp; Health monitoring"
+              description="Real-time insights into your health vitals and tips from our experts"
+              src="/images/s08-health-vitals.png"
+              alt="Health monitoring — face scan showing HR, SpO2, RR and HRV readings"
+              imgPos="left top"
+              style={{ height: "clamp(260px, 23.28vw, 352px)" }}
+            />
           </div>
 
           {/* 06 — full width */}
-          <FeatureCard>
-            <FeatureCardHeader
-              num="06"
-              title="Unlock smarter, safer driving habits"
-              description="Track and improve your driving with real-time telematics data and real time insights."
-            />
-            <FeatureImageBox
-              src="/images/s08-telematics.png"
-              alt="Telematics — Driving Score card, Acceleration and Turning metrics with car"
-              className="h-[260px] md:h-[320px]"
-            />
-          </FeatureCard>
+          <S08Card
+            num="06"
+            title="Unlock smarter, safer driving habits"
+            description="Track and improve your driving with real-time telematics data and real time insights."
+            src="/images/s08-telematics.png"
+            alt="Telematics — Driving Score card, Acceleration and Turning metrics with car"
+            imgPos="30% top"
+            style={{ height: "clamp(260px, 23.28vw, 352px)" }}
+          />
         </div>
       </FadeIn>
 
       {/* ══════════════════════════════════════════════════════════════════════
-          SECTION 3 — Cohort based Customisation  (node 42:164533)
+          SECTION 3 — Cohort based Customisation  (node 77:17524)
+          Cohort card height: 1500px @ 1512px → clamp(600px, 99.21vw, 1500px)
+          Shows complete mobile homepage per user state.
       ══════════════════════════════════════════════════════════════════════ */}
       <FadeIn delay={0.04}>
         <S08Heading>Cohort based Customisation</S08Heading>
-        <FeatureCard>
-          <FeatureCardHeader
-            num="07"
-            title="Dynamic Homepage with personalised experience"
-            description="Dynamically personalising the homepage to align with the target user's preferences. Each section changes in real time to provide user specific sections which are relevant to their persona."
-          />
-          {/* 3-col phone grid with cohort labels */}
-          <div className="grid grid-cols-3 border-t border-[var(--border)]">
+        {/* Outer card — same fill + border, no fixed height (phone columns dictate height) */}
+        <div
+          className="relative overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.07)] flex flex-col p-5"
+          style={{ background: "rgba(23,22,28,0.55)" }}
+        >
+          {/* Card header */}
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="font-mono text-[10px] font-semibold text-[#EC6625] tracking-[2px]">07</span>
+            <h4 className="font-bold text-[15px] text-[#F0F0F4] leading-tight">
+              Dynamic Homepage with personalised experience
+            </h4>
+          </div>
+          <div className="h-2 w-1 shrink-0" aria-hidden />
+          <p className="text-[13px] text-[rgba(240,240,244,0.5)] leading-[1.55] shrink-0">
+            Dynamically personalising the homepage to align with the target user&apos;s preferences.
+            Each section adapts in real time to surface content relevant to that persona.
+          </p>
+
+          {/* 3-col phone grid — negative margin to break out of p-5 padding */}
+          <div className="grid grid-cols-3 -mx-5 mt-5 border-t border-[rgba(255,255,255,0.07)]">
             {[
-              { label: "New User",            src: "/images/s08-cohort-new.png",     alt: "New user home — add policy widget, business banners, quick buy" },
+              { label: "New User",            src: "/images/s08-cohort-new.png",     alt: "New user home — add-policy widget, banners, quick buy" },
               { label: "Active Policyholder", src: "/images/s08-cohort-active.png",  alt: "Active policyholder home — policy card, health vitals, wellness" },
-              { label: "Win-back User",        src: "/images/s08-cohort-winback.png", alt: "Win-back user home — renewal nudge and one-tap buy" },
+              { label: "Win-back User",       src: "/images/s08-cohort-winback.png", alt: "Win-back user home — renewal nudge and one-tap buy" },
             ].map((c, i) => (
-              <div key={c.label} className={i > 0 ? "border-l border-[var(--border)]" : ""}>
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--text)]/45 text-center py-2.5 border-b border-[var(--border)]">
+              <div key={c.label} className={i > 0 ? "border-l border-[rgba(255,255,255,0.07)]" : ""}>
+                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[rgba(240,240,244,0.4)] text-center py-2.5 border-b border-[rgba(255,255,255,0.07)]">
                   {c.label}
                 </p>
-                <div className="relative overflow-hidden h-[320px] md:h-[400px]">
+                {/* Phone image — tall enough to show complete mobile page */}
+                <div
+                  className="relative overflow-hidden"
+                  style={{ height: "clamp(600px, 99.21vw, 1500px)" }}
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={c.src} alt={c.alt} className="absolute inset-0 w-full h-full object-cover object-top block" loading="lazy" draggable={false} />
+                  <img
+                    src={c.src}
+                    alt={c.alt}
+                    className="absolute inset-0 w-full h-full object-cover object-top block"
+                    loading="lazy"
+                    draggable={false}
+                  />
                 </div>
               </div>
             ))}
           </div>
-        </FeatureCard>
+        </div>
       </FadeIn>
 
     </div>
