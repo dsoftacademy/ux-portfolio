@@ -34,7 +34,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const styles = cn(
       // Base: v5 Lead-Level Parameters
       "inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-[13px] font-bold uppercase tracking-[0.15em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] disabled:pointer-events-none disabled:opacity-50 font-sans cursor-pointer",
-      
+
       // v5 Primary: Tokenized Brand Gradient (Same in all modes)
       variant === "primary" &&
         "bg-gradient-to-br from-[#6366F1] to-[#818CF8] text-white shadow-[0_6px_20px_rgba(99,102,241,0.25)] border-none motion-safe:hover:scale-105 motion-safe:active:scale-95",
@@ -42,15 +42,15 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       // v5 Secondary: Token-Driven Accessibility (Flipping correctly in light/dark)
       variant === "secondary" &&
         "border border-[var(--border)] bg-transparent text-[var(--text)] hover:bg-[var(--text)]/[0.04] hover:border-[var(--text)]/[0.2] motion-safe:hover:scale-105 motion-safe:active:scale-95",
-      
+
       className
     )
 
     if ("href" in props && props.href) {
       const isExternal = props.href.startsWith("http") || props.href.startsWith("mailto:")
       return (
-        <Link 
-          className={styles} 
+        <Link
+          className={styles}
           href={props.href}
           target={isExternal ? (props.target || "_blank") : props.target}
           rel={isExternal ? (props.rel || "noopener noreferrer") : props.rel}
