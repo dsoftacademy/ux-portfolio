@@ -144,7 +144,7 @@ export function IltcCaseStudy() {
                   Role
                 </dt>
                 <dd className="text-[var(--text)] font-medium">
-                  Design Lead · Strategy &amp; UX
+                  Design Lead
                 </dd>
               </div>
               <div>
@@ -152,7 +152,7 @@ export function IltcCaseStudy() {
                   Team
                 </dt>
                 <dd className="text-[var(--text)] font-medium">
-                  7 designers · 3 product managers · cross-functional eng &amp; QA
+                  6 designers · cross-functional eng &amp; QA
                 </dd>
               </div>
               <div>
@@ -200,16 +200,10 @@ export function IltcCaseStudy() {
               <Meta label="Geography" value="India · 280M+ insured lives" />
               <Meta label="Platform" value="iOS &amp; Android" />
               <div className="md:col-span-2">
-                <Meta
-                  label="Designers"
-                  value="Anjali Deswandikar, Sweta Balamurali, Avantika Pidiha, Gaurav Agrawal, Anaya Purandare, Milap Patel, Pratishek Bansal"
-                />
+                <Meta label="Design Lead" value="Pratishek Bansal" />
               </div>
               <div className="md:col-span-2">
-                <Meta
-                  label="Product Managers"
-                  value="Neha Gautam, Dinesh Mohan, Saurabh Lohani"
-                />
+                <Meta label="Design Team" value="6 Designers" />
               </div>
             </div>
           </FadeIn>
@@ -537,62 +531,153 @@ function GapGrid() {
   )
 }
 
+// Complex — branching arrows that endlessly fork, showing too many paths
 function ComplexIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EC6625" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <rect x="3" y="3" width="6" height="6" rx="1" />
-      <rect x="15" y="3" width="6" height="6" rx="1" />
-      <rect x="9" y="9" width="6" height="6" rx="1" />
-      <rect x="3" y="15" width="6" height="6" rx="1" />
-      <rect x="15" y="15" width="6" height="6" rx="1" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+      {/* centre node */}
+      <circle cx="12" cy="12" r="2" fill="#EC6625" />
+      {/* four forking paths that stagger-pulse to show divergence */}
+      {[
+        { x2: 5,  y2: 5  },
+        { x2: 19, y2: 5  },
+        { x2: 5,  y2: 19 },
+        { x2: 19, y2: 19 },
+      ].map(({ x2, y2 }, i) => (
+        <motion.line
+          key={i}
+          x1="12" y1="12" x2={x2} y2={y2}
+          stroke="#EC6625"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          animate={{ opacity: [0.9, 0.2, 0.9], pathLength: [1, 0.4, 1] }}
+          transition={{
+            duration: 2.4,
+            delay: i * 0.35,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+      {/* arrow tips */}
+      {[
+        { cx: 5,  cy: 5  },
+        { cx: 19, cy: 5  },
+        { cx: 5,  cy: 19 },
+        { cx: 19, cy: 19 },
+      ].map(({ cx, cy }, i) => (
+        <motion.circle
+          key={i}
+          cx={cx} cy={cy} r="1.5"
+          fill="#EC6625"
+          animate={{ scale: [1, 0.3, 1], opacity: [1, 0.2, 1] }}
+          transition={{ duration: 2.4, delay: i * 0.35, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ))}
     </svg>
   )
 }
 
+// Slow — a clock hand that drags and lags, barely moving
 function SlowIcon() {
   return (
-    <motion.svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="#EC6625"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      animate={{ rotate: [0, 360] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-      aria-hidden
-    >
-      <path d="M12 2v4" />
-      <path d="m16.24 7.76 2.83-2.83" />
-      <path d="M18 12h4" />
-      <path d="m16.24 16.24 2.83 2.83" />
-      <path d="M12 18v4" />
-      <path d="m4.93 19.07 2.83-2.83" />
-      <path d="M2 12h4" />
-      <path d="m4.93 4.93 2.83 2.83" />
-    </motion.svg>
-  )
-}
-
-function DiscoverIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EC6625" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M2 12s3-7 10-7 10 7 10 7" />
-      <path d="M2 12s3 7 10 7 10-7 10-7" opacity="0.35" />
-      <path d="M3 7l2 3" />
-      <path d="M21 7l-2 3" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="9" stroke="#EC6625" strokeWidth="1.5" strokeOpacity="0.5" />
+      {/* minute hand — creeps forward */}
+      <motion.line
+        x1="12" y1="12" x2="12" y2="5"
+        stroke="#EC6625"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        animate={{ rotate: [0, 360] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+        style={{ originX: "12px", originY: "12px" }}
+      />
+      {/* hour hand — barely moves */}
+      <motion.line
+        x1="12" y1="12" x2="16" y2="9"
+        stroke="#EC6625"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeOpacity="0.7"
+        animate={{ rotate: [0, 30] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+        style={{ originX: "12px", originY: "12px" }}
+      />
+      {/* pulsing stall dots */}
+      <motion.circle
+        cx="12" cy="12" r="1.5"
+        fill="#EC6625"
+        animate={{ opacity: [1, 0.3, 1] }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+      />
     </svg>
   )
 }
 
+// Discoverability — an eye that slowly blinks closed (hidden features)
+function DiscoverIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+      {/* eye outline — morphs between open and closed */}
+      <motion.path
+        stroke="#EC6625"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        animate={{
+          d: [
+            "M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z",  // open
+            "M2 12s3-1 10-1 10 1 10 1-3 1-10 1S2 12 2 12Z",  // half-blink
+            "M2 12 C5 12 19 12 22 12",                         // fully closed
+            "M2 12s3-1 10-1 10 1 10 1-3 1-10 1S2 12 2 12Z",  // re-opening
+            "M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z",  // open again
+          ],
+        }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", times: [0, 0.25, 0.4, 0.6, 1] }}
+      />
+      {/* pupil — fades out as eye closes */}
+      <motion.circle
+        cx="12" cy="12" r="3"
+        stroke="#EC6625"
+        strokeWidth="1.4"
+        animate={{ opacity: [1, 0.4, 0, 0.4, 1], scaleY: [1, 0.4, 0, 0.4, 1] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", times: [0, 0.25, 0.4, 0.6, 1] }}
+        style={{ originX: "12px", originY: "12px" }}
+      />
+      {/* hidden-feature dot that blinks in when eye is closed */}
+      <motion.circle
+        cx="12" cy="12" r="1"
+        fill="#EC6625"
+        animate={{ opacity: [0, 0, 0.9, 0, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", times: [0, 0.35, 0.45, 0.55, 1] }}
+      />
+    </svg>
+  )
+}
+
+// Inconsistent — three shapes that drift to different sizes & positions
 function DriftIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="6" cy="12" r="3" stroke="#EC6625" strokeWidth="1.6" />
-      <circle cx="12" cy="12" r="3" stroke="#EC6625" strokeWidth="1.6" />
-      <circle cx="18" cy="12" r="3" stroke="#EC6625" strokeWidth="1.6" />
+      <motion.circle
+        cx="5" cy="12" r="2.5"
+        stroke="#EC6625" strokeWidth="1.5"
+        animate={{ cy: [12, 9, 14, 12], r: [2.5, 1.5, 3.5, 2.5] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.rect
+        x="9.5" y="9.5" width="5" height="5" rx="1"
+        stroke="#EC6625" strokeWidth="1.5"
+        animate={{ y: [9.5, 12, 7, 9.5], width: [5, 7, 3, 5], height: [5, 3, 7, 5] }}
+        transition={{ duration: 3, delay: 0.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.circle
+        cx="19" cy="12" r="2.5"
+        stroke="#EC6625" strokeWidth="1.5"
+        animate={{ cy: [12, 15, 8, 12], r: [2.5, 3.5, 1.5, 2.5] }}
+        transition={{ duration: 3, delay: 1, repeat: Infinity, ease: "easeInOut" }}
+      />
     </svg>
   )
 }
@@ -726,7 +811,8 @@ function PrincipleGrid() {
           <div className="relative h-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]/55 p-7">
             <span
               aria-hidden
-              className="pointer-events-none absolute -bottom-4 -right-2 text-[7rem] font-extrabold tracking-tighter leading-none text-[var(--text)]/[0.04]"
+              className="pointer-events-none select-none absolute -bottom-6 -right-1 text-[8rem] font-extrabold tracking-tighter leading-none"
+              style={{ color: "rgba(240,240,244,0.018)" }}
             >
               {p.n}
             </span>

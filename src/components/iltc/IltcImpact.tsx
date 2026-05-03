@@ -61,39 +61,74 @@ function Counter({
 // Insight counters (3130, 2256, 2524, 1370 — customer signals from research)
 // ────────────────────────────────────────────────────────────────────────────
 
-const INSIGHTS = [
+interface InsightRow {
+  value: number
+  tag: string
+  label: string
+  icon: React.ReactNode
+}
+
+const INSIGHTS: InsightRow[] = [
   {
     value: 3130,
-    label: "Customers struggled to find their policy coverage and details.",
+    tag: "Policy",
+    label: "Couldn't find their policy coverage or understand what they were actually insured for.",
+    // shield / document icon
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EC6625" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+        <path d="M9 12l2 2 4-4" />
+      </svg>
+    ),
   },
   {
     value: 2256,
-    label: "Customers were uncertain about claim process and coverages.",
+    tag: "Claims",
+    label: "Were uncertain about the claim process — when to file, what's covered, what to expect.",
+    // file-check icon
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EC6625" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+        <path d="M14 2v6h6" />
+        <path d="m9 15 2 2 4-4" />
+      </svg>
+    ),
   },
   {
     value: 2524,
-    label: "Customers were unaware of additional value-added policy benefits.",
+    tag: "Benefits",
+    label: "Had no idea the app offered value-added benefits — wellness, lifestyle, and partner services.",
+    // star / gift icon
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EC6625" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z" />
+      </svg>
+    ),
   },
   {
     value: 1370,
-    label: "Customers faced issues logging in and linking policy to their account.",
+    tag: "Login",
+    label: "Hit friction logging in or couldn't link their existing policy to their account.",
+    // lock icon
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EC6625" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        <circle cx="12" cy="16" r="1" fill="#EC6625" />
+      </svg>
+    ),
   },
-] as const
+]
 
 export function InsightCounters() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--border)] rounded-2xl overflow-hidden border border-[var(--border)]">
       {INSIGHTS.map((m) => (
-        <div key={m.label} className="bg-[var(--bg)] p-6 md:p-8">
+        <div key={m.tag} className="bg-[var(--bg)] p-6 md:p-8">
           <div className="flex items-center gap-2 mb-3">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EC6625" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
+            {m.icon}
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text)]/55">
-              Customers
+              {m.tag}
             </span>
           </div>
           <p className="text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--text)] tabular-nums">
