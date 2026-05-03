@@ -190,21 +190,17 @@ export function IltcCaseStudy() {
         </SectionWrapper>
       </section>
 
-      {/* ─── PROJECT META STRIP ───────────────────────────────────────────── */}
+      {/* ─── PROJECT META STRIP (node 42:576) ────────────────────────────── */}
       <section aria-label="Project meta" className="pb-16 md:pb-24">
         <SectionWrapper>
           <FadeIn>
-            <div className="grid gap-y-8 gap-x-10 md:grid-cols-4 rounded-3xl border border-[var(--border)] bg-[var(--surface)]/50 p-6 md:p-10">
+            <div className="grid gap-y-8 gap-x-10 grid-cols-2 md:grid-cols-3 rounded-3xl border border-[var(--border)] bg-[var(--surface)]/50 p-6 md:p-10">
               <Meta label="Company" value="ICICI Lombard General Insurance" />
-              <Meta label="Domain" value="Insurance Tech" />
               <Meta label="Geography" value="India · 280M+ insured lives" />
+              <Meta label="Domain" value="Insurance Tech" />
+              <Meta label="Role" value="Design Lead" />
+              <Meta label="Design Team" value="6 Designers" />
               <Meta label="Platform" value="iOS &amp; Android" />
-              <div className="md:col-span-2">
-                <Meta label="Design Lead" value="Pratishek Bansal" />
-              </div>
-              <div className="md:col-span-2">
-                <Meta label="Design Team" value="6 Designers" />
-              </div>
             </div>
           </FadeIn>
         </SectionWrapper>
@@ -532,153 +528,59 @@ function GapGrid() {
   )
 }
 
-// Complex — branching arrows that endlessly fork, showing too many paths
+// Complex — branching arrows showing too many paths (static)
 function ComplexIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-      {/* centre node */}
       <circle cx="12" cy="12" r="2" fill="#EC6625" />
-      {/* four forking paths that stagger-pulse to show divergence */}
-      {[
-        { x2: 5,  y2: 5  },
-        { x2: 19, y2: 5  },
-        { x2: 5,  y2: 19 },
-        { x2: 19, y2: 19 },
-      ].map(({ x2, y2 }, i) => (
-        <motion.line
-          key={i}
-          x1="12" y1="12" x2={x2} y2={y2}
-          stroke="#EC6625"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          animate={{ opacity: [0.9, 0.2, 0.9], pathLength: [1, 0.4, 1] }}
-          transition={{
-            duration: 2.4,
-            delay: i * 0.35,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-      {/* arrow tips */}
-      {[
-        { cx: 5,  cy: 5  },
-        { cx: 19, cy: 5  },
-        { cx: 5,  cy: 19 },
-        { cx: 19, cy: 19 },
-      ].map(({ cx, cy }, i) => (
-        <motion.circle
-          key={i}
-          cx={cx} cy={cy} r="1.5"
-          fill="#EC6625"
-          animate={{ scale: [1, 0.3, 1], opacity: [1, 0.2, 1] }}
-          transition={{ duration: 2.4, delay: i * 0.35, repeat: Infinity, ease: "easeInOut" }}
-        />
-      ))}
+      <line x1="12" y1="12" x2="5"  y2="5"  stroke="#EC6625" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="12" y1="12" x2="19" y2="5"  stroke="#EC6625" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="12" y1="12" x2="5"  y2="19" stroke="#EC6625" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="12" y1="12" x2="19" y2="19" stroke="#EC6625" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="5"  cy="5"  r="1.5" fill="#EC6625" />
+      <circle cx="19" cy="5"  r="1.5" fill="#EC6625" />
+      <circle cx="5"  cy="19" r="1.5" fill="#EC6625" />
+      <circle cx="19" cy="19" r="1.5" fill="#EC6625" />
     </svg>
   )
 }
 
-// Slow — a clock hand that drags and lags, barely moving
+// Slow — a clock face (static)
 function SlowIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
       <circle cx="12" cy="12" r="9" stroke="#EC6625" strokeWidth="1.5" strokeOpacity="0.5" />
-      {/* minute hand — creeps forward */}
-      <motion.line
-        x1="12" y1="12" x2="12" y2="5"
-        stroke="#EC6625"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-        style={{ originX: "12px", originY: "12px" }}
-      />
-      {/* hour hand — barely moves */}
-      <motion.line
-        x1="12" y1="12" x2="16" y2="9"
-        stroke="#EC6625"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeOpacity="0.7"
-        animate={{ rotate: [0, 30] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-        style={{ originX: "12px", originY: "12px" }}
-      />
-      {/* pulsing stall dots */}
-      <motion.circle
-        cx="12" cy="12" r="1.5"
-        fill="#EC6625"
-        animate={{ opacity: [1, 0.3, 1] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <line x1="12" y1="12" x2="12" y2="5"  stroke="#EC6625" strokeWidth="1.8" strokeLinecap="round" />
+      <line x1="12" y1="12" x2="16" y2="9"  stroke="#EC6625" strokeWidth="1.4" strokeLinecap="round" strokeOpacity="0.7" />
+      <circle cx="12" cy="12" r="1.5" fill="#EC6625" />
     </svg>
   )
 }
 
-// Discoverability — an eye that slowly blinks closed (hidden features)
+// Discoverability — an eye (static, open)
 function DiscoverIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-      {/* eye outline — morphs between open and closed */}
-      <motion.path
+      <path
+        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z"
         stroke="#EC6625"
         strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
-        animate={{
-          d: [
-            "M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z",  // open
-            "M2 12s3-1 10-1 10 1 10 1-3 1-10 1S2 12 2 12Z",  // half-blink
-            "M2 12 C5 12 19 12 22 12",                         // fully closed
-            "M2 12s3-1 10-1 10 1 10 1-3 1-10 1S2 12 2 12Z",  // re-opening
-            "M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z",  // open again
-          ],
-        }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", times: [0, 0.25, 0.4, 0.6, 1] }}
       />
-      {/* pupil — fades out as eye closes */}
-      <motion.circle
-        cx="12" cy="12" r="3"
-        stroke="#EC6625"
-        strokeWidth="1.4"
-        animate={{ opacity: [1, 0.4, 0, 0.4, 1], scaleY: [1, 0.4, 0, 0.4, 1] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", times: [0, 0.25, 0.4, 0.6, 1] }}
-        style={{ originX: "12px", originY: "12px" }}
-      />
-      {/* hidden-feature dot that blinks in when eye is closed */}
-      <motion.circle
-        cx="12" cy="12" r="1"
-        fill="#EC6625"
-        animate={{ opacity: [0, 0, 0.9, 0, 0] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", times: [0, 0.35, 0.45, 0.55, 1] }}
-      />
+      <circle cx="12" cy="12" r="3" stroke="#EC6625" strokeWidth="1.4" />
+      <circle cx="12" cy="12" r="1" fill="#EC6625" />
     </svg>
   )
 }
 
-// Inconsistent — three shapes that drift to different sizes & positions
+// Inconsistent — three mismatched shapes (static)
 function DriftIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <motion.circle
-        cx="5" cy="12" r="2.5"
-        stroke="#EC6625" strokeWidth="1.5"
-        animate={{ cy: [12, 9, 14, 12], r: [2.5, 1.5, 3.5, 2.5] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.rect
-        x="9.5" y="9.5" width="5" height="5" rx="1"
-        stroke="#EC6625" strokeWidth="1.5"
-        animate={{ y: [9.5, 12, 7, 9.5], width: [5, 7, 3, 5], height: [5, 3, 7, 5] }}
-        transition={{ duration: 3, delay: 0.5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.circle
-        cx="19" cy="12" r="2.5"
-        stroke="#EC6625" strokeWidth="1.5"
-        animate={{ cy: [12, 15, 8, 12], r: [2.5, 3.5, 1.5, 2.5] }}
-        transition={{ duration: 3, delay: 1, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <circle cx="5"  cy="12" r="2.5" stroke="#EC6625" strokeWidth="1.5" />
+      <rect   x="9.5" y="9.5" width="5" height="5" rx="1" stroke="#EC6625" strokeWidth="1.5" />
+      <circle cx="19" cy="12" r="2.5" stroke="#EC6625" strokeWidth="1.5" />
     </svg>
   )
 }
@@ -1023,7 +925,7 @@ function SurfaceShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex-shrink-0 w-full max-w-[340px] mx-auto lg:mx-0"
+            className="relative flex-shrink-0 w-full max-w-[480px] mx-auto lg:mx-0"
           >
             <motion.div
               animate={{ y: [0, -14, 0] }}
@@ -1091,32 +993,24 @@ function SurfaceShowcase() {
         </div>
       </FadeIn>
 
-      {/* ── Feature showcase images (from Figma) ── */}
+      {/* ── Feature showcase images (from Figma, node 42:162269) ── */}
       {FEATURE_FRAMES.map((f, i) => (
         <FadeIn key={f.eyebrow} delay={i * 0.05}>
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-[#EC6625]">
-                {f.eyebrow}
-              </span>
-            </div>
-            <h3 className="text-xl md:text-2xl font-bold text-[var(--text)]">{f.title}</h3>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-2xl overflow-hidden border border-[var(--border)]"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={f.image}
-                alt={f.alt}
-                className="w-full h-auto block"
-                loading="lazy"
-              />
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="rounded-2xl overflow-hidden border border-[var(--border)]"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={f.image}
+              alt={f.alt}
+              className="w-full h-auto block"
+              loading="lazy"
+            />
+          </motion.div>
         </FadeIn>
       ))}
     </div>
