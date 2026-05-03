@@ -950,26 +950,23 @@ function SurfaceShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex-shrink-0 w-full max-w-[220px] sm:max-w-[240px] mx-auto lg:mx-0 lg:w-full lg:max-w-none justify-self-start overflow-hidden flex justify-end"
+            className="relative flex-shrink-0 w-full max-w-[220px] sm:max-w-[240px] mx-auto lg:mx-0 lg:w-full lg:max-w-none justify-self-start pb-10"
           >
             <PhoneFloatWrap>
-              {/* Slightly wider than column + right-aligned: clips excess canvas on the left so the copy column can stay wide. */}
-              <div className="w-[118%] max-w-none shrink-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/iltc-app-mockup.jpg"
-                  alt="IL TakeCare app — personalised home screen with policy card, quick actions, and buy insurance shortcuts"
-                  className="w-full h-auto block drop-shadow-2xl"
-                  width={610}
-                  height={1024}
-                  draggable={false}
-                />
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/iltc-mockup.png"
+                alt="IL TakeCare app — personalised home screen with policy card, quick actions, and buy insurance shortcuts"
+                className="w-full h-auto block drop-shadow-2xl"
+                width={610}
+                height={1024}
+                draggable={false}
+              />
             </PhoneFloatWrap>
             <div
               aria-hidden
-              className="absolute -bottom-8 right-[18%] w-48 h-12 rounded-full blur-2xl pointer-events-none"
-              style={{ background: "rgba(236,102,37,0.25)" }}
+              className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-48 h-12 rounded-full blur-2xl pointer-events-none"
+              style={{ background: "rgba(236,102,37,0.35)" }}
             />
           </motion.div>
 
